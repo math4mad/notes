@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "01-pb21-pseudo-order.html",
+    "href": "01-pb21-pseudo-order.html",
+    "title": "01 · PB21 伪序案：2.5 秒杀死一个想法（的前半）",
+    "section": "",
+    "text": "判据 冻尺四条：器闸/序效/鼓包/方向。源: sklearn digits 64 维（维号无因果语义），三臂顺/并/乱。\n\n\n\n读数\n结果\n\n\n\n\nH-a0 器闸 Ov(D0)≥0.98\n破（0.886–0.919：撕随机袋本底位移 ~9%）\n\n\nH-a1 边敏 ≥3×\n未立（被本底淹没）\n\n\nH-a2 阶梯\n反序：年表袋最钝感\n\n\nH-a3\n随案挂 exploratory\n\n\n\n判词三行：①鼓包=维生≠序生——新维出生 acc 必跳，乱序臂同鼓（与 C47 分辨率律严丝合缝）；②digits 维号无语义，顺/乱本同臂——序若是伪序，律不受理；③此否不伤朱批「顺序是最贫的一维」，反逼出 21c 的正确战场。sha a03d3193fe6d073b。\n边：上游 [00 晨议未启前此案已生——判语链自此案起] → 下游 02（为续命而铸的因果链沙盒）。"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "园记 · 案匣",
+    "section": "",
+    "text": "早十时议定：实现笔记的网站，结果在网站展示。取义知识图——非数据库表，而是概念空间的图谱化：每篇案卷是一节点，节点间以「判语链」为有向边（伪序证伪 → 刃病自供 → 修刃终审），网站即此小图的显影。"
+  },
+  {
+    "objectID": "index.html#谱系按生长序",
+    "href": "index.html#谱系按生长序",
+    "title": "园记 · 案匣",
+    "section": "谱系（按生长序）",
+    "text": "谱系（按生长序）\n\n\n\n节点\n案\n一句判语\n\n\n\n\n00\n知识图谱晨议\n设计裁定录：为何此站是图不是表\n\n\n01\nPB21 伪序案\n下标之序=伪序；鼓包归 C47 不归序\n\n\n02\nPB21b 刃病案\n全空间净化之误自供——刃杀律非数据杀律\n\n\n03\nPB21c 因果链终审\n序须内容之序：顺216&lt;随432&lt;逆∞，主判 2/3 过\n\n\n\n站成于园笔，源匣在 github.com/math4mad/chora/experiments/pb21-dimgrowth。凡成案必入图，凡入图必挂链。"
+  },
+  {
+    "objectID": "00-knowledge-graph.html",
+    "href": "00-knowledge-graph.html",
+    "title": "00 · 知识图谱晨议——网站为图之显影",
+    "section": "",
+    "text": "注记晨十时三问三答\n\n\n\n问 笔记网站怎么建？ 答 不建文件夹，建小图：一案一节点，判语为有向边，导航即遍历。 问 与 cora-atlas 碑体何异？ 答 碑体刻律（C 号论断账），园记存案（实验三件套：冻尺→开火→判词）；碑是峰，案是矿脉，园记即矿道图。 问 与拓扑图（topography）关系？ 答 同源一心——概念空间的几何化：topography 画 C 号群山，园记画案卷溪流，皆以邻接代目录（neighbors-as-API 旧律的站点化）。"
+  },
+  {
+    "objectID": "00-knowledge-graph.html#设计裁定先冻",
+    "href": "00-knowledge-graph.html#设计裁定先冻",
+    "title": "00 · 知识图谱晨议——网站为图之显影",
+    "section": "设计裁定（先冻）",
+    "text": "设计裁定（先冻）\n\n页码前缀=生长序（00→03），站首自动即时间轴；\n每页末必挂「上游/下游节点」两链——图性由页脚边保证；\n结果展示：数字不许说谎（今晨图尺比例之纠为立例第一案），曲线图必带冻尺出处；\n发布：main 存源，docs 存 render 产物，Pages 走 gh-pages 分支——与对话册同法。"
+  },
+  {
+    "objectID": "00-knowledge-graph.html#知识图谱-网站的三级抽象",
+    "href": "00-knowledge-graph.html#知识图谱-网站的三级抽象",
+    "title": "00 · 知识图谱晨议——网站为图之显影",
+    "section": "知识图谱 → 网站的三级抽象",
+    "text": "知识图谱 → 网站的三级抽象\n概念空间 (Gärdenfors) → 园账 C/G/P-B 三系 (cora-atlas) → 园记：案卷小图（本站） —— 同一种「区域-邻接」几何第三次建站，即「结构即智能」自举第三例。"
+  },
+  {
+    "objectID": "03-pb21c-causal-chain.html",
+    "href": "03-pb21c-causal-chain.html",
+    "title": "03 · PB21c 因果链终审：序须内容之序",
+    "section": "",
+    "text": "注记案卷索引\n\n\n\n对话正典: external/模型训练中的逐维添加与格拉姆史...-20260927042804.json (建造对话 60 轮) · 成页: talk-with-agents/gram-schmidt-dimension-growth · 本案卷: github.com/math4mad/chora — experiments/pb21-dimgrowth (PREREG/run_c.py/result_pb21c.json/VERDICT 四件同匣)"
+  },
+  {
+    "objectID": "03-pb21c-causal-chain.html#一-对话摘要",
+    "href": "03-pb21c-causal-chain.html#一-对话摘要",
+    "title": "03 · PB21c 因果链终审：序须内容之序",
+    "section": "一 · 对话摘要",
+    "text": "一 · 对话摘要\n建造对话中主人问「逐维添加+逐维削减的格拉姆-施密特对决可行否」，千问许以 MNIST 沙盒；次日主人自指理解 gap 在此一环。园笔铸 PB21 三案：21 伪序证伪 → 21b 刃病自供 → 21c 修刃终审。"
+  },
+  {
+    "objectID": "03-pb21c-causal-chain.html#二-设计与数据",
+    "href": "03-pb21c-causal-chain.html#二-设计与数据",
+    "title": "03 · PB21c 因果链终审：序须内容之序",
+    "section": "二 · 设计与数据",
+    "text": "二 · 设计与数据\nAR(1) 因果链 64 维: x₁~N(0,1) 为信号源 (y=x₁ 四分位), x_k=0.95x_{k-1}+noise。维序自带因果语义。五臂×三籽=15 训, 本机 CPU 30 秒。判据先冻 (commit 997abf6 系先于开火)。"
+  },
+  {
+    "objectID": "03-pb21c-causal-chain.html#三-结果-达-95-所需更新数-upd95",
+    "href": "03-pb21c-causal-chain.html#三-结果-达-95-所需更新数-upd95",
+    "title": "03 · PB21c 因果链终审：序须内容之序",
+    "section": "三 · 结果: 达 95% 所需更新数 (upd95)",
+    "text": "三 · 结果: 达 95% 所需更新数 (upd95)\n\nupd95 比例尺: 0.5 px = 1 更新 (达 95% 之梯度)  0400800 E 顺因果生长 · 216–432 A⁺ 修刃GR · 与E全等 C′ 随机序 · 432–864 B 全维并喂 · 720–864 (E 为其 1/4–1/2) D′ 逆因果 · 出界 (三种子永不达标)"
+  },
+  {
+    "objectID": "03-pb21c-causal-chain.html#四-判据兑现-23-多数-冻尺不事后挑",
+    "href": "03-pb21c-causal-chain.html#四-判据兑现-23-多数-冻尺不事后挑",
+    "title": "03 · PB21c 因果链终审：序须内容之序",
+    "section": "四 · 判据兑现 (2/3 多数, 冻尺不事后挑)",
+    "text": "四 · 判据兑现 (2/3 多数, 冻尺不事后挑)\n\n\n\n尺\n判\n\n\n\n\nH-c1 器闸 (GR残差&lt;0.05)\n✓ 修刃后全净\n\n\nH-c2 主判 (E≤0.5×B)\n2/3 过 → 律得合成湿证\n\n\nH-c3 序义梯度\n顺 216 &lt; 随 432 &lt; 逆 ∞ (记录即金)\n\n\nH-c4 GR 平反审\nA⁺−E ≡ 0 → 不伤无增益, 正交化温和退役"
+  },
+  {
+    "objectID": "03-pb21c-causal-chain.html#五-分析",
+    "href": "03-pb21c-causal-chain.html#五-分析",
+    "title": "03 · PB21c 因果链终审：序须内容之序",
+    "section": "五 · 分析",
+    "text": "五 · 分析\n\n序的效力来自信息密度梯度——PB21 已证下标伪序三臂打平 (鼓包归 C47 分辨率律), 载道之序方见真效;\n机制: 顺因果=旧维为解释器, 新维只注入残差; 逆序=表征反复报废, 是结构性绝望不是慢。序对了, 正交自然长出 (格拉姆-施密特 PK 零号证据添钉);\n园用: AGE-LADDER 年阶与 dag06 行序律之理论凭据; 逆序崩溃深度=「语料含几成因果」免费消融探针。"
+  },
+  {
+    "objectID": "03-pb21c-causal-chain.html#六-边界-丑话在册",
+    "href": "03-pb21c-causal-chain.html#六-边界-丑话在册",
+    "title": "03 · PB21c 因果链终审：序须内容之序",
+    "section": "六 · 边界 (丑话在册)",
+    "text": "六 · 边界 (丑话在册)\n单源线性 64 维玩具链, 判的是纯因果上限非普适保票; PB21 系三案齐封 (21 否伪序 / 21b 刃病自供 / 21c 终审)，原始 json 先 sha 后读, 判词 VERDICT_PB21c.md 在匣。\nγνῶθι σεαυτόν — 打乱即消融, 逆序即审讯。\n边：上游 02（刃病自供）→ 下游 00（本站因之立）。本案卷即园记开匣第一钉。"
+  },
+  {
+    "objectID": "02-pb21b-blade-confession.html",
+    "href": "02-pb21b-blade-confession.html",
+    "title": "02 · PB21b 刃病案：园笔自供「我杀了自己的被告」",
+    "section": "",
+    "text": "改判缘由 PB21 判词逼出边界条件：序须内容之序。铸 AR(1) 因果链沙盒（ρ=.95，信号在链首），五臂含 GR 正交化臂 A/D。\n读数：H_b2 A−D≈0（两臂同困 ~0.90）；H_b3 A−E 反向（−0.05）：无 GR 的 E 臂完胜。\n验尸三行（判词原文照登）：①刃病非律病——园笔把「新维块残差注入」错铸成「全空间净化」，已见信号被投影自尽；②金子在旁证：E 216 vs B 864 步达 95%——4 倍省首现；③D 逆因果同困亦刃累，序义判官未开腔。sha 99550f189c180acd。\n边：上游 01 → 下游 03（修刃再审）。 ::: {.callout-warning appearance=“minimal”} 此案的价值不在数据在诚实：判词把自家刀误列为首要发现——弯路链至此闭环为路标。 :::"
+  }
+]
