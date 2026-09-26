@@ -12,5 +12,6 @@ subtitle: "知识图谱为骨，案卷为页：一案一节点，判语即边"
 | [01](01-pb21-pseudo-order.qmd) | PB21 伪序案 | 下标之序=伪序；鼓包归 C47 不归序 |
 | [02](02-pb21b-blade-confession.qmd) | PB21b 刃病案 | 全空间净化之误自供——刃杀律非数据杀律 |
 | [03](03-pb21c-causal-chain.qmd) | PB21c 因果链终审 | 序须内容之序：顺216<随432<逆∞，**主判 2/3 过** |
+| [04](04-shopping-cart-post-holmes.qmd) | 购物车与事后福尔摩斯 | 结账前多逛：判据冻结论，购物车冻视野 |
 
 *站成于园笔，源匣在 `github.com/math4mad/chora/experiments/pb21-dimgrowth`。凡成案必入图，凡入图必挂链。*
