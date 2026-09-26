@@ -1,0 +1,25 @@
+project:
+  type: website
+  output-dir: _site
+website:
+  title: "园记 · Garden Notes"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "案匣"
+      - text: "谱"
+        menu:
+          - 00-knowledge-graph.qmd
+          - 01-pb21-pseudo-order.qmd
+          - 02-pb21b-blade-confession.qmd
+          - 03-pb21c-causal-chain.qmd
+    right:
+      - href: https://math4mad.github.io/cora-atlas
+        text: "碑体 Cora"
+      - href: https://math4mad.github.io/talk-with-agents
+        text: "对话册"
+format:
+  html:
+    toc-depth: 3
+    theme: cosmo
+    lang: zh
