@@ -122,6 +122,14 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./03-pb21c-causal-chain.html">
  <span class="dropdown-text">03 · PB21c 因果链终审：序须内容之序</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./04-shopping-cart-post-holmes.html">
+ <span class="dropdown-text">04 · 购物车与事后福尔摩斯（战队·旗舰页）</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./05-knowledge-graph-socks.html">
+ <span class="dropdown-text">05 · 园记知识图谱（袜对版）</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -287,6 +295,45 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 </main> <!-- /main -->
+<style>
+.socknav{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0;padding:.55rem .7rem;
+ background:#0e1116;border:1px solid #2c333d;border-radius:.5rem;font-size:.86rem}
+.socknav .lbl{color:#8a93a3;margin-right:.3rem;letter-spacing:.1em}
+.socknav a{color:#e8c56d;text-decoration:none;border-bottom:1px dotted #6b5a2a;padding:0 .15rem}
+.socknav a:hover{color:#ffe9b0}
+.socknav .disk{color:#67707d;font-style:italic}
+.socknav .warn{color:#e07b5a}
+</style>
+<div id="socknav" class="socknav" style="display:none"></div>
+<script>
+(function(){
+ var CH="https://github.com/math4mad/chora/blob/main/experiments/";
+ var TA="https://math4mad.github.io/talk-with-agents/talking/learning-theory/";
+ var P=document.location.pathname.split("/").pop()||"index.html";
+ var MAP={
+ "index":[["对话","园盘外" ,1],["问题","05-knowledge-graph-socks.html"],["实验",CH+"pb21-dimgrowth/",1],["结果",CH+"pb21-dimgrowth/result_pb21c.json",1],["讨论","01-pb21-pseudo-order.html"]],
+ "01-pb21-pseudo-order":["对话",TA+"gram-schmidt-dimension-growth.html",1],
+ "02-pb21b-blade-confession":["对话",TA+"gram-schmidt-dimension-growth.html",1],
+ "03-pb21c-causal-chain":["对话",TA+"gram-schmidt-dimension-growth.html",1],
+ "04-shopping-cart-post-holmes":["对话","external/与AI助手互动….json 园盘",0],
+ "05-knowledge-graph-socks":["全图","本页",1]};
+ var SOCKS={
+ "01-pb21-pseudo-order":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21",CH+"pb21-dimgrowth/PREREG_PB21_dimgrowth.md",1],["结果·判词",CH+"pb21-dimgrowth/VERDICT_PB21.md",1],["讨论·下游","02-pb21b-blade-confession.html"]],
+ "02-pb21b-blade-confession":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21b",CH+"pb21-dimgrowth/PREREG_PB21b_causalchain.md",1],["结果·自供",CH+"pb21-dimgrowth/VERDICT_PB21b.md",1],["讨论·下游","03-pb21c-causal-chain.html"]],
+ "03-pb21c-causal-chain":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·run_c",CH+"pb21-dimgrowth/run_c.py",1],["结果·sha+判词",CH+"pb21-dimgrowth/VERDICT_PB21c.md",1],["讨论·律碑","04-shopping-cart-post-holmes.html"]],
+ "04-shopping-cart-post-holmes":[["对话·与AI助手","园盘 external json",0],["问题·洗澡水/购物车","本页幕二"],["实验邻·PB21c","03-pb21c-causal-chain.html"],["结果邻·C49","05-knowledge-graph-socks.html"],["讨论·图法","05-knowledge-graph-socks.html"]],
+ "05-knowledge-graph-socks":[["全链源","园盘 4 json",0],["五元链","本页图"],["单袜账","本页表"],["候射·PB22",CH+"pb22-graphorder/PREREG_PB22_graphorder.md",1],["回匣","index.html"]],
+ "index":[["对话群","园盘 4 json",0],["链图","05-knowledge-graph-socks.html"],["案群",CH+"pb21-dimgrowth/",1],["律","03-pb21c-causal-chain.html"],["战队","04-shopping-cart-post-holmes.html"]]};
+ var socks=SOCKS[P.replace(".html","")]||SOCKS["index"];
+ var el=document.getElementById("socknav"); if(!socks||!el) return;
+ var h='<span class="lbl">🧦 袜对</span>';
+ socks.forEach(function(s){
+  if(s[1]==="@ext"){h+='<span class="disk">'+s[0]+'·园盘正典</span>';return;}
+  if(!s[2]&&s[1].indexOf("http")!=0&&s[1].indexOf(".html")!=0){h+='<span class="warn">'+s[0]+'·'+s[1]+'</span>';return;}
+  h+='<a href="'+s[1]+'">'+s[0]+'</a>';});
+ el.innerHTML=h; el.style.display="flex";
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
