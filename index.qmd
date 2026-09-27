@@ -14,4 +14,6 @@ subtitle: "知识图谱为骨，案卷为页：一案一节点，判语即边"
 | [03](03-pb21c-causal-chain.qmd) | PB21c 因果链终审 | 序须内容之序：顺216<随432<逆∞，**主判 2/3 过** |
 | [04](04-shopping-cart-post-holmes.qmd) | **战队空间·旗舰**：购物车与事后福尔摩斯 | 非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形 |
 
+| [05](05-knowledge-graph-socks.qmd) | **知识图谱·袜对版** | 五元成链，半缺亮单袜——图显其必有 |
+
 *站成于园笔，源匣在 `github.com/math4mad/chora/experiments/pb21-dimgrowth`。凡成案必入图，凡入图必挂链。*
