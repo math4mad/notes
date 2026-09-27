@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>园记 · 案匣 – 园记 · Garden Notes</title>
+<title>05 · 园记知识图谱（袜对版） – 园记 · Garden Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -73,6 +73,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "搜索"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -95,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">案匣</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -148,8 +151,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">园记 · 案匣</h1>
-<p class="subtitle lead">知识图谱为骨，案卷为页：一案一节点，判语即边</p>
+<h1 class="title">05 · 园记知识图谱（袜对版）</h1>
+<p class="subtitle lead">对话→问题→实验→结果→讨论，链链成对；单袜即欠账</p>
 </div>
 
 
@@ -157,6 +160,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2026年9月27日</p>
+    </div>
+  </div>
   
     
   </div>
@@ -166,47 +175,113 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>早十时议定：<strong>实现笔记的网站，结果在网站展示</strong>。取义知识图——非数据库表，而是<strong>概念空间的图谱化</strong>：每篇案卷是一节点，节点间以「判语链」为有向边（伪序证伪 → 刃病自供 → 修刃终审），网站即此小图的显影。</p>
-<section id="谱系按生长序" class="level2">
-<h2 class="anchored" data-anchor-id="谱系按生长序">谱系（按生长序）</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>袜对公理（本站图法第一律，主人 0927 裁定）
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A 出现，B 必在附近。园记五元（<strong>对话·问题·实验·结果·讨论</strong>）互为孪生： 每案必经五元成链，链上<strong>半缺即亮单袜</strong>（⚠）——图的价值不在存已有，在<strong>显其必有</strong>。 理论本体维与 triple-store 技术维两条，主人令存目购物车，本站优先。</p>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+  classDef dlg fill:#1f3a5f,color:#cfe3ff,stroke:#4a7bb0;
+  classDef q fill:#5b4a1f,color:#ffe9b0,stroke:#b09a4a;
+  classDef exp fill:#24512c,color:#cfeecf,stroke:#4a9a5b;
+  classDef res fill:#5f3712,color:#ffd9b0,stroke:#b07a3a;
+  classDef disc fill:#3d2b52,color:#e6d4ff,stroke:#8a6ab0;
+
+  D1[对话·高级隐喻母本]::dlg --&gt; Q1[问题·序是最贫的一维?]::q
+  D2[对话·建造对话 0927]::dlg --&gt; Q1
+  D3[对话·晾衣偶得 0927]::dlg --&gt; Q2[问题·图如何显其必有]::q
+  D4[对话·与AI助手 0927]::dlg --&gt; Q3[问题·洗澡水与孩子/购物车]::q
+  Q1 --&gt; E1[实验·PB21 伪序]::exp
+  Q1 --&gt; E2[实验·PB21b 刃病]::exp
+  Q1 --&gt; E3[实验·PB21c 链序终审]::exp
+  Q1 -.候射.-&gt; E4[实验·PB22 图序 单袜⚠]::exp
+  Q3 -.候弹.-&gt; E5[实验·PB21e/f 噪声与逆序]::exp
+  E1 --&gt; R1[结果·伪序判否]::res
+  E2 --&gt; R2[结果·刃病自供]::res
+  E3 --&gt; R3[结果·顺216&lt;随432&lt;逆∞]::res
+  R3 --&gt; C49[律·C49 信息租正交补]::res
+  C13[律·格拉姆-施密特 PK]::res --&gt; E1
+  R1 --&gt; S1[讨论·园记01]::disc
+  R2 --&gt; S2[讨论·园记02]::disc
+  R3 --&gt; S3[讨论·园记03]::disc
+  Q2 --&gt; S5[讨论·园记05 本页]::disc
+  Q3 --&gt; S4[讨论·园记04 战队旗舰]::disc
+  S4 --&gt; C49
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<section id="袜对账缺孪生即欠账图自点名" class="level2">
+<h2 class="anchored" data-anchor-id="袜对账缺孪生即欠账图自点名">袜对账（缺孪生即欠账，图自点名）</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>节点</th>
-<th>案</th>
-<th>一句判语</th>
+<th>物</th>
+<th>应有之孪</th>
+<th>状态</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./00-knowledge-graph.html">00</a></td>
-<td>知识图谱晨议</td>
-<td>设计裁定录：为何此站是图不是表</td>
+<td>PB22 封条（冻尺在先）</td>
+<td>实验结果</td>
+<td>⚠ <strong>单袜</strong>（候「射」字——图例虚线）</td>
 </tr>
 <tr class="even">
-<td><a href="./01-pb21-pseudo-order.html">01</a></td>
-<td>PB21 伪序案</td>
-<td>下标之序=伪序；鼓包归 C47 不归序</td>
+<td>C49 律</td>
+<td>论文落点 §4.2</td>
+<td>⚠ 单袜（园记 04 有，正碑未刻）</td>
 </tr>
 <tr class="odd">
-<td><a href="./02-pb21b-blade-confession.html">02</a></td>
-<td>PB21b 刃病案</td>
-<td>全空间净化之误自供——刃杀律非数据杀律</td>
+<td>三问购物车 (e/f)</td>
+<td>对话源头 ✓ 实验 ✗</td>
+<td>半袜（车上，未结账）</td>
 </tr>
 <tr class="even">
-<td><a href="./03-pb21c-causal-chain.html">03</a></td>
-<td>PB21c 因果链终审</td>
-<td>序须内容之序：顺216&lt;随432&lt;逆∞，<strong>主判 2/3 过</strong></td>
+<td>战队空间</td>
+<td>归档律 ✓ 五舰 ✓</td>
+<td>全袜</td>
 </tr>
 <tr class="odd">
-<td><a href="./04-shopping-cart-post-holmes.html">04</a></td>
-<td><strong>战队空间·旗舰</strong>：购物车与事后福尔摩斯</td>
-<td>非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形</td>
+<td>LoRA 对话</td>
+<td>他图（主人令存目不入本链）</td>
+<td>挂账不挂图</td>
+</tr>
+<tr class="even">
+<td>晾衣偶得</td>
+<td>图法第一律 ✓（即本页公理）</td>
+<td>全袜成对</td>
 </tr>
 </tbody>
 </table>
-<div class="line-block"><a href="./05-knowledge-graph-socks.html">05</a> | <strong>知识图谱·袜对版</strong> | 五元成链，半缺亮单袜——图显其必有 |</div>
-<p><em>站成于园笔，源匣在 <code>github.com/math4mad/chora/experiments/pb21-dimgrowth</code>。凡成案必入图，凡入图必挂链。</em></p>
+</section>
+<section id="边之分类图的代数结构袜子第四问落地" class="level2">
+<h2 class="anchored" data-anchor-id="边之分类图的代数结构袜子第四问落地">边之分类（图的代数结构，袜子第四问落地）</h2>
+<ul>
+<li><strong>链边</strong>（对话→问题→实验→结果→讨论）：因果序，<strong>不可逆</strong>——21c 律之自反应用：本站按因果序生长；</li>
+<li><strong>袜边</strong>（孪生配对，图中以「应有」隐式存在）：对称不可分辨——判据↔︎判词、冻尺↔︎开火、结果↔︎sha；</li>
+<li><strong>图例未画之对称群</strong>：C49 与 GS-PK 碑乃同家系（左右袜，无左右）；PB21/21b/21c 三案乃<strong>同题异序</strong>（同一问题的三次换序）——可换性已标：三案页可互链而序不可换（封条日期为骨）。 <em>本页即第一只挂图的袜子：此后凡新案入匣，先补链再亮袜。</em></li>
+</ul>
 
 
 </section>

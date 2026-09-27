@@ -63,6 +63,27 @@
     "text": "六 · 边界 (丑话在册)\n单源线性 64 维玩具链, 判的是纯因果上限非普适保票; PB21 系三案齐封 (21 否伪序 / 21b 刃病自供 / 21c 终审)，原始 json 先 sha 后读, 判词 VERDICT_PB21c.md 在匣。\nγνῶθι σεαυτόν — 打乱即消融, 逆序即审讯。\n边：上游 02（刃病自供）→ 下游 00（本站因之立）。本案卷即园记开匣第一钉。"
   },
   {
+    "objectID": "05-knowledge-graph-socks.html",
+    "href": "05-knowledge-graph-socks.html",
+    "title": "05 · 园记知识图谱（袜对版）",
+    "section": "",
+    "text": "注记袜对公理（本站图法第一律，主人 0927 裁定）\n\n\n\nA 出现，B 必在附近。园记五元（对话·问题·实验·结果·讨论）互为孪生： 每案必经五元成链，链上半缺即亮单袜（⚠）——图的价值不在存已有，在显其必有。 理论本体维与 triple-store 技术维两条，主人令存目购物车，本站优先。\ngraph LR\n  classDef dlg fill:#1f3a5f,color:#cfe3ff,stroke:#4a7bb0;\n  classDef q fill:#5b4a1f,color:#ffe9b0,stroke:#b09a4a;\n  classDef exp fill:#24512c,color:#cfeecf,stroke:#4a9a5b;\n  classDef res fill:#5f3712,color:#ffd9b0,stroke:#b07a3a;\n  classDef disc fill:#3d2b52,color:#e6d4ff,stroke:#8a6ab0;\n\n  D1[对话·高级隐喻母本]::dlg --&gt; Q1[问题·序是最贫的一维?]::q\n  D2[对话·建造对话 0927]::dlg --&gt; Q1\n  D3[对话·晾衣偶得 0927]::dlg --&gt; Q2[问题·图如何显其必有]::q\n  D4[对话·与AI助手 0927]::dlg --&gt; Q3[问题·洗澡水与孩子/购物车]::q\n  Q1 --&gt; E1[实验·PB21 伪序]::exp\n  Q1 --&gt; E2[实验·PB21b 刃病]::exp\n  Q1 --&gt; E3[实验·PB21c 链序终审]::exp\n  Q1 -.候射.-&gt; E4[实验·PB22 图序 单袜⚠]::exp\n  Q3 -.候弹.-&gt; E5[实验·PB21e/f 噪声与逆序]::exp\n  E1 --&gt; R1[结果·伪序判否]::res\n  E2 --&gt; R2[结果·刃病自供]::res\n  E3 --&gt; R3[结果·顺216&lt;随432&lt;逆∞]::res\n  R3 --&gt; C49[律·C49 信息租正交补]::res\n  C13[律·格拉姆-施密特 PK]::res --&gt; E1\n  R1 --&gt; S1[讨论·园记01]::disc\n  R2 --&gt; S2[讨论·园记02]::disc\n  R3 --&gt; S3[讨论·园记03]::disc\n  Q2 --&gt; S5[讨论·园记05 本页]::disc\n  Q3 --&gt; S4[讨论·园记04 战队旗舰]::disc\n  S4 --&gt; C49"
+  },
+  {
+    "objectID": "05-knowledge-graph-socks.html#袜对账缺孪生即欠账图自点名",
+    "href": "05-knowledge-graph-socks.html#袜对账缺孪生即欠账图自点名",
+    "title": "05 · 园记知识图谱（袜对版）",
+    "section": "袜对账（缺孪生即欠账，图自点名）",
+    "text": "袜对账（缺孪生即欠账，图自点名）\n\n\n\n\n\n\n\n\n物\n应有之孪\n状态\n\n\n\n\nPB22 封条（冻尺在先）\n实验结果\n⚠ 单袜（候「射」字——图例虚线）\n\n\nC49 律\n论文落点 §4.2\n⚠ 单袜（园记 04 有，正碑未刻）\n\n\n三问购物车 (e/f)\n对话源头 ✓ 实验 ✗\n半袜（车上，未结账）\n\n\n战队空间\n归档律 ✓ 五舰 ✓\n全袜\n\n\nLoRA 对话\n他图（主人令存目不入本链）\n挂账不挂图\n\n\n晾衣偶得\n图法第一律 ✓（即本页公理）\n全袜成对"
+  },
+  {
+    "objectID": "05-knowledge-graph-socks.html#边之分类图的代数结构袜子第四问落地",
+    "href": "05-knowledge-graph-socks.html#边之分类图的代数结构袜子第四问落地",
+    "title": "05 · 园记知识图谱（袜对版）",
+    "section": "边之分类（图的代数结构，袜子第四问落地）",
+    "text": "边之分类（图的代数结构，袜子第四问落地）\n\n链边（对话→问题→实验→结果→讨论）：因果序，不可逆——21c 律之自反应用：本站按因果序生长；\n袜边（孪生配对，图中以「应有」隐式存在）：对称不可分辨——判据↔︎判词、冻尺↔︎开火、结果↔︎sha；\n图例未画之对称群：C49 与 GS-PK 碑乃同家系（左右袜，无左右）；PB21/21b/21c 三案乃同题异序（同一问题的三次换序）——可换性已标：三案页可互链而序不可换（封条日期为骨）。 本页即第一只挂图的袜子：此后凡新案入匣，先补链再亮袜。"
+  },
+  {
     "objectID": "00-knowledge-graph.html",
     "href": "00-knowledge-graph.html",
     "title": "00 · 知识图谱晨议——网站为图之显影",
@@ -95,7 +116,7 @@
     "href": "index.html#谱系按生长序",
     "title": "园记 · 案匣",
     "section": "谱系（按生长序）",
-    "text": "谱系（按生长序）\n\n\n\n节点\n案\n一句判语\n\n\n\n\n00\n知识图谱晨议\n设计裁定录：为何此站是图不是表\n\n\n01\nPB21 伪序案\n下标之序=伪序；鼓包归 C47 不归序\n\n\n02\nPB21b 刃病案\n全空间净化之误自供——刃杀律非数据杀律\n\n\n03\nPB21c 因果链终审\n序须内容之序：顺216&lt;随432&lt;逆∞，主判 2/3 过\n\n\n04\n战队空间·旗舰：购物车与事后福尔摩斯\n非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形\n\n\n\n站成于园笔，源匣在 github.com/math4mad/chora/experiments/pb21-dimgrowth。凡成案必入图，凡入图必挂链。"
+    "text": "谱系（按生长序）\n\n\n\n节点\n案\n一句判语\n\n\n\n\n00\n知识图谱晨议\n设计裁定录：为何此站是图不是表\n\n\n01\nPB21 伪序案\n下标之序=伪序；鼓包归 C47 不归序\n\n\n02\nPB21b 刃病案\n全空间净化之误自供——刃杀律非数据杀律\n\n\n03\nPB21c 因果链终审\n序须内容之序：顺216&lt;随432&lt;逆∞，主判 2/3 过\n\n\n04\n战队空间·旗舰：购物车与事后福尔摩斯\n非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形\n\n\n\n05 | 知识图谱·袜对版 | 五元成链，半缺亮单袜——图显其必有 |\n站成于园笔，源匣在 github.com/math4mad/chora/experiments/pb21-dimgrowth。凡成案必入图，凡入图必挂链。"
   },
   {
     "objectID": "04-shopping-cart-post-holmes.html",
