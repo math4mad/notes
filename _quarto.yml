@@ -13,6 +13,8 @@ website:
           - 01-pb21-pseudo-order.qmd
           - 02-pb21b-blade-confession.qmd
           - 03-pb21c-causal-chain.qmd
+          - 04-shopping-cart-post-holmes.qmd
+          - 05-knowledge-graph-socks.qmd
     right:
       - href: https://math4mad.github.io/cora-atlas
         text: "碑体 Cora"

@@ -1,23 +1,23 @@
 {
+  "05-knowledge-graph-socks.qmd": {
+    "05-knowledge-graph-socks.html": "8d005a5a"
+  },
   "00-knowledge-graph.qmd": {
-    "00-knowledge-graph.html": "dd59d3b3"
+    "00-knowledge-graph.html": "b7b5f91c"
   },
   "03-pb21c-causal-chain.qmd": {
-    "03-pb21c-causal-chain.html": "03a022a3"
+    "03-pb21c-causal-chain.html": "c6e19863"
   },
   "index.qmd": {
-    "index.html": "d10c6614"
+    "index.html": "7d39b1ae"
   },
   "02-pb21b-blade-confession.qmd": {
-    "02-pb21b-blade-confession.html": "680264f5"
-  },
-  "01-pb21-pseudo-order.qmd": {
-    "01-pb21-pseudo-order.html": "8329beee"
+    "02-pb21b-blade-confession.html": "028b3cf8"
   },
   "04-shopping-cart-post-holmes.qmd": {
-    "04-shopping-cart-post-holmes.html": "e1fc9b99"
+    "04-shopping-cart-post-holmes.html": "17af4552"
   },
-  "05-knowledge-graph-socks.qmd": {
-    "05-knowledge-graph-socks.html": "3e52695b"
+  "01-pb21-pseudo-order.qmd": {
+    "01-pb21-pseudo-order.html": "0860cea4"
   }
 }

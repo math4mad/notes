@@ -1,4 +1,5 @@
 ---
+include-after-body: partials/socks.html
 title: "园记 · 案匣"
 subtitle: "知识图谱为骨，案卷为页：一案一节点，判语即边"
 ---

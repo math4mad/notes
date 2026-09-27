@@ -1,4 +1,5 @@
 ---
+include-after-body: partials/socks.html
 title: "03 · PB21c 因果链终审：序须内容之序"
 date: "2026-09-27"
 subtitle: "顺 216 < 随 432 < 逆 ∞ —— 主判 2/3 过，律升条件机制"
