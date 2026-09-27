@@ -20,6 +20,8 @@ website:
         text: "对话册"
 format:
   html:
+    includes:
+      after-body: partials/socks.html
     toc-depth: 3
     theme: cosmo
     lang: zh
