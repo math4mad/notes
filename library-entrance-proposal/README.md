@@ -44,3 +44,11 @@
 
 见 `outreach.csv`（初始 n=2：广州、上海，均 `pending`）。
 **广东省立中山图书馆**：官网只登电话、无邮箱，按令**不管**。
+
+## 六 · 定期巡检与阈值告警（主人令：定期收，达 5 回复则通知）
+
+- **巡检器** `check_replies.py`：扫邮箱（`agently-cli message +search --from`）→ 回音写回 `outreach.csv` → 计有回音数。
+- **定时**：launchd `com.concept-space.lib-proposal`，**每日 09:30** 跑一次（`--notify --threshold 5`）。
+- **阈值告警**：回音累计 **≥ 5** → 挂一条 iPhone 提醒（`bin/remind.sh`）＋ 打印哨 `THRESHOLD-REACHED`。
+- **日志**：`/tmp/concept-lib-proposal.log` ／ `.err`；plist 副本存本目录。
+- 手动：`python3 check_replies.py --notify --threshold 5`
