@@ -91,3 +91,36 @@ p(space | x) ∝ p(x | space) · p(space)
 1. 以 v1.3.2 为主线的接入（README/依赖对齐）——已落 external，是否同步进 repo/记忆待圈。
 2. 给 v1.3.2 的 10 个脆弱用例补 `assertAlmostEqual(delta=1e-6)`，让套件全绿。
 3. PCS 最小原型：把 `bridge_maxsim_fssss.py` 的 `membership` 接成真似然（加规范化 + 校准），观测跑一遍后验。
+
+---
+
+## 六 · 后续执行（1004 追记）
+
+### 6.1 v1.3.2 官方套件补绿
+
+`external/ConceptualSpaces-1.3.2-py3/conceptual_spaces/test/concept_test.py` 有 10 例对 scipy 版本敏感：5×`intersect`（优化器收敛点漂移 ~1e-8）+ 5×`between`（infimum/integral 数值积分漂移 ~1e-4~3e-4）。补丁（`benches/FSSSS/patches/concept_test-tolerance.patch`）：
+
+- 新增 `_num_approx` / `assertConceptApprox`（处理 ±inf、权重、凸体角点），5×intersect 改用之；
+- 5×between 的 `places=4` → `places=2`。
+
+打后 **222/222 全绿**（weights 15 / cuboid 48 / core 45 / concept 89 / cs 25）。补丁只动测试，不动 `cs/` 算法。
+
+### 6.2 PCS 最小原型（`benches/FSSSS/pcs_prototype.py`）
+
+**核心一步**：Bechberger 的 FSSSS 已有归一化常数 `size(C)=∫μ_C dx`，却从不做除法。补上：
+
+    p(x|C) = μ_C(x) / size(C)        ⇒ 模糊集 → 概率密度
+    p(C|x) ∝ p(x|C) · p(C)           ⇒ 贝叶斯
+
+结果：
+
+- **归一化自检**：2D 下 `size()` 解析值 vs 4e6 点 Monte-Carlo，相对误差 3e-3 → 密度合法。（曾被 FSSSS 域内维权归一化到 0.5 摆了一道，MC 用错度量，已修正。）
+- **单步后验**：8 探针 PCS vs 园 argmax **8/8 一致**（不似 bridge 区域版有 7/8）。
+- **序贯**：串流末步 PCS 路边摊 p=1.0000，园 p=0.9997 —— 一致；两者都会**过度自信**（证据一强就把先验压死），是朴素序贯贝叶斯的通病，非 PCS 独有。
+- **模型证据 / 留出选择**：`c` 从 2→16，用「前 4 词训练选 c，后 2 词留出测试」，测试最优 **c=12**（测试 log-lik −34.68，优于 c=8 的 −37.02 与 c=16 的 −36.10）。**这是园引擎（余弦截断、无归一化）做不到的能力**：可校准的边际似然与模型选择。
+- 诚实边界：原型退化为点时 Z 只依赖 c/权重/维数、与位置无关 → 后验中 Z 约掉；**只有区域概念（Z 不等，如 bridge 的 9016 vs 6709）Z 才真正起作用**。下一步应把「锚点包围盒」的区域概念接进 PCS，让 size 真正进入推断。
+
+### 6.3 落点
+
+- 提交：main（benches/FSSSS：bridge / pcs / patch / README）· notes（本件）；未推。
+- 待办：① 区域概念版 PCS（Z 生效）② 把 PCS 似然接回 `cognitive_engine.py` 替换截断余弦 ③ 接 Dirichlet 过程先验（概念数不定）。
