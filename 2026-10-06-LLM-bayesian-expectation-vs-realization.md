@@ -45,3 +45,22 @@
 ## 七 · 可入碑候选（候圈，不急）
 - 「**期望贝叶斯律** the in-expectation Bayes law」：*逐序列化实现 ≠ 序贯可竞争*；可交换性违反由 log loss 定价。
 - 邻碑：倒灌律（其病理面）· 底图律（其有限表/floor 面）· 参数意愿律（序平均＝对序分布的意愿）· 序号/切片轴律。
+
+---
+
+## 八 · 对岸 ima 的 EDRL-2026 review（1006 第二论）· 须校
+
+对岸 ima 于《Dog/概念空间·第二论》（turns 3–5，正本 `chora/lola/notes/2026-10-06-dog-concept-space-part2.md`）
+给出一份 review ＋「该文 vs 你框架」四点对照表，拟入其「EDRL-2026」笔记本。**须校三处**
+（彼自陈 PDF fetch 失败、仅凭搜索摘要）：
+
+1. 「**不完备性定理**：有限参数装不下无限计算复杂度 ⇒ **外部推理 (extrinsic reasoning)** 必要」——
+   **原文无此定理/概念**（本地实读 2507.11768v3：只有 prequential 码长 ≡ 预测 KL、order-averaging 分解、
+   KT/Dirichlet＋safe-code floor、PE 消融、激活修补；无 incompleteness theorem、无 extrinsic reasoning）。
+2. 「**最优思维链 (optimal chain-of-thought)** 框架」——**原文无**（无 CoT/思维链内容）。
+3. 「可**大幅降低计算成本**」——原文仅作**预测分数诊断**（作者明言 *not a deployment recommendation*）；无降本之据。
+
+⇒ 疑为**搜索摘要串味/幻觉**（对岸自认抓不到 PDF）。**禁裸引入园账。**
+
+**可采之处**：对照表第 1–3 维（贝叶斯性在期望层面／架构 vs 语料两层正交／时序维度缺席）与本地读记一致，可保留；
+**第 4 维须以本地口径重写**：正题＝**prequential 定价 ＋「竞争性 ≠ 可审计性」**，而非「不完备性定理→外部推理」。
