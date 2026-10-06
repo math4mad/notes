@@ -68,7 +68,7 @@
 ---
 
 ## 九 · 知识库指针（主人 1006 供）
-- ima 知识库 **`Learning Support Cocept`** → 文件夹 **`Concept-Space-Paper`**
+- ima 知识库 **`Learning Support Concept`**（主人 1006 已正名：旧拼写 `Cocept` 系笔误）→ 文件夹 **`Concept-Space-Paper`**
 - 件：`LLMs are Bayesian, In Expectation, Not in Realization.pdf`（media_type 1）
   （同夹：Gärdenfors《The Geometry of Thought》《Elaborations and Applications》《Applications of Conceptual Spaces》、A Thorough Formalization…、Logic Tensor Networks 等）
 - ⇒ **对岸 ima 身自此可直读本论文**（不再"抓不到 PDF"），后续 review 可望贴合原文。
