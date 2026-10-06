@@ -64,3 +64,31 @@
 
 **可采之处**：对照表第 1–3 维（贝叶斯性在期望层面／架构 vs 语料两层正交／时序维度缺席）与本地读记一致，可保留；
 **第 4 维须以本地口径重写**：正题＝**prequential 定价 ＋「竞争性 ≠ 可审计性」**，而非「不完备性定理→外部推理」。
+
+---
+
+## 九 · 知识库指针（主人 1006 供）
+- ima 知识库 **`Learning Support Cocept`** → 文件夹 **`Concept-Space-Paper`**
+- 件：`LLMs are Bayesian, In Expectation, Not in Realization.pdf`（media_type 1）
+  （同夹：Gärdenfors《The Geometry of Thought》《Elaborations and Applications》《Applications of Conceptual Spaces》、A Thorough Formalization…、Logic Tensor Networks 等）
+- ⇒ **对岸 ima 身自此可直读本论文**（不再"抓不到 PDF"），后续 review 可望贴合原文。
+
+---
+
+## 十 · EDRL-2026 可粘贴版（本地准确版）
+
+**【EDRL-2026 · 2026-10-06】Review：《LLMs are Bayesian, In Expectation, Not in Realization》（arXiv:2507.11768v3）对照结构化先验框架**
+
+- **该文一句话**：变换器**不必逐条序列化实现可交换后验**，但**可为贝叶斯竞争力的序贯预测器**；可交换性违反不是二元反驳，而由 log loss 定价。
+- **机制四件**：① 超额 prequential 码长 ≡ 累积预测 KL；② 保任务序分解 ＝序平均后悔 ＋ 非负 order-averaging gain；③ 保任务序 vs 语义序；④ KT/Dirichlet ＋ safe-code floor。
+- **实测（Qwen2.5-7B/14B）**：一步超额码长 **0.020/0.011 bits（Bernoulli）、0.039/0.022（四类）**，candidate mass **>0.999**；位置干预降序方差 **≈21×**；**无 PE ⇒ 序方差 3.7e−16**（可交换性违反住位置编码，非架构）；探针 **R²=0.9998** 且因果使用；证据 QA gain **0.1041/0.00982 nats/token**。
+
+| # | 维度 | 该文 | 本地框架 | 关系 |
+|---|---|---|---|---|
+| 1 | 贝叶斯性的位置 | 期望层面／隐式；非显式结构 | 显式**概念空间之塔**（底图律） | 互补 |
+| 2 | 关注对象 | 架构层序贯统计最优（PE／可交换／排列平均） | 语料层**概念空间演化**（自变序列律） | 正交 |
+| 3 | 时序／演化 | 不涉概念时间演化；只谈序列内可交换与 PE 张力 | 核心是**概念空间自身变化序列** | 空缺 vs 填补 |
+| 4 | 「显式结构必要」的**论据** | **不是**「不完备性定理→外部推理」（原文无）；而是 **LLM 无显式先验/后验结构、只是期望层隐式贝叶斯**，且 **序贯竞争性 ≠ 可审计性** | 园：有限显式先验 ＋ 黑天鹅 floor 才可审计 | 支撑（以正确论据） |
+
+- **须校（禁裸引）**：对岸 ima review 里的「不完备性定理／外部推理（extrinsic reasoning）／最优思维链／大幅降本」**原文皆无**。
+- **对框架的意义**：该文给园的「显式先验之塔 ＋ 自变序列」提供**外部锚点**（LLM 的贝叶斯性只是期望层隐式效果、缺显式结构）；但它不涉语料演化时序，**园之方向未被占用**。
