@@ -15,7 +15,11 @@ website:
           - 03-pb21c-causal-chain.qmd
           - 04-shopping-cart-post-holmes.qmd
           - 05-knowledge-graph-socks.qmd
+      - href: kaggle/index.qmd
+        text: "Kaggle 夜航"
     right:
+      - href: https://math4mad.github.io/notes
+        text: "笔记"
       - href: https://math4mad.github.io/cora-atlas
         text: "碑体 Cora"
       - href: https://math4mad.github.io/talk-with-agents
