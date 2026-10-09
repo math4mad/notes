@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>园记 · 案匣 – 园记 · Garden Notes</title>
+<title>draft-为何停在2022-概念空间计算的停点-1004 – 园记 · Garden Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -74,6 +74,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -95,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">案匣</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -160,113 +189,233 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">园记 · 案匣</h1>
-<p class="subtitle lead">知识图谱为骨，案卷为页：一案一节点，判语即边</p>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>早十时议定：<strong>实现笔记的网站，结果在网站展示</strong>。取义知识图——非数据库表，而是<strong>概念空间的图谱化</strong>：每篇案卷是一节点，节点间以「判语链」为有向边（伪序证伪 → 刃病自供 → 修刃终审），网站即此小图的显影。</p>
-<section id="谱系按生长序" class="level2">
-<h2 class="anchored" data-anchor-id="谱系按生长序">谱系（按生长序）</h2>
+<section id="他停在-2022领域没有-bechberger-概念空间计算的停点与未竟的概率问题" class="level1">
+<h1>他停在 2022，领域没有 —— Bechberger 概念空间计算的停点与未竟的概率问题</h1>
+<blockquote class="blockquote">
+<p><strong>【内部草稿 · 未公开 · 未经本人确认】</strong> 标注约定：<strong>【记录】=有公开源可复现；【推断】=有据但不确；【未知】=留白。</strong> 数据源与脚本：<code>benches/FSSSS/bechberger_timeline.py</code>（GitHub API · WordPress REST · OpenAlex）。 图：<code>benches/FSSSS/fig_bechberger_timeline.png</code>、<code>fig_field_growth.png</code>。 本文只分析<strong>研究纲领</strong>的天花板，不对作者个人动机作因果断言。</p>
+</blockquote>
+<hr>
+<section id="一-三个停点记录" class="level2">
+<h2 class="anchored" data-anchor-id="一-三个停点记录">一 · 三个停点【记录】</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>节点</th>
-<th>案</th>
-<th>一句判语</th>
+<th>线</th>
+<th>起点</th>
+<th>终点</th>
+<th>源</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./00-knowledge-graph.html">00</a></td>
-<td>知识图谱晨议</td>
-<td>设计裁定录：为何此站是图不是表</td>
+<td>代码（ConceptualSpaces）</td>
+<td>2017-06-01</td>
+<td><strong>2022-01-20</strong>（v1.3.2，133 commits）</td>
+<td>GitHub API</td>
 </tr>
 <tr class="even">
-<td><a href="./01-pb21-pseudo-order.html">01</a></td>
-<td>PB21 伪序案</td>
-<td>下标之序=伪序；鼓包归 C47 不归序</td>
+<td>博客（同主题连载）</td>
+<td>2017</td>
+<td><strong>2022-09-29</strong></td>
+<td>WP REST（65 篇）</td>
 </tr>
 <tr class="odd">
-<td><a href="./02-pb21b-blade-confession.html">02</a></td>
-<td>PB21b 刃病案</td>
-<td>全空间净化之误自供——刃杀律非数据杀律</td>
+<td>著述</td>
+<td>2012</td>
+<td><strong>2023-12</strong>（博士论文，收官）</td>
+<td>主页书目 / OpenAlex / S2</td>
 </tr>
 <tr class="even">
-<td><a href="./03-pb21c-causal-chain.html">03</a></td>
-<td>PB21c 因果链终审</td>
-<td>序须内容之序：顺216&lt;随432&lt;逆∞，<strong>主判 2/3 过</strong></td>
-</tr>
-<tr class="odd">
-<td><a href="./04-shopping-cart-post-holmes.html">04</a></td>
-<td><strong>战队空间·旗舰</strong>：购物车与事后福尔摩斯</td>
-<td>非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形</td>
+<td>其后</td>
+<td>—</td>
+<td><strong>2024–2025 零新作</strong></td>
+<td>OpenAlex(20 作)/S2/主页</td>
 </tr>
 </tbody>
 </table>
-<div class="line-block"><a href="./05-knowledge-graph-socks.html">05</a> | <strong>知识图谱·袜对版</strong> | 五元成链，半缺亮单袜——图显其必有 |</div>
-<p><em>站成于园笔，源匣在 <code>github.com/math4mad/chora/experiments/pb21-dimgrowth</code>。凡成案必入图，凡入图必挂链。</em></p>
+<p>两处精确停点： - <strong>2022-01-20</strong>：最后一次研究性提交（v1.3.2，<code>866b7a98</code>）。此后 <code>pushed_at=2023-07-06</code> <strong>不是研究活动</strong>——是 dependabot「Bump scipy 1.5.3→1.10.0」。master HEAD 即 2022-01-20。 - <strong>2022-09-29</strong>：最后一篇博客《Learning To Map Images Into Shape Space (Part 10)》。</p>
+<p>逐年活动（图一，四线并置）：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>年</th>
+<th>commits</th>
+<th>blog</th>
+<th>pubs</th>
+<th>cites</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2017</td>
+<td>71</td>
+<td>23</td>
+<td>12</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2018</td>
+<td>25</td>
+<td>15</td>
+<td>6</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>2019</td>
+<td>8</td>
+<td>5</td>
+<td>3</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>2020</td>
+<td>23</td>
+<td>11</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>2021</td>
+<td>2</td>
+<td>10</td>
+<td>10</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td><strong>13</strong></td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="二-这不是没人用也不是没做完记录" class="level2">
+<h2 class="anchored" data-anchor-id="二-这不是没人用也不是没做完记录">二 · 这不是「没人用」，也不是「没做完」【记录】</h2>
+<ul>
+<li>仓库 <code>lbechberger/ConceptualSpaces</code>：<strong>36 star / 12 fork</strong>，非无人问津。</li>
+<li>博士论文 <em>summa cum laude</em>（Osnabrück，2023-12）——是<strong>收官</strong>，不是半途。</li>
+<li>被引峰值恰在 <strong>2022（13 次/年）</strong>，此后缓降——<strong>影响力峰值与产出停点重合</strong>。</li>
+<li>同期<strong>领域在涨</strong>：OpenAlex「conceptual spaces Gärdenfors」年产量 2022:160 → 2023:178 → 2024:190（图二）。<strong>他停了，领域没有。</strong></li>
+<li>他的 FSSSS 这条线<strong>无后继者</strong>：其形式化论文此后仅偶被引用（2023×1、2024×1），无人接手推进。</li>
+</ul>
+</section>
+<section id="三-结构纲领的天花板推断有证据" class="level2">
+<h2 class="anchored" data-anchor-id="三-结构纲领的天花板推断有证据">三 · 结构：纲领的天花板【推断·有证据】</h2>
+<p><strong>核心命题</strong>：停点不是随机的——FSSSS 到 v1.3.2 已是<strong>封闭形式的收尾</strong>：交集、并、投影、<code>size</code>、相似、<code>between</code> 全部实现并带测试；再往前一步（在线学习、概念数不定、证据累积）<strong>必须跨到概率</strong>，而这条线他<strong>刻意没走</strong>。</p>
+<p>三处铁证【记录】： 1. KI-2017 结语：fuzziness “similar to the usage of probability theory in SRL”——<strong>明说模糊在扮演概率的角色，却选了模糊</strong>。 2. 2019 论文引 <strong>Lewis &amp; Lawry 的 random set</strong>（membership = 距离 ≤ ε 的<strong>概率</strong>）为相关文献，<strong>却未采纳</strong>。 3. grounding 论文（1706.04825）：网络训练后 <strong>“remains unchanged afterwards”</strong>，训练/使用两段式冻结。</p>
+<p>词频旁证【记录】：五篇形式化论文 probab/Bayes/likelihood 词频 ≈ 0；fuzzy 词频 29–45。</p>
+<p><strong>缺口五层</strong>【推断】：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>层</th>
+<th>他给的</th>
+<th>缺的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>①语义</td>
+<td>模糊隶属 μ∈[0,1]</td>
+<td>概率：无规范化、无加性、无 Bayes</td>
+</tr>
+<tr class="even">
+<td>②生成</td>
+<td>手设 μ=μ₀·exp(−c·d)，超参全先验</td>
+<td>无 p(x|C) 生成模型</td>
+</tr>
+<tr class="odd">
+<td>③信念</td>
+<td>概念＝区域</td>
+<td>概念上的先验/后验</td>
+</tr>
+<tr class="even">
+<td>④元</td>
+<td>相关用几何权重</td>
+<td>协方差/联合分布；对几何本身的不确定性</td>
+</tr>
+<tr class="odd">
+<td>⑤动力学</td>
+<td>训练后冻结</td>
+<td>在线/增量更新</td>
+</tr>
+</tbody>
+</table>
+<p>而其概念形成纲领（1706.06366 §5.1）要求的恰是「增量、概念数未知、资源受限、信息不全」——<strong>这四条正是 Dirichlet 过程混合（DPMM）的教科书适用面</strong>；他用的是无概率的增量聚类（CLASSIT/SUSTAIN 灵感）。</p>
+</section>
+<section id="四-外部事实记录-不判断语" class="level2">
+<h2 class="anchored" data-anchor-id="四-外部事实记录-不判断语">四 · 外部事实【记录 · 不判断语】</h2>
+<ul>
+<li>2023-12：博士毕业；2023-06 在 Warsaw「Conceptual Spaces at Work」作受邀报告。</li>
+<li>其后：任 <strong>Sovendus GmbH</strong> 机器学习工程师（其 About 页自述）。</li>
+</ul>
+<p><strong>本文只记录，不据此断言「因此他停了」。</strong></p>
+</section>
+<section id="五-多因并存未知" class="level2">
+<h2 class="anchored" data-anchor-id="五-多因并存未知">五 · 多因并存【未知】</h2>
+<p>公开记录不足以判定主因。诚实列出候选，<strong>不押单一</strong>： - <strong>职业转向</strong>：离开学界入工业界（时间线与停点相邻，但<strong>相关≠因果</strong>）。 - <strong>纲领自然收束</strong>：v1.3.2 已把「形式化＋实现」型工作做完，收尾是合理的。 - <strong>激励结构</strong>：引用天花板 15 次，形式化路线的学术回报有限。 - <strong>领域转向</strong>：同期概念空间研究向神经/LLM grounding 迁移，几何形式化不再是热点。</p>
+<p><strong>判语留白。</strong> 任何「因为他想不出/因为他失败」的说法，本文明确不写。</p>
+</section>
+<section id="六-接力那一步是除法推断实现" class="level2">
+<h2 class="anchored" data-anchor-id="六-接力那一步是除法推断实现">六 · 接力：那一步是除法【推断＋实现】</h2>
+<ul>
+<li><p>FSSSS 早已算出归一化常数 <code>size(C)=∫μ_C dx</code>，却从不做除法。补上：</p>
+<p><span class="math display">\[p(x\mid C)=\frac{\mu_C(x)}{\mathrm{size}(C)},\qquad p(C\mid x)\propto p(x\mid C)\,p(C)\]</span></p>
+<p><strong>模糊集即概率密度。</strong> 实测：归一化 Monte-Carlo 自检相对误差 3e-3；单步后验与园引擎 8/8 一致；留出边际似然可选 c（园引擎做不到的模型选择）。</p></li>
+<li><p>区域概念下 <code>size</code> 真正生效：Z(超市)=9016 vs Z(路边摊)=6709；遗忘 Z ≡ 暗中把先验放大 Z_C 倍。</p></li>
+<li><p>细节见 <code>notes/DRAFT-概率概念空间-Bechberger缺口诊断-1004.md</code> 与 <code>benches/FSSSS/</code>。</p></li>
+</ul>
+<p><strong>一句话</strong>：他给了「空间」，接力棒是「空间上的测度」。</p>
+</section>
+<section id="七-方法与伦理" class="level2">
+<h2 class="anchored" data-anchor-id="七-方法与伦理">七 · 方法与伦理</h2>
+<ul>
+<li><strong>数据可复现</strong>：全部数字由 <code>bechberger_timeline.py</code> 从公开 API 取得；脚本随文。</li>
+<li><strong>三级标注</strong>：【记录】/【推断】/【未知】贯穿全篇，尤其作用在「个人为何」。</li>
+<li><strong>禁用词</strong>：失败／放弃／江郎才尽／无人问津——本文一律不用。</li>
+<li><strong>免责</strong>：基于公开数据，未经本人确认；保留本人纠错权。</li>
+<li><strong>待办</strong>：发出 038 号礼貌询问信（<code>cora-atlas/letters/bechberger/</code>），获回应前<strong>不公开</strong>。</li>
+</ul>
 
 
 </section>
+</section>
 
 </main> <!-- /main -->
-<style>
-.socknav{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0;padding:.55rem .7rem;
- background:#0e1116;border:1px solid #2c333d;border-radius:.5rem;font-size:.86rem}
-.socknav .lbl{color:#8a93a3;margin-right:.3rem;letter-spacing:.1em}
-.socknav a{color:#e8c56d;text-decoration:none;border-bottom:1px dotted #6b5a2a;padding:0 .15rem}
-.socknav a:hover{color:#ffe9b0}
-.socknav .disk{color:#67707d;font-style:italic}
-.socknav .warn{color:#e07b5a}
-</style>
-<div id="socknav" class="socknav" style="display:none"></div>
-<script>
-(function(){
- var CH="https://github.com/math4mad/chora/blob/main/experiments/";
- var TA="https://math4mad.github.io/talk-with-agents/talking/learning-theory/";
- var P=document.location.pathname.split("/").pop()||"index.html";
- var MAP={
- "index":[["对话","园盘外" ,1],["问题","05-knowledge-graph-socks.html"],["实验",CH+"pb21-dimgrowth/",1],["结果",CH+"pb21-dimgrowth/result_pb21c.json",1],["讨论","01-pb21-pseudo-order.html"]],
- "01-pb21-pseudo-order":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "02-pb21b-blade-confession":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "03-pb21c-causal-chain":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "04-shopping-cart-post-holmes":["对话","external/与AI助手互动….json 园盘",0],
- "05-knowledge-graph-socks":["全图","本页",1]};
- var SOCKS={
- "01-pb21-pseudo-order":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21",CH+"pb21-dimgrowth/PREREG_PB21_dimgrowth.md",1],["结果·判词",CH+"pb21-dimgrowth/VERDICT_PB21.md",1],["讨论·下游","02-pb21b-blade-confession.html"]],
- "02-pb21b-blade-confession":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21b",CH+"pb21-dimgrowth/PREREG_PB21b_causalchain.md",1],["结果·自供",CH+"pb21-dimgrowth/VERDICT_PB21b.md",1],["讨论·下游","03-pb21c-causal-chain.html"]],
- "03-pb21c-causal-chain":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·run_c",CH+"pb21-dimgrowth/run_c.py",1],["结果·sha+判词",CH+"pb21-dimgrowth/VERDICT_PB21c.md",1],["讨论·律碑","04-shopping-cart-post-holmes.html"]],
- "04-shopping-cart-post-holmes":[["对话·与AI助手","园盘 external json",0],["问题·洗澡水/购物车","本页幕二"],["实验邻·PB21c","03-pb21c-causal-chain.html"],["结果邻·C49","05-knowledge-graph-socks.html"],["讨论·图法","05-knowledge-graph-socks.html"]],
- "05-knowledge-graph-socks":[["全链源","园盘 4 json",0],["五元链","本页图"],["单袜账","本页表"],["候射·PB22",CH+"pb22-graphorder/PREREG_PB22_graphorder.md",1],["回匣","index.html"]],
- "index":[["对话群","园盘 4 json",0],["链图","05-knowledge-graph-socks.html"],["案群",CH+"pb21-dimgrowth/",1],["律","03-pb21c-causal-chain.html"],["战队","04-shopping-cart-post-holmes.html"]]};
- var socks=SOCKS[P.replace(".html","")]||SOCKS["index"];
- var el=document.getElementById("socknav"); if(!socks||!el) return;
- var h='<span class="lbl">🧦 袜对</span>';
- socks.forEach(function(s){
-  if(s[1]==="@ext"){h+='<span class="disk">'+s[0]+'·园盘正典</span>';return;}
-  if(!s[2]&&s[1].indexOf("http")!=0&&s[1].indexOf(".html")!=0){h+='<span class="warn">'+s[0]+'·'+s[1]+'</span>';return;}
-  h+='<a href="'+s[1]+'">'+s[0]+'</a>';});
- el.innerHTML=h; el.style.display="flex";
-})();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

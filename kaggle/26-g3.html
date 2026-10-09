@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>园记 · 案匣 – 园记 · Garden Notes</title>
+<title>G3 · 三年级模型 – 园记 · Garden Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,26 +26,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -84,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">园记 · Garden Notes</span>
     </a>
   </div>
@@ -95,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">案匣</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -104,33 +139,33 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
         <li>
-    <a class="dropdown-item" href="./00-knowledge-graph.html">
+    <a class="dropdown-item" href="../00-knowledge-graph.html">
  <span class="dropdown-text">00 · 知识图谱晨议——网站为图之显影</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./01-pb21-pseudo-order.html">
+    <a class="dropdown-item" href="../01-pb21-pseudo-order.html">
  <span class="dropdown-text">01 · PB21 伪序案：2.5 秒杀死一个想法（的前半）</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./02-pb21b-blade-confession.html">
+    <a class="dropdown-item" href="../02-pb21b-blade-confession.html">
  <span class="dropdown-text">02 · PB21b 刃病案：园笔自供「我杀了自己的被告」</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./03-pb21c-causal-chain.html">
+    <a class="dropdown-item" href="../03-pb21c-causal-chain.html">
  <span class="dropdown-text">03 · PB21c 因果链终审：序须内容之序</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./04-shopping-cart-post-holmes.html">
+    <a class="dropdown-item" href="../04-shopping-cart-post-holmes.html">
  <span class="dropdown-text">04 · 购物车与事后福尔摩斯（战队·旗舰页）</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./05-knowledge-graph-socks.html">
+    <a class="dropdown-item" href="../05-knowledge-graph-socks.html">
  <span class="dropdown-text">05 · 园记知识图谱（袜对版）</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./kaggle/index.html"> 
+    <a class="nav-link" href="../kaggle/index.html"> 
 <span class="menu-text">Kaggle 夜航</span></a>
   </li>  
 </ul>
@@ -164,8 +199,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">园记 · 案匣</h1>
-<p class="subtitle lead">知识图谱为骨，案卷为页：一案一节点，判语即边</p>
+<h1 class="title">G3 · 三年级模型</h1>
+<p class="subtitle lead">给不给课程，孩子学得一样吗？——四条臂的消融对照</p>
 </div>
 
 
@@ -182,91 +217,118 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>早十时议定：<strong>实现笔记的网站，结果在网站展示</strong>。取义知识图——非数据库表，而是<strong>概念空间的图谱化</strong>：每篇案卷是一节点，节点间以「判语链」为有向边（伪序证伪 → 刃病自供 → 修刃终审），网站即此小图的显影。</p>
-<section id="谱系按生长序" class="level2">
-<h2 class="anchored" data-anchor-id="谱系按生长序">谱系（按生长序）</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>一句话
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>训练一个「三年级水平」的小模型，用四种不同的「视野规则」各训一遍， 看<strong>给课程 / 不给课程 / 给假课程 / 自己学</strong>哪种真有用。 这批实验第一次上 Kaggle 时崩了，本页记录<strong>怎么修好的</strong>。</p>
+</div>
+</div>
+<section id="为什么做这个" class="level2">
+<h2 class="anchored" data-anchor-id="为什么做这个">为什么做这个</h2>
+<p>园里主张：概念空间的成长像<strong>盖小区</strong>——不是加词汇，是<strong>加结构</strong>（维度/组织层级）。 要验证「课程」对加结构有没有用，就造一个模型当小白鼠，四臂对照：</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>节点</th>
-<th>案</th>
-<th>一句判语</th>
+<th>臂</th>
+<th>白话</th>
+<th>给什么</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./00-knowledge-graph.html">00</a></td>
-<td>知识图谱晨议</td>
-<td>设计裁定录：为何此站是图不是表</td>
+<td><strong>given</strong></td>
+<td>给答案</td>
+<td>直接告诉它注意力该看哪</td>
 </tr>
 <tr class="even">
-<td><a href="./01-pb21-pseudo-order.html">01</a></td>
-<td>PB21 伪序案</td>
-<td>下标之序=伪序；鼓包归 C47 不归序</td>
+<td><strong>free</strong></td>
+<td>麻辣烫</td>
+<td>想怎么连就怎么连（全放开）</td>
 </tr>
 <tr class="odd">
-<td><a href="./02-pb21b-blade-confession.html">02</a></td>
-<td>PB21b 刃病案</td>
-<td>全空间净化之误自供——刃杀律非数据杀律</td>
+<td><strong>random</strong></td>
+<td>安慰剂</td>
+<td>给一套乱打的规矩（对照组）</td>
 </tr>
 <tr class="even">
-<td><a href="./03-pb21c-causal-chain.html">03</a></td>
-<td>PB21c 因果链终审</td>
-<td>序须内容之序：顺216&lt;随432&lt;逆∞，<strong>主判 2/3 过</strong></td>
-</tr>
-<tr class="odd">
-<td><a href="./04-shopping-cart-post-holmes.html">04</a></td>
-<td><strong>战队空间·旗舰</strong>：购物车与事后福尔摩斯</td>
-<td>非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形</td>
+<td><strong>learned</strong></td>
+<td>自己学</td>
+<td>让它自己摸索出视野</td>
 </tr>
 </tbody>
 </table>
-<div class="line-block"><a href="./05-knowledge-graph-socks.html">05</a> | <strong>知识图谱·袜对版</strong> | 五元成链，半缺亮单袜——图显其必有 |</div>
-<p><em>站成于园笔，源匣在 <code>github.com/math4mad/chora/experiments/pb21-dimgrowth</code>。凡成案必入图，凡入图必挂链。</em></p>
+</section>
+<section id="崩在哪故事" class="level2">
+<h2 class="anchored" data-anchor-id="崩在哪故事">崩在哪（故事）</h2>
+<p>第一次上 Kaggle，<strong>given 臂训练成功</strong>（loss 从 6.95 收敛到 0.122，耗时 449 秒）， 但跑到<strong>探针</strong>（落架判分）阶段就 ERROR：</p>
+<pre><code>RuntimeError: The size of tensor a (18) must match the size of tensor b (512)</code></pre>
+</section>
+<section id="根因一行切片" class="level2">
+<h2 class="anchored" data-anchor-id="根因一行切片">根因：一行切片</h2>
+<p>罪魁是这行看起来没问题的代码：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>CAUS[:<span class="bu">len</span>(ids)][:<span class="bu">len</span>(ids)]   <span class="co"># 错</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>CAUS[:<span class="bu">len</span>(ids), :<span class="bu">len</span>(ids)]   <span class="co"># 对</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>CAUS[:18]</code> 沿<strong>行</strong>切 → 得 18×512</li>
+<li>再 <code>[:18]</code> <strong>又沿行</strong>切（已经 18 行了）→ <strong>仍然</strong> 18×512</li>
+<li>作者以为在切列，其实在切行。正确写法要用<strong>逗号</strong>。</li>
+</ul>
+<p><strong>为什么训练时没崩？</strong> 因为训练序列恰好满载 512，<code>18×512</code> 这种错形状<strong>碰巧</strong>对上了。 只有探针的短句（18 个 token）才让它露馅——典型的「撞大运式正确」。</p>
+</section>
+<section id="怎么修的" class="level2">
+<h2 class="anchored" data-anchor-id="怎么修的">怎么修的</h2>
+<ol type="1">
+<li>三处 <code>CAUS[:n][:n]</code> 全改成 <code>CAUS[:n, :n]</code>（训练段两处 + 探针段一处）</li>
+<li>本地<strong>金丝雀</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>跑通：给定臂 20 步，探针能出分（不再崩）</li>
+<li>重新推上 Kaggle（修复版 <code>g3_kaggle.py</code> sha <code>dcaa301d</code>）</li>
+</ol>
+</section>
+<section id="修法留痕三样交付律" class="level2">
+<h2 class="anchored" data-anchor-id="修法留痕三样交付律">修法留痕（三样交付律）</h2>
+<ul>
+<li><strong>正本</strong>：<code>chora/experiments/g3-grade3/g3_kaggle.py</code></li>
+<li><strong>可读投影</strong>：本页（上方代码对照）</li>
+<li><strong>verify</strong>：本地金丝雀 = 探针能出 9 判分即通</li>
+</ul>
+</section>
+<section id="现在的状态" class="level2">
+<h2 class="anchored" data-anchor-id="现在的状态">现在的状态</h2>
+<ul>
+<li>✅ bug 已修，本地验证通过</li>
+<li>🔄 2026-10-08 重射 kernel <code>math4amd/g3-grade-three-ablation-suite</code></li>
+<li>⏳ 舱完后读「G3-Paper 落架判分」出判词</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>及格线（候朱批）
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>金丝雀阶段曾拟：主臂 ≥85%、对照 ≤65%、差 ≥20pt。<strong>此项未冻</strong>，待主人点头后才生效。</p>
+</div>
+</div>
 
 
 </section>
 
-</main> <!-- /main -->
-<style>
-.socknav{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0;padding:.55rem .7rem;
- background:#0e1116;border:1px solid #2c333d;border-radius:.5rem;font-size:.86rem}
-.socknav .lbl{color:#8a93a3;margin-right:.3rem;letter-spacing:.1em}
-.socknav a{color:#e8c56d;text-decoration:none;border-bottom:1px dotted #6b5a2a;padding:0 .15rem}
-.socknav a:hover{color:#ffe9b0}
-.socknav .disk{color:#67707d;font-style:italic}
-.socknav .warn{color:#e07b5a}
-</style>
-<div id="socknav" class="socknav" style="display:none"></div>
-<script>
-(function(){
- var CH="https://github.com/math4mad/chora/blob/main/experiments/";
- var TA="https://math4mad.github.io/talk-with-agents/talking/learning-theory/";
- var P=document.location.pathname.split("/").pop()||"index.html";
- var MAP={
- "index":[["对话","园盘外" ,1],["问题","05-knowledge-graph-socks.html"],["实验",CH+"pb21-dimgrowth/",1],["结果",CH+"pb21-dimgrowth/result_pb21c.json",1],["讨论","01-pb21-pseudo-order.html"]],
- "01-pb21-pseudo-order":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "02-pb21b-blade-confession":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "03-pb21c-causal-chain":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "04-shopping-cart-post-holmes":["对话","external/与AI助手互动….json 园盘",0],
- "05-knowledge-graph-socks":["全图","本页",1]};
- var SOCKS={
- "01-pb21-pseudo-order":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21",CH+"pb21-dimgrowth/PREREG_PB21_dimgrowth.md",1],["结果·判词",CH+"pb21-dimgrowth/VERDICT_PB21.md",1],["讨论·下游","02-pb21b-blade-confession.html"]],
- "02-pb21b-blade-confession":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21b",CH+"pb21-dimgrowth/PREREG_PB21b_causalchain.md",1],["结果·自供",CH+"pb21-dimgrowth/VERDICT_PB21b.md",1],["讨论·下游","03-pb21c-causal-chain.html"]],
- "03-pb21c-causal-chain":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·run_c",CH+"pb21-dimgrowth/run_c.py",1],["结果·sha+判词",CH+"pb21-dimgrowth/VERDICT_PB21c.md",1],["讨论·律碑","04-shopping-cart-post-holmes.html"]],
- "04-shopping-cart-post-holmes":[["对话·与AI助手","园盘 external json",0],["问题·洗澡水/购物车","本页幕二"],["实验邻·PB21c","03-pb21c-causal-chain.html"],["结果邻·C49","05-knowledge-graph-socks.html"],["讨论·图法","05-knowledge-graph-socks.html"]],
- "05-knowledge-graph-socks":[["全链源","园盘 4 json",0],["五元链","本页图"],["单袜账","本页表"],["候射·PB22",CH+"pb22-graphorder/PREREG_PB22_graphorder.md",1],["回匣","index.html"]],
- "index":[["对话群","园盘 4 json",0],["链图","05-knowledge-graph-socks.html"],["案群",CH+"pb21-dimgrowth/",1],["律","03-pb21c-causal-chain.html"],["战队","04-shopping-cart-post-holmes.html"]]};
- var socks=SOCKS[P.replace(".html","")]||SOCKS["index"];
- var el=document.getElementById("socknav"); if(!socks||!el) return;
- var h='<span class="lbl">🧦 袜对</span>';
- socks.forEach(function(s){
-  if(s[1]==="@ext"){h+='<span class="disk">'+s[0]+'·园盘正典</span>';return;}
-  if(!s[2]&&s[1].indexOf("http")!=0&&s[1].indexOf(".html")!=0){h+='<span class="warn">'+s[0]+'·'+s[1]+'</span>';return;}
-  h+='<a href="'+s[1]+'">'+s[0]+'</a>';});
- el.innerHTML=h; el.style.display="flex";
-})();
-</script>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">脚注</h2>
+
+<ol>
+<li id="fn1"><p><strong>金丝雀</strong>：正式开跑前的小规模试跑。源自矿工带金丝雀下井——鸟先倒，人就跑。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

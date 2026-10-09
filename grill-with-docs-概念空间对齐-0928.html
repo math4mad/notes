@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>园记 · 案匣 – 园记 · Garden Notes</title>
+<title>grill-with-docs-概念空间对齐-0928 – 园记 · Garden Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -95,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">案匣</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -160,113 +160,88 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">园记 · 案匣</h1>
-<p class="subtitle lead">知识图谱为骨，案卷为页：一案一节点，判语即边</p>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>早十时议定：<strong>实现笔记的网站，结果在网站展示</strong>。取义知识图——非数据库表，而是<strong>概念空间的图谱化</strong>：每篇案卷是一节点，节点间以「判语链」为有向边（伪序证伪 → 刃病自供 → 修刃终审），网站即此小图的显影。</p>
-<section id="谱系按生长序" class="level2">
-<h2 class="anchored" data-anchor-id="谱系按生长序">谱系（按生长序）</h2>
+<section id="grill-with-docs-概念空间对齐的工程实践0928-视频对账记" class="level1">
+<h1>grill-with-docs = 概念空间对齐的工程实践（0928 视频对账记）</h1>
+<blockquote class="blockquote">
+<p>源件：<code>~/Downloads/AI 编程范式变革：从 grill-me 到领域驱动的 grill-with-docs 深度剖析 - 002 - 双语字幕.mp4</code>（bilibili「牛不知道」转载 Matt Pocock 原声，15:16） 文字稿：OCR 烧录英文字幕 → <code>external/grill-with-docs-视频文字稿-EN-0928.txt</code>（314 句 / 2873 词，与 15 分钟口速吻合；中文轨本机 Vision 模型残缺，弃） 园笔按：主人直觉「这就是我们的概念空间对齐问题」——<strong>证实，且视频提供了罕见的现场标本</strong>。</p>
+</blockquote>
+<section id="一视频主干摘" class="level2">
+<h2 class="anchored" data-anchor-id="一视频主干摘">一、视频主干（摘）</h2>
+<ol type="1">
+<li>grill-me 四句真言走红（每日一百封反馈），但 Matt 自感三桩不满：agent 啰嗦时他要提醒”早有术语了”；他自己啰嗦的表述<strong>不被挑战</strong>；好的共享语言<strong>没落盘</strong>，每会话重讲一遍领域。</li>
+<li>解法 = 最薄文档层：Eric Evans DDD 的 <strong>ubiquitous language</strong>——<code>CONTEXT.md</code> 纯词汇表（无实现细节）+ ADR 三门槛（难撤销 / 缺上下文会困惑 / 真实取舍，三者齐备才立档）。</li>
+<li><strong>现场标本（09:14，全片命门）</strong>：agent 在拷问中挂牌——“你说 standalone video，但词表定义是 no lesson，你的新用法混入了 no pitch——<strong>术语冲突</strong>，哪个算数？” 主人被迫在 A/B 框架间表态，一表态，UI 分区、删除级联、pitchId 元数据全被牵动。会话尾 CONTEXT.md 当场更新。</li>
+<li>收益三件：回复变简（token 少）、<strong>思考轨迹也变简</strong>（“AI 用语言对自己思考”）、说话方式=代码结构 → 可导航性。Matt 原话：<em>“it magically aligned with the thoughts I had before the words came out of my brain.”</em></li>
+<li>分工律：无代码库用 grill-me（纯决策树拷问），有代码库用 grill-with-docs；grill-me 移入 productivity（有人用它写悼词）。</li>
+</ol>
+</section>
+<section id="二对表园学为何这就是我们的问题" class="level2">
+<h2 class="anchored" data-anchor-id="二对表园学为何这就是我们的问题">二、对表园学（为何这就是我们的问题）</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>节点</th>
-<th>案</th>
-<th>一句判语</th>
+<th>视频机制</th>
+<th>园中对应</th>
+<th>注</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./00-knowledge-graph.html">00</a></td>
-<td>知识图谱晨议</td>
-<td>设计裁定录：为何此站是图不是表</td>
+<td>standalone 术语冲突挂牌</td>
+<td><strong>同 token 在两个概念空间指向不同区域</strong></td>
+<td>即 MaxSim 失配的人类版；他们靠人肉察觉，我们可算法化</td>
 </tr>
 <tr class="even">
-<td><a href="./01-pb21-pseudo-order.html">01</a></td>
-<td>PB21 伪序案</td>
-<td>下标之序=伪序；鼓包归 C47 不归序</td>
+<td>CONTEXT.md 词汇表</td>
+<td>术语碑 GLOSSARY / 冻册判据</td>
+<td>共享坐标系一旦落定，通信从”描述”降为”点名”</td>
 </tr>
 <tr class="odd">
-<td><a href="./02-pb21b-blade-confession.html">02</a></td>
-<td>PB21b 刃病案</td>
-<td>全空间净化之误自供——刃杀律非数据杀律</td>
+<td>ADR 三门槛</td>
+<td>判据先冻后用 + LEDGER</td>
+<td>“难撤销+反直觉+真取舍” ≈ 我们的”值得刻石”标准</td>
 </tr>
 <tr class="even">
-<td><a href="./03-pb21c-causal-chain.html">03</a></td>
-<td>PB21c 因果链终审</td>
-<td>序须内容之序：顺216&lt;随432&lt;逆∞，<strong>主判 2/3 过</strong></td>
+<td>挑战用户用词（grilling 的 working-if 条）</td>
+<td>园笔当值之责：主人用词与冻册冲突时<strong>当场对撞</strong></td>
+<td>我们已有此律，视频证明它值钱</td>
 </tr>
 <tr class="odd">
-<td><a href="./04-shopping-cart-post-holmes.html">04</a></td>
-<td><strong>战队空间·旗舰</strong>：购物车与事后福尔摩斯</td>
-<td>非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形</td>
+<td>“查事实归 AI，决策归用户”</td>
+<td>提醒账批复通道（☑=朱批）</td>
+<td>完全同构</td>
+</tr>
+<tr class="even">
+<td>“对齐后 token 消耗降”</td>
+<td>义素经济学的实证外证</td>
+<td>语言=压缩的概念索引；共享词表=字典训练</td>
 </tr>
 </tbody>
 </table>
-<div class="line-block"><a href="./05-knowledge-graph-socks.html">05</a> | <strong>知识图谱·袜对版</strong> | 五元成链，半缺亮单袜——图显其必有 |</div>
-<p><em>站成于园笔，源匣在 <code>github.com/math4mad/chora/experiments/pb21-dimgrowth</code>。凡成案必入图，凡入图必挂链。</em></p>
+</section>
+<section id="三园笔进言候圈点" class="level2">
+<h2 class="anchored" data-anchor-id="三园笔进言候圈点">三、园笔进言（候圈点）</h2>
+<ol type="1">
+<li><strong>grill-garden skill 自铸案</strong>升级：grilling 轮次 × 提醒账批复 × ADR→LEDGER/PREREG 格式——视频已把算法讲透，桥接件我们全有。</li>
+<li>试刀场仍荐 <strong>04 案判据冻册</strong>（γ=3.0、FIFO 600、lock 阈值三处沉默假设）。</li>
+<li>研究侧彩蛋：他们的”术语冲突检测”是<strong>人肉+提示词</strong>；我们若用概念空间给冲突做个<strong>可计算判据</strong>（同 token 双空间区域重叠度），正是 Chora 理论的正牌用武之地——可挂骨架页为一列候补（08 · 对齐工程?）。</li>
+</ol>
 
 
 </section>
+</section>
 
 </main> <!-- /main -->
-<style>
-.socknav{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0;padding:.55rem .7rem;
- background:#0e1116;border:1px solid #2c333d;border-radius:.5rem;font-size:.86rem}
-.socknav .lbl{color:#8a93a3;margin-right:.3rem;letter-spacing:.1em}
-.socknav a{color:#e8c56d;text-decoration:none;border-bottom:1px dotted #6b5a2a;padding:0 .15rem}
-.socknav a:hover{color:#ffe9b0}
-.socknav .disk{color:#67707d;font-style:italic}
-.socknav .warn{color:#e07b5a}
-</style>
-<div id="socknav" class="socknav" style="display:none"></div>
-<script>
-(function(){
- var CH="https://github.com/math4mad/chora/blob/main/experiments/";
- var TA="https://math4mad.github.io/talk-with-agents/talking/learning-theory/";
- var P=document.location.pathname.split("/").pop()||"index.html";
- var MAP={
- "index":[["对话","园盘外" ,1],["问题","05-knowledge-graph-socks.html"],["实验",CH+"pb21-dimgrowth/",1],["结果",CH+"pb21-dimgrowth/result_pb21c.json",1],["讨论","01-pb21-pseudo-order.html"]],
- "01-pb21-pseudo-order":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "02-pb21b-blade-confession":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "03-pb21c-causal-chain":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "04-shopping-cart-post-holmes":["对话","external/与AI助手互动….json 园盘",0],
- "05-knowledge-graph-socks":["全图","本页",1]};
- var SOCKS={
- "01-pb21-pseudo-order":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21",CH+"pb21-dimgrowth/PREREG_PB21_dimgrowth.md",1],["结果·判词",CH+"pb21-dimgrowth/VERDICT_PB21.md",1],["讨论·下游","02-pb21b-blade-confession.html"]],
- "02-pb21b-blade-confession":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21b",CH+"pb21-dimgrowth/PREREG_PB21b_causalchain.md",1],["结果·自供",CH+"pb21-dimgrowth/VERDICT_PB21b.md",1],["讨论·下游","03-pb21c-causal-chain.html"]],
- "03-pb21c-causal-chain":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·run_c",CH+"pb21-dimgrowth/run_c.py",1],["结果·sha+判词",CH+"pb21-dimgrowth/VERDICT_PB21c.md",1],["讨论·律碑","04-shopping-cart-post-holmes.html"]],
- "04-shopping-cart-post-holmes":[["对话·与AI助手","园盘 external json",0],["问题·洗澡水/购物车","本页幕二"],["实验邻·PB21c","03-pb21c-causal-chain.html"],["结果邻·C49","05-knowledge-graph-socks.html"],["讨论·图法","05-knowledge-graph-socks.html"]],
- "05-knowledge-graph-socks":[["全链源","园盘 4 json",0],["五元链","本页图"],["单袜账","本页表"],["候射·PB22",CH+"pb22-graphorder/PREREG_PB22_graphorder.md",1],["回匣","index.html"]],
- "index":[["对话群","园盘 4 json",0],["链图","05-knowledge-graph-socks.html"],["案群",CH+"pb21-dimgrowth/",1],["律","03-pb21c-causal-chain.html"],["战队","04-shopping-cart-post-holmes.html"]]};
- var socks=SOCKS[P.replace(".html","")]||SOCKS["index"];
- var el=document.getElementById("socknav"); if(!socks||!el) return;
- var h='<span class="lbl">🧦 袜对</span>';
- socks.forEach(function(s){
-  if(s[1]==="@ext"){h+='<span class="disk">'+s[0]+'·园盘正典</span>';return;}
-  if(!s[2]&&s[1].indexOf("http")!=0&&s[1].indexOf(".html")!=0){h+='<span class="warn">'+s[0]+'·'+s[1]+'</span>';return;}
-  h+='<a href="'+s[1]+'">'+s[0]+'</a>';});
- el.innerHTML=h; el.style.display="flex";
-})();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

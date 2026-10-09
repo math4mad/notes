@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>园记 · 案匣 – 园记 · Garden Notes</title>
+<title>Kaggle 夜航 · 实验合集 – 园记 · Garden Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,26 +26,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -84,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">园记 · Garden Notes</span>
     </a>
   </div>
@@ -95,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">案匣</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -104,33 +139,33 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
         <li>
-    <a class="dropdown-item" href="./00-knowledge-graph.html">
+    <a class="dropdown-item" href="../00-knowledge-graph.html">
  <span class="dropdown-text">00 · 知识图谱晨议——网站为图之显影</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./01-pb21-pseudo-order.html">
+    <a class="dropdown-item" href="../01-pb21-pseudo-order.html">
  <span class="dropdown-text">01 · PB21 伪序案：2.5 秒杀死一个想法（的前半）</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./02-pb21b-blade-confession.html">
+    <a class="dropdown-item" href="../02-pb21b-blade-confession.html">
  <span class="dropdown-text">02 · PB21b 刃病案：园笔自供「我杀了自己的被告」</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./03-pb21c-causal-chain.html">
+    <a class="dropdown-item" href="../03-pb21c-causal-chain.html">
  <span class="dropdown-text">03 · PB21c 因果链终审：序须内容之序</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./04-shopping-cart-post-holmes.html">
+    <a class="dropdown-item" href="../04-shopping-cart-post-holmes.html">
  <span class="dropdown-text">04 · 购物车与事后福尔摩斯（战队·旗舰页）</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./05-knowledge-graph-socks.html">
+    <a class="dropdown-item" href="../05-knowledge-graph-socks.html">
  <span class="dropdown-text">05 · 园记知识图谱（袜对版）</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./kaggle/index.html"> 
+    <a class="nav-link active" href="../kaggle/index.html" aria-current="page"> 
 <span class="menu-text">Kaggle 夜航</span></a>
   </li>  
 </ul>
@@ -164,8 +199,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">园记 · 案匣</h1>
-<p class="subtitle lead">知识图谱为骨，案卷为页：一案一节点，判语即边</p>
+<h1 class="title">Kaggle 夜航 · 实验合集</h1>
+<p class="subtitle lead">云端跑过的每一门实验：冻稿、读数、判词，一处收齐</p>
 </div>
 
 
@@ -182,91 +217,189 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>早十时议定：<strong>实现笔记的网站，结果在网站展示</strong>。取义知识图——非数据库表，而是<strong>概念空间的图谱化</strong>：每篇案卷是一节点，节点间以「判语链」为有向边（伪序证伪 → 刃病自供 → 修刃终审），网站即此小图的显影。</p>
-<section id="谱系按生长序" class="level2">
-<h2 class="anchored" data-anchor-id="谱系按生长序">谱系（按生长序）</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>先看这个
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>不熟园里行话？先翻 <strong><a href="../kaggle/10-glossary-plain.html">随身词典 · 傻瓜版</a></strong> —— 每个术语一句话 + 一个比喻。 本页与各案页里凡是难词，都挂脚注指回那里。</p>
+</div>
+</div>
+<section id="这是什么" class="level2">
+<h2 class="anchored" data-anchor-id="这是什么">这是什么</h2>
+<p>园里的实验分两类：<strong>本机跑的</strong>（分钟到小时）和 <strong>Kaggle 云端跑的</strong>（免费 GPU，夜里跑，醒来收）。 这一册<strong>两类皆收</strong>——把散落在各实验目录里的冻稿、报告、判词，汇成一部可读的集子； 每案的「舱」栏标出它跑在哪（「本机」「不上舱」即按设计不占云端资源）。</p>
+<p>正本（机器可读的状态账）在 <code>chora/experiments/KAGGLE-LEDGER.json</code>； 本册是它的<strong>可读投影</strong>，两者用 <code>ledger_verify.py</code> 对账，不许偷偷漂移。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</section>
+<section id="逐案诊断表" class="level2">
+<h2 class="anchored" data-anchor-id="逐案诊断表">逐案诊断表</h2>
+<p>下表是<strong>2026-10-08 全面体检</strong>的结果。关键发现：多数标着「待射」的案子，<strong>舱其实早就跑完了</strong>—— 缺的不是「再跑一次」，而是「读报告出判词」。重跑会与已冻的封条<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>对不上账，也白费 Kaggle 粮。</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>节点</th>
 <th>案</th>
-<th>一句判语</th>
+<th style="text-align: center;">冻稿</th>
+<th style="text-align: center;">弹</th>
+<th style="text-align: center;">舱</th>
+<th style="text-align: center;">产物</th>
+<th style="text-align: center;">判词</th>
+<th>真实缺口</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./00-knowledge-graph.html">00</a></td>
-<td>知识图谱晨议</td>
-<td>设计裁定录：为何此站是图不是表</td>
+<td><a href="../kaggle/20-pb26.html">PB26</a></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">本机</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td>无（首射已成）</td>
 </tr>
 <tr class="even">
-<td><a href="./01-pb21-pseudo-order.html">01</a></td>
-<td>PB21 伪序案</td>
-<td>下标之序=伪序；鼓包归 C47 不归序</td>
+<td>PB26b</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td><strong>需冻稿 + 真嵌入弹</strong></td>
 </tr>
 <tr class="odd">
-<td><a href="./02-pb21b-blade-confession.html">02</a></td>
-<td>PB21b 刃病案</td>
-<td>全空间净化之误自供——刃杀律非数据杀律</td>
+<td><a href="../kaggle/21-pb23c.html">PB23c</a></td>
+<td style="text-align: center;">🟡</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">🟡</td>
+<td>补冻稿 + 定判词（勿重跑）</td>
 </tr>
 <tr class="even">
-<td><a href="./03-pb21c-causal-chain.html">03</a></td>
-<td>PB21c 因果链终审</td>
-<td>序须内容之序：顺216&lt;随432&lt;逆∞，<strong>主判 2/3 过</strong></td>
+<td><a href="../kaggle/22-pb20.html">PB20</a></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td>b 版修器待射</td>
 </tr>
 <tr class="odd">
-<td><a href="./04-shopping-cart-post-holmes.html">04</a></td>
-<td><strong>战队空间·旗舰</strong>：购物车与事后福尔摩斯</td>
-<td>非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形</td>
+<td><a href="../kaggle/23-pb18.html">PB18</a></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">❌</td>
+<td><strong>读已有报告出判词</strong></td>
+</tr>
+<tr class="even">
+<td><a href="../kaggle/24-pb16c.html">PB16c</a></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td>无（已终判）</td>
+</tr>
+<tr class="odd">
+<td>E26</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">不上舱</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">❌</td>
+<td>人工双端手测（非代码）</td>
+</tr>
+<tr class="even">
+<td>PB22</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">不上舱</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">❌</td>
+<td>写本机弹（零 Kaggle 粮）</td>
+</tr>
+<tr class="odd">
+<td><a href="../kaggle/25-pb19.html">PB19</a></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">❌</td>
+<td><strong>读已有产物出判词</strong></td>
+</tr>
+<tr class="even">
+<td><a href="../kaggle/26-g3.html">G3 消融</a></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅ COMPLETE</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">❌</td>
+<td>读港出判词</td>
+</tr>
+<tr class="odd">
+<td><a href="../kaggle/27-p5.html">P5 锚定</a></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">本机</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td>省名位重射候选</td>
+</tr>
+<tr class="even">
+<td>PB27</td>
+<td style="text-align: center;">🟡</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td>候批；真语料需采买</td>
 </tr>
 </tbody>
 </table>
-<div class="line-block"><a href="./05-knowledge-graph-socks.html">05</a> | <strong>知识图谱·袜对版</strong> | 五元成链，半缺亮单袜——图显其必有 |</div>
-<p><em>站成于园笔，源匣在 <code>github.com/math4mad/chora/experiments/pb21-dimgrowth</code>。凡成案必入图，凡入图必挂链。</em></p>
+<p>图例：✅ 齐 / 🟡 草案或进行中 / ❌ 缺 —— 「舱」栏的「本机」「不上舱」表示该案按设计就不该占 Kaggle 资源。</p>
+</section>
+<section id="各案分页" class="level2">
+<h2 class="anchored" data-anchor-id="各案分页">各案分页</h2>
+<ul>
+<li><a href="../kaggle/20-pb26.html">PB26 · 可达几何基准</a> —— 相似与可达可分离</li>
+<li><a href="../kaggle/21-pb23c.html">PB23c · 细十二带</a> —— 序生维膝检</li>
+<li><a href="../kaggle/22-pb20.html">PB20 · DAG 消融</a> —— 算法序的边敏</li>
+<li><a href="../kaggle/23-pb18.html">PB18 · 尾部分辨率</a> —— 长尾里还剩多少</li>
+<li><a href="../kaggle/24-pb16c.html">PB16c · 序即数据</a> —— 成人只剩波浪一只手</li>
+<li><a href="../kaggle/25-pb19.html">PB19 · 多分辨率字典</a> —— 尺子该多细</li>
+<li><a href="../kaggle/26-g3.html">G3 · 三年级模型</a> —— 课程该不该给</li>
+<li><a href="../kaggle/27-p5.html">P5 · 上下文锚定</a> —— 换域杆长在省名上</li>
+</ul>
+</section>
+<section id="一处特别的记录g3-的-bug" class="level2">
+<h2 class="anchored" data-anchor-id="一处特别的记录g3-的-bug">一处特别的记录：G3 的 bug</h2>
+<p>G3 的 Kaggle 舱第一次跑是 <strong>ERROR</strong>，卡在探针<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>阶段的张量形状不匹配。</p>
+<p>根因是一行看起来没问题的切片：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>CAUS[:<span class="bu">len</span>(ids)][:<span class="bu">len</span>(ids)]   <span class="co"># 错的</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>CAUS[:<span class="bu">len</span>(ids), :<span class="bu">len</span>(ids)]   <span class="co"># 对的</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>CAUS[:18]</code> 沿<strong>行</strong>切，得 18×512；第二个 <code>[:18]</code> 又沿行切，<strong>仍然</strong>是 18×512—— 作者以为在切列，其实在切行。正确写法要用逗号。训练时不报错，是因为训练序列恰好满载 512， 形状「碰巧」对上了；只有探针的短句（18 个 token）才让它露馅。</p>
+<p>修复在册（sha <code>dcaa301d</code>），本地金丝雀<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>跑通；2026-10-08 重射<strong>已成</strong>（kernel COMPLETE，待读港出判词）。</p>
+<hr>
+<p><em>本册由园笔维护。正本 <code>KAGGLE-LEDGER.json</code>，下次体检重跑 <code>ledger_verify.py</code> 即可对账。</em></p>
 
 
 </section>
 
-</main> <!-- /main -->
-<style>
-.socknav{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0;padding:.55rem .7rem;
- background:#0e1116;border:1px solid #2c333d;border-radius:.5rem;font-size:.86rem}
-.socknav .lbl{color:#8a93a3;margin-right:.3rem;letter-spacing:.1em}
-.socknav a{color:#e8c56d;text-decoration:none;border-bottom:1px dotted #6b5a2a;padding:0 .15rem}
-.socknav a:hover{color:#ffe9b0}
-.socknav .disk{color:#67707d;font-style:italic}
-.socknav .warn{color:#e07b5a}
-</style>
-<div id="socknav" class="socknav" style="display:none"></div>
-<script>
-(function(){
- var CH="https://github.com/math4mad/chora/blob/main/experiments/";
- var TA="https://math4mad.github.io/talk-with-agents/talking/learning-theory/";
- var P=document.location.pathname.split("/").pop()||"index.html";
- var MAP={
- "index":[["对话","园盘外" ,1],["问题","05-knowledge-graph-socks.html"],["实验",CH+"pb21-dimgrowth/",1],["结果",CH+"pb21-dimgrowth/result_pb21c.json",1],["讨论","01-pb21-pseudo-order.html"]],
- "01-pb21-pseudo-order":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "02-pb21b-blade-confession":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "03-pb21c-causal-chain":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "04-shopping-cart-post-holmes":["对话","external/与AI助手互动….json 园盘",0],
- "05-knowledge-graph-socks":["全图","本页",1]};
- var SOCKS={
- "01-pb21-pseudo-order":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21",CH+"pb21-dimgrowth/PREREG_PB21_dimgrowth.md",1],["结果·判词",CH+"pb21-dimgrowth/VERDICT_PB21.md",1],["讨论·下游","02-pb21b-blade-confession.html"]],
- "02-pb21b-blade-confession":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21b",CH+"pb21-dimgrowth/PREREG_PB21b_causalchain.md",1],["结果·自供",CH+"pb21-dimgrowth/VERDICT_PB21b.md",1],["讨论·下游","03-pb21c-causal-chain.html"]],
- "03-pb21c-causal-chain":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·run_c",CH+"pb21-dimgrowth/run_c.py",1],["结果·sha+判词",CH+"pb21-dimgrowth/VERDICT_PB21c.md",1],["讨论·律碑","04-shopping-cart-post-holmes.html"]],
- "04-shopping-cart-post-holmes":[["对话·与AI助手","园盘 external json",0],["问题·洗澡水/购物车","本页幕二"],["实验邻·PB21c","03-pb21c-causal-chain.html"],["结果邻·C49","05-knowledge-graph-socks.html"],["讨论·图法","05-knowledge-graph-socks.html"]],
- "05-knowledge-graph-socks":[["全链源","园盘 4 json",0],["五元链","本页图"],["单袜账","本页表"],["候射·PB22",CH+"pb22-graphorder/PREREG_PB22_graphorder.md",1],["回匣","index.html"]],
- "index":[["对话群","园盘 4 json",0],["链图","05-knowledge-graph-socks.html"],["案群",CH+"pb21-dimgrowth/",1],["律","03-pb21c-causal-chain.html"],["战队","04-shopping-cart-post-holmes.html"]]};
- var socks=SOCKS[P.replace(".html","")]||SOCKS["index"];
- var el=document.getElementById("socknav"); if(!socks||!el) return;
- var h='<span class="lbl">🧦 袜对</span>';
- socks.forEach(function(s){
-  if(s[1]==="@ext"){h+='<span class="disk">'+s[0]+'·园盘正典</span>';return;}
-  if(!s[2]&&s[1].indexOf("http")!=0&&s[1].indexOf(".html")!=0){h+='<span class="warn">'+s[0]+'·'+s[1]+'</span>';return;}
-  h+='<a href="'+s[1]+'">'+s[0]+'</a>';});
- el.innerHTML=h; el.style.display="flex";
-})();
-</script>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">脚注</h2>
+
+<ol>
+<li id="fn1"><p>这是园里的「<strong>三样交付律</strong>」：任何新建子系统都要交①正本（谁是唯一真相）②一条 verify 命令（退出码即判据）③一份可读投影（人可复核）。详见 <code>AGENTS.md</code>。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><strong>冻稿（PREREG）</strong>：开跑前就把「什么算成立、什么算失败」写死盖章。跑完才定判据，就成了「事后找理由」，不认。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><strong>探针</strong>：训练完后拿出来的一组小考题，用来量模型学到了什么。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><strong>金丝雀</strong>：正式开跑前的小规模试跑，确认管道通不通。源自矿工带金丝雀下井——鸟先倒，人就跑。<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

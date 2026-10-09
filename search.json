@@ -7,11 +7,774 @@
     "text": "判据 冻尺四条：器闸/序效/鼓包/方向。源: sklearn digits 64 维（维号无因果语义），三臂顺/并/乱。\n\n\n\n读数\n结果\n\n\n\n\nH-a0 器闸 Ov(D0)≥0.98\n破（0.886–0.919：撕随机袋本底位移 ~9%）\n\n\nH-a1 边敏 ≥3×\n未立（被本底淹没）\n\n\nH-a2 阶梯\n反序：年表袋最钝感\n\n\nH-a3\n随案挂 exploratory\n\n\n\n判词三行：①鼓包=维生≠序生——新维出生 acc 必跳，乱序臂同鼓（与 C47 分辨率律严丝合缝）；②digits 维号无语义，顺/乱本同臂——序若是伪序，律不受理；③此否不伤朱批「顺序是最贫的一维」，反逼出 21c 的正确战场。sha a03d3193fe6d073b。\n边：上游 [00 晨议未启前此案已生——判语链自此案起] → 下游 02（为续命而铸的因果链沙盒）。"
   },
   {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "arXiv:2507.11768v3 [stat.ML] · 2026-06-23 · Leon Chlon, Zein Khamis, Fatima Sheaib, Maggie Chlon, Mahdi El Zein (Hassana Labs), MarcAntonio M. Awada (Harvard) 读于 2026-10-06（主人示）。源：https://arxiv.org/html/2507.11768v3\n\n\n\n「变换器不是逐条序列化都实现可交换后验预测的机器，但可以是贝叶斯竞争力的序贯（prequential）预测器」—— 把「可交换性被违反」从二元反驳改写成用 log loss 定价的序贯后悔。\n\n\n\n\n可交换数据的精确后验预测对保任务序不变；但 transformer 换个序列化，next-token 概率就变 → 表面反驳贝叶斯 ICL 观。\n作者：这个反驳打的是结构不变量，不是在线预测所评的操作量。\n\n\n\n\n\n评估目标：对任何贝叶斯参照，超出 prequential code length ＝ 累积预测 KL（关键恒等式）。\n保任务序分解：单序列化的后悔 ＝ 序平均预测器的后悔 ＋ 非负的 order-averaging gain（Jensen：log E ≥ E log）。⇒ 违反可交换性不是”崩了”，是有价码的。\n保任务序 vs 语义序（核心区分）：只有保信息态 Z_t 的序列化才配做序平均；「首条演示语义相关」是序即任务的一部分，不可平均掉。\n接入原生概率：candidate-event 分解 ＋ safe-code floor（带显式开销）；实例：KT/Dirichlet 有限字母预测、BLR 粗化后验预测。\n\n\n\n\n\n\n\n\n\n\n\n实验\n读数\n\n\n\n\n离散贝叶斯审计\nsupport 256 时一步超额码长 Bernoulli 0.020/0.011 bits；四类 0.039/0.022 bits；candidate mass &gt;0.999\n\n\n频率派 plug-in 对照\n模型离贝叶斯后验预测更近，离ML plug-in更远；差距小样本最大（plug-in 退化），参照收敛则消失\n\n\n位置干预（仅改 position_ids）\ndemo-local（块内保留、抹掉绝对槽位）使贝叶斯预测序方差 ↓≈21×；语义序对照反而变差\n\n\n从零训练 PE 消融\n无 PE：序方差 ≈3.7e-16（精确可交换到数值精度）；learned/sinusoidal/RoPE/ALiBi：1e-8–1e-6 ⇒ 可交换性违反是「编码」给的属性，不是架构的\n\n\n线性探针\n残差流线性可解码 (S_t,t)，R²=0.9998（Qwen/Llama）\n\n\n激活修补\n计数/位置被因果使用（不止”可得”）\n\n\n证据 QA 序平均\nQwen2.5-7B：dispersion slope 0.377 vs log n，order-averaging gain 0.1041 nats/token；Llama-3.1-8B：0.147 / 0.00982\n\n\n\n\n\n\n「可交换性失败 ⇒ 反驳精确后验等价；不反驳贝叶斯竞争力的 prequential 预测。」 保留 martingale 批评的负面结果，但把二元不变量问题换成序贯后悔问题。\n\n\n\n\n与倒灌律同向、更细：它同样判 LLM 不是字面后验机器（无显式后验机制），但拒绝停在”不是”——给出定价工具。园之倒灌律说”病在先验后验不分层”；此文说”若只问序贯码长，它仍可贝叶斯竞争”——两者不矛盾：竞争性 ≠ 可审计性。\n与底图律的接口：文中 floored KT/Dirichlet 就是园「有限表 n_k/N ＋ 黑天鹅 floor」的一个现成实例——floor（safe-code）＝ 拉普拉斯/CRP 留名的码长版；candidate mass &gt;0.999 正合园「有限可枚举先验」。\n与序/时序线（最要紧）：\n\n文的「order」＝可交换支撑集被序列化的次序，保任务；序平均正当。\n园的 LADDER「暴露序」＝发展序，序就是任务的一部分（语义序）——按此文，不可做序平均，只能把它的效应定价（正合园「先冻判据」＋PB/E12c 的过程几何读数）。\n文之「可交换性住在 PE 里」（无 PE⇒3.7e-16）是一条可复算的定位：若园要”抹平纯序列化噪声、只留发展信号”，位置编码就是那个可拆的通道。值得与 P-B18（谱带/分辨）并列，入”序通道”候选清单。\n\n方法论亲缘：把”是不是”改成”差多少 bits/nats”——与园「判据先冻/量在过程/失败照登」同一种做科学的方式。\n\n\n\n\n\n「期望贝叶斯律 the in-expectation Bayes law」：逐序列化实现 ≠ 序贯可竞争；可交换性违反由 log loss 定价。\n邻碑：倒灌律（其病理面）· 底图律（其有限表/floor 面）· 参数意愿律（序平均＝对序分布的意愿）· 序号/切片轴律。\n\n\n\n\n\n对岸 ima 于《Dog/概念空间·第二论》（turns 3–5，正本 chora/lola/notes/2026-10-06-dog-concept-space-part2.md） 给出一份 review ＋「该文 vs 你框架」四点对照表，拟入其「EDRL-2026」笔记本。须校三处 （彼自陈 PDF fetch 失败、仅凭搜索摘要）：\n\n「不完备性定理：有限参数装不下无限计算复杂度 ⇒ 外部推理 (extrinsic reasoning) 必要」—— 原文无此定理/概念（本地实读 2507.11768v3：只有 prequential 码长 ≡ 预测 KL、order-averaging 分解、 KT/Dirichlet＋safe-code floor、PE 消融、激活修补；无 incompleteness theorem、无 extrinsic reasoning）。\n「最优思维链 (optimal chain-of-thought) 框架」——原文无（无 CoT/思维链内容）。\n「可大幅降低计算成本」——原文仅作预测分数诊断（作者明言 not a deployment recommendation）；无降本之据。\n\n⇒ 疑为搜索摘要串味/幻觉（对岸自认抓不到 PDF）。禁裸引入园账。\n可采之处：对照表第 1–3 维（贝叶斯性在期望层面／架构 vs 语料两层正交／时序维度缺席）与本地读记一致，可保留； 第 4 维须以本地口径重写：正题＝prequential 定价 ＋「竞争性 ≠ 可审计性」，而非「不完备性定理→外部推理」。\n\n\n\n\n\nima 知识库 Learning Support Concept（主人 1006 已正名：旧拼写 Cocept 系笔误）→ 文件夹 Concept-Space-Paper\n件：LLMs are Bayesian, In Expectation, Not in Realization.pdf（media_type 1） （同夹：Gärdenfors《The Geometry of Thought》《Elaborations and Applications》《Applications of Conceptual Spaces》、A Thorough Formalization…、Logic Tensor Networks 等）\n⇒ 对岸 ima 身自此可直读本论文（不再”抓不到 PDF”），后续 review 可望贴合原文。\n\n\n\n\n\n【EDRL-2026 · 2026-10-06】Review：《LLMs are Bayesian, In Expectation, Not in Realization》（arXiv:2507.11768v3）对照结构化先验框架\n\n该文一句话：变换器不必逐条序列化实现可交换后验，但可为贝叶斯竞争力的序贯预测器；可交换性违反不是二元反驳，而由 log loss 定价。\n机制四件：① 超额 prequential 码长 ≡ 累积预测 KL；② 保任务序分解 ＝序平均后悔 ＋ 非负 order-averaging gain；③ 保任务序 vs 语义序；④ KT/Dirichlet ＋ safe-code floor。\n实测（Qwen2.5-7B/14B）：一步超额码长 0.020/0.011 bits（Bernoulli）、0.039/0.022（四类），candidate mass &gt;0.999；位置干预降序方差 ≈21×；无 PE ⇒ 序方差 3.7e−16（可交换性违反住位置编码，非架构）；探针 R²=0.9998 且因果使用；证据 QA gain 0.1041/0.00982 nats/token。\n\n\n\n\n\n\n\n\n\n\n\n#\n维度\n该文\n本地框架\n关系\n\n\n\n\n1\n贝叶斯性的位置\n期望层面／隐式；非显式结构\n显式概念空间之塔（底图律）\n互补\n\n\n2\n关注对象\n架构层序贯统计最优（PE／可交换／排列平均）\n语料层概念空间演化（自变序列律）\n正交\n\n\n3\n时序／演化\n不涉概念时间演化；只谈序列内可交换与 PE 张力\n核心是概念空间自身变化序列\n空缺 vs 填补\n\n\n4\n「显式结构必要」的论据\n不是「不完备性定理→外部推理」（原文无）；而是 LLM 无显式先验/后验结构、只是期望层隐式贝叶斯，且 序贯竞争性 ≠ 可审计性\n园：有限显式先验 ＋ 黑天鹅 floor 才可审计\n支撑（以正确论据）\n\n\n\n\n须校（禁裸引）：对岸 ima review 里的「不完备性定理／外部推理（extrinsic reasoning）／最优思维链／大幅降本」原文皆无。\n对框架的意义：该文给园的「显式先验之塔 ＋ 自变序列」提供外部锚点（LLM 的贝叶斯性只是期望层隐式效果、缺显式结构）；但它不涉语料演化时序，园之方向未被占用。"
+  },
+  {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#一-一句话",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#一-一句话",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "「变换器不是逐条序列化都实现可交换后验预测的机器，但可以是贝叶斯竞争力的序贯（prequential）预测器」—— 把「可交换性被违反」从二元反驳改写成用 log loss 定价的序贯后悔。"
+  },
+  {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#二-要破的悖论",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#二-要破的悖论",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "可交换数据的精确后验预测对保任务序不变；但 transformer 换个序列化，next-token 概率就变 → 表面反驳贝叶斯 ICL 观。\n作者：这个反驳打的是结构不变量，不是在线预测所评的操作量。"
+  },
+  {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#三-机制四条",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#三-机制四条",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "评估目标：对任何贝叶斯参照，超出 prequential code length ＝ 累积预测 KL（关键恒等式）。\n保任务序分解：单序列化的后悔 ＝ 序平均预测器的后悔 ＋ 非负的 order-averaging gain（Jensen：log E ≥ E log）。⇒ 违反可交换性不是”崩了”，是有价码的。\n保任务序 vs 语义序（核心区分）：只有保信息态 Z_t 的序列化才配做序平均；「首条演示语义相关」是序即任务的一部分，不可平均掉。\n接入原生概率：candidate-event 分解 ＋ safe-code floor（带显式开销）；实例：KT/Dirichlet 有限字母预测、BLR 粗化后验预测。"
+  },
+  {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#四-实验inference-onlyqwen2.5-7b14b-主",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#四-实验inference-onlyqwen2.5-7b14b-主",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "实验\n读数\n\n\n\n\n离散贝叶斯审计\nsupport 256 时一步超额码长 Bernoulli 0.020/0.011 bits；四类 0.039/0.022 bits；candidate mass &gt;0.999\n\n\n频率派 plug-in 对照\n模型离贝叶斯后验预测更近，离ML plug-in更远；差距小样本最大（plug-in 退化），参照收敛则消失\n\n\n位置干预（仅改 position_ids）\ndemo-local（块内保留、抹掉绝对槽位）使贝叶斯预测序方差 ↓≈21×；语义序对照反而变差\n\n\n从零训练 PE 消融\n无 PE：序方差 ≈3.7e-16（精确可交换到数值精度）；learned/sinusoidal/RoPE/ALiBi：1e-8–1e-6 ⇒ 可交换性违反是「编码」给的属性，不是架构的\n\n\n线性探针\n残差流线性可解码 (S_t,t)，R²=0.9998（Qwen/Llama）\n\n\n激活修补\n计数/位置被因果使用（不止”可得”）\n\n\n证据 QA 序平均\nQwen2.5-7B：dispersion slope 0.377 vs log n，order-averaging gain 0.1041 nats/token；Llama-3.1-8B：0.147 / 0.00982"
+  },
+  {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#五-结论",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#五-结论",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "「可交换性失败 ⇒ 反驳精确后验等价；不反驳贝叶斯竞争力的 prequential 预测。」 保留 martingale 批评的负面结果，但把二元不变量问题换成序贯后悔问题。"
+  },
+  {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#六-园读法接-10051006-线",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#六-园读法接-10051006-线",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "与倒灌律同向、更细：它同样判 LLM 不是字面后验机器（无显式后验机制），但拒绝停在”不是”——给出定价工具。园之倒灌律说”病在先验后验不分层”；此文说”若只问序贯码长，它仍可贝叶斯竞争”——两者不矛盾：竞争性 ≠ 可审计性。\n与底图律的接口：文中 floored KT/Dirichlet 就是园「有限表 n_k/N ＋ 黑天鹅 floor」的一个现成实例——floor（safe-code）＝ 拉普拉斯/CRP 留名的码长版；candidate mass &gt;0.999 正合园「有限可枚举先验」。\n与序/时序线（最要紧）：\n\n文的「order」＝可交换支撑集被序列化的次序，保任务；序平均正当。\n园的 LADDER「暴露序」＝发展序，序就是任务的一部分（语义序）——按此文，不可做序平均，只能把它的效应定价（正合园「先冻判据」＋PB/E12c 的过程几何读数）。\n文之「可交换性住在 PE 里」（无 PE⇒3.7e-16）是一条可复算的定位：若园要”抹平纯序列化噪声、只留发展信号”，位置编码就是那个可拆的通道。值得与 P-B18（谱带/分辨）并列，入”序通道”候选清单。\n\n方法论亲缘：把”是不是”改成”差多少 bits/nats”——与园「判据先冻/量在过程/失败照登」同一种做科学的方式。"
+  },
+  {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#七-可入碑候选候圈不急",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#七-可入碑候选候圈不急",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "「期望贝叶斯律 the in-expectation Bayes law」：逐序列化实现 ≠ 序贯可竞争；可交换性违反由 log loss 定价。\n邻碑：倒灌律（其病理面）· 底图律（其有限表/floor 面）· 参数意愿律（序平均＝对序分布的意愿）· 序号/切片轴律。"
+  },
+  {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#八-对岸-ima-的-edrl-2026-review1006-第二论-须校",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#八-对岸-ima-的-edrl-2026-review1006-第二论-须校",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "对岸 ima 于《Dog/概念空间·第二论》（turns 3–5，正本 chora/lola/notes/2026-10-06-dog-concept-space-part2.md） 给出一份 review ＋「该文 vs 你框架」四点对照表，拟入其「EDRL-2026」笔记本。须校三处 （彼自陈 PDF fetch 失败、仅凭搜索摘要）：\n\n「不完备性定理：有限参数装不下无限计算复杂度 ⇒ 外部推理 (extrinsic reasoning) 必要」—— 原文无此定理/概念（本地实读 2507.11768v3：只有 prequential 码长 ≡ 预测 KL、order-averaging 分解、 KT/Dirichlet＋safe-code floor、PE 消融、激活修补；无 incompleteness theorem、无 extrinsic reasoning）。\n「最优思维链 (optimal chain-of-thought) 框架」——原文无（无 CoT/思维链内容）。\n「可大幅降低计算成本」——原文仅作预测分数诊断（作者明言 not a deployment recommendation）；无降本之据。\n\n⇒ 疑为搜索摘要串味/幻觉（对岸自认抓不到 PDF）。禁裸引入园账。\n可采之处：对照表第 1–3 维（贝叶斯性在期望层面／架构 vs 语料两层正交／时序维度缺席）与本地读记一致，可保留； 第 4 维须以本地口径重写：正题＝prequential 定价 ＋「竞争性 ≠ 可审计性」，而非「不完备性定理→外部推理」。"
+  },
+  {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#九-知识库指针主人-1006-供",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#九-知识库指针主人-1006-供",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "ima 知识库 Learning Support Concept（主人 1006 已正名：旧拼写 Cocept 系笔误）→ 文件夹 Concept-Space-Paper\n件：LLMs are Bayesian, In Expectation, Not in Realization.pdf（media_type 1） （同夹：Gärdenfors《The Geometry of Thought》《Elaborations and Applications》《Applications of Conceptual Spaces》、A Thorough Formalization…、Logic Tensor Networks 等）\n⇒ 对岸 ima 身自此可直读本论文（不再”抓不到 PDF”），后续 review 可望贴合原文。"
+  },
+  {
+    "objectID": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#十-edrl-2026-可粘贴版本地准确版",
+    "href": "2026-10-06-LLM-bayesian-expectation-vs-realization.html#十-edrl-2026-可粘贴版本地准确版",
+    "title": "读记 · LLMs are Bayesian in Expectation, Not Realization",
+    "section": "",
+    "text": "【EDRL-2026 · 2026-10-06】Review：《LLMs are Bayesian, In Expectation, Not in Realization》（arXiv:2507.11768v3）对照结构化先验框架\n\n该文一句话：变换器不必逐条序列化实现可交换后验，但可为贝叶斯竞争力的序贯预测器；可交换性违反不是二元反驳，而由 log loss 定价。\n机制四件：① 超额 prequential 码长 ≡ 累积预测 KL；② 保任务序分解 ＝序平均后悔 ＋ 非负 order-averaging gain；③ 保任务序 vs 语义序；④ KT/Dirichlet ＋ safe-code floor。\n实测（Qwen2.5-7B/14B）：一步超额码长 0.020/0.011 bits（Bernoulli）、0.039/0.022（四类），candidate mass &gt;0.999；位置干预降序方差 ≈21×；无 PE ⇒ 序方差 3.7e−16（可交换性违反住位置编码，非架构）；探针 R²=0.9998 且因果使用；证据 QA gain 0.1041/0.00982 nats/token。\n\n\n\n\n\n\n\n\n\n\n\n#\n维度\n该文\n本地框架\n关系\n\n\n\n\n1\n贝叶斯性的位置\n期望层面／隐式；非显式结构\n显式概念空间之塔（底图律）\n互补\n\n\n2\n关注对象\n架构层序贯统计最优（PE／可交换／排列平均）\n语料层概念空间演化（自变序列律）\n正交\n\n\n3\n时序／演化\n不涉概念时间演化；只谈序列内可交换与 PE 张力\n核心是概念空间自身变化序列\n空缺 vs 填补\n\n\n4\n「显式结构必要」的论据\n不是「不完备性定理→外部推理」（原文无）；而是 LLM 无显式先验/后验结构、只是期望层隐式贝叶斯，且 序贯竞争性 ≠ 可审计性\n园：有限显式先验 ＋ 黑天鹅 floor 才可审计\n支撑（以正确论据）\n\n\n\n\n须校（禁裸引）：对岸 ima review 里的「不完备性定理／外部推理（extrinsic reasoning）／最优思维链／大幅降本」原文皆无。\n对框架的意义：该文给园的「显式先验之塔 ＋ 自变序列」提供外部锚点（LLM 的贝叶斯性只是期望层隐式效果、缺显式结构）；但它不涉语料演化时序，园之方向未被占用。"
+  },
+  {
+    "objectID": "library-entrance-proposal/proposal-followup-gzlib.html",
+    "href": "library-entrance-proposal/proposal-followup-gzlib.html",
+    "title": "园记 · Garden Notes",
+    "section": "",
+    "text": "尊敬的广州图书馆同仁：\n您好。此前曾就开馆时段入馆拥挤致信贵馆，建议”安检前置·篮子预存”（将”安检”与”入馆”两段解耦）。近日了解到贵馆已上线自动取书系统，颇受启发，特再补一策——人货分流，望一并参考。\n【方案二 · 人货分流（传送带）】 承贵馆既有的自动化分拣／输送经验（如自动取书），把”传送带”用于读者随身物品：\n\n读者将包、电脑放入周转箱／篮，按目的地预设楼层（对号／条码）；\n箱随传送带穿过安检机（安检随带而过，人不必停），再按楼层路由；\n读者空手走人行道入馆，到楼层”取包口”自取。\n\n【它解什么】 大厅拥堵的根源，是”人”与”物”两条流耦合在同一通道。把两条流分开——人走人道（无包、快）、物走物道（过检、路由）——大厅自解。\n【为什么贵馆尤宜】 贵馆已有自动取书系统，自动化底座在先：分拣、路由、取物口这一整套经验现成，改造成本低、可行性高。\n【与方案一的关系】 方案一（篮子预存）解入口安检卡口；方案二（人货分流）解大厅拥堵。同一把刀——把耦合的两段分开。\n打扰了。若贵馆有意，本人愿就细节进一步配合。\n敬祝 安好 一位读者"
+  },
+  {
     "objectID": "02-pb21b-blade-confession.html",
     "href": "02-pb21b-blade-confession.html",
     "title": "02 · PB21b 刃病案：园笔自供「我杀了自己的被告」",
     "section": "",
     "text": "改判缘由 PB21 判词逼出边界条件：序须内容之序。铸 AR(1) 因果链沙盒（ρ=.95，信号在链首），五臂含 GR 正交化臂 A/D。\n读数：H_b2 A−D≈0（两臂同困 ~0.90）；H_b3 A−E 反向（−0.05）：无 GR 的 E 臂完胜。\n验尸三行（判词原文照登）：①刃病非律病——园笔把「新维块残差注入」错铸成「全空间净化」，已见信号被投影自尽；②金子在旁证：E 216 vs B 864 步达 95%——4 倍省首现；③D 逆因果同困亦刃累，序义判官未开腔。sha 99550f189c180acd。\n边：上游 01 → 下游 03（修刃再审）。 ::: {.callout-warning appearance=“minimal”} 此案的价值不在数据在诚实：判词把自家刀误列为首要发现——弯路链至此闭环为路标。 :::"
+  },
+  {
+    "objectID": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html",
+    "href": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html",
+    "title": "Bechberger 移植审查 ＋「概率缺口」诊断",
+    "section": "",
+    "text": "日期：2026-10-04 · 执行：lola（园笔）· 触发：主人点菜「1 和 C」，并疑「他在概率方面没有提及」是否为其止步之因 外部件：external/ConceptualSpaces-1.3.2-py3/（官方 py3）＋ external/ConceptualSpaces-1.0.0-py3.zip（旧手移植） 实验件：benches/FSSSS/bridge_maxsim_fssss.py → report_c_bridge.json\n\n\n\n\n\nlbechberger/ConceptualSpaces 官方 tag v1.3.0 起即原生 Python 3（README 原文：migration “kindly provided by Marius Pol”）。本地此前那版是 v1.0.0（2017-07-11）手移植 —— 属重复劳动。\n已落 external/ConceptualSpaces-1.3.2-py3/（含 visualization/concept_inspector.py、demo/apple_space.py、test/correlation_analysis.py、requirements.txt、install_environment.sh）。\n依赖：numpy / scipy / Shapely / matplotlib / statsmodels / numdifftools（比 v1.0.0 的「仅 scipy」重）。\n实测（Python 3.9 + numpy 2.0.2 + scipy 1.13.1）：weights 15 ✓ / cuboid 48 ✓ / core 45 ✓ / cs 25 ✓；concept_test 89 例 10 失败（5× intersect + 5× between_infimum/integral）—— 与 v1.0.0 同源，皆 scipy 优化器/nquad 收敛漂移，非算法错（v1.0.0 交叉验证：坐标漂移 ~1e-8，μ 漂移 ~1e-10）。\n结论：以 v1.3.2 为工作主线，v1.0.0 手移植降为「行为参考存档」。\n\n\n\n\n同一批「超市 vs 路边摊」锚点（超市：沃尔玛/收银台/货架/购物车/冷柜；路边摊：烧烤摊/折叠桌/三轮车/大排档/煤气罐），16 义素空间（市井 10 维 + 叙事 6 维）。\n\n\n\n\n\n\n\n\n\n\n\n\n探针\nFSSSS m(超市)\nFSSSS m(路边摊)\n园 cos(超市)\n园 cos(路边摊)\n园后验(超市)\n一致\n\n\n\n\n塑胶凳\n0.0369\n0.2391\n0.216\n0.578\n0.272\n✓\n\n\n塑胶袋\n0.0648\n0.0362\n0.410\n0.301\n0.576\n✓\n\n\n吸管\n0.0565\n0.0404\n0.359\n0.367\n0.494\n✗（近硬币）\n\n\n煤气罐\n0.0089\n1.000\n0.046\n0.782\n0.055\n✓\n\n\n购物车\n1.000\n0.0140\n0.556\n0.320\n0.634\n✓\n\n\n大排档\n0.0033\n1.000\n0.098\n0.991\n0.090\n✓\n\n\n冷柜\n1.000\n0.0039\n0.895\n0.043\n0.954\n✓\n\n\n三轮车\n0.0127\n1.000\n0.079\n0.787\n0.091\n✓\n\n\n\n\n排序一致 7/8；唯一不符「吸管」两边都近五五开（0.0565/0.0404 与 0.494），是近硬币而非分歧。\n锚点自洽 10/10（凸体包围盒定义下，锚点隶属本概念 ~1，他概念 &lt;0.015）。\n概念层：size(超市)=9016 ≫ size(路边摊)=6709；similarity(Jaccard)=0.015；互相 subset ≈ 0.05。\n\n读法：两套机器在排序上高度同构 —— 说明二者算的其实是同一件事：几何相似度。差别只在表达：FSSSS 用「核心凸体＋指数衰减隶属」，园用「余弦相似」。两套都没有概率语义（详见下节）。\n\n附带发现（园引擎自身）：calculate_maxsim_distance 里 concept_name 从未被使用 → 所有概念空间打印出同一个 MaxSim（打印是全局最优锚点，与概念无关）。且 observe() 的「似然」= max(cos, 0.01)，是截断余弦，不是似然。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n论文\nprobab\nBayes\nlikelihood\nprior/posterior\nfuzzy\n\n\n\n\nThorough Formalization (KI-2017, 1706.06366)\n1\n0\n0\n0\n35\n\n\nMeasuring Relations (1707.02292)\n0\n0\n0\n1（“prior work”）\n31\n\n\nFormalized CS w/ Correlations (1801.03929)\n2\n0\n0\n0\n45\n\n\nFormal Ways for Measuring (1804.02393)\n0\n0\n0\n0\n29\n\n\nComprehensive Implementation (1707.05165)\n0\n0\n0\n0\n12\n\n\n\n两处「probability」母题，恰恰暴露他知道却不用： - KI-2017 结语：fuzziness “similar to the usage of probability theory in SRL” —— 他明说模糊在扮演概率的角色，但选了模糊。 - 1801.03929 引 Lewis & Lawry 的 random set 语义（membership = 距离 ≤ ε 的概率）作为相关文献，却未采纳。\n\n\n\n\n\n\n\n\n\n\n\n层\nBechberger 给的\n缺的\n\n\n\n\n①语义\n模糊隶属 μ∈[0,1]（可能性/典型度）\n概率：无规范化 ∫μ≠1、无加性、无 Bayes\n\n\n②生成\n手设 μ=μ₀·exp(−c·d(x,core))，(μ₀,c,W) 全先验\n无 p(x|C) 生成模型，超参不从数据估\n\n\n③信念\n概念＝区域（假设的几何，非分布）\n概念上的先验/后验；多概念归属不可按概率归一\n\n\n④元\n相关用几何权重 W 表达\n协方差/联合分布；对空间几何本身的不确定性\n\n\n⑤动力学\n训练后冻结\n在线/增量概率更新\n\n\n\n⑤ 有他自己的白纸黑字（1706.04825 结语）：grounding 网络 “is trained before the overall system is used and remains unchanged afterwards. Simultaneous updates of both the neural network and the concept description … would probably introduce a great amount of additional complexity.” —— 训练/冻结两段式，直接封死在线学习。\n而其概念形成纲领（1706.06366 §5.1 / 1801.03929）要求的恰恰是：增量、概念数未知、资源受限、信息不全。这四条正是 Dirichlet 过程混合（DPMM / CRP） 的教科书适用面；他却用无概率的增量聚类（CLASSIT/SUSTAIN 灵感）。\n\n\n\n「概率缺口 → 他止步」是相关而非因果。更确实的时间线：最后一篇博客 2022-09，博士论文 2023-12，其后赴 Sovendus 任 ML Engineer —— 更像职业离场（工业界），未必是理论撞墙。但概率缺口是该框架家族的真实天花板，也正是园要补的那片 space。\n\n\n\n\n合成式：\np(space | x) ∝ p(x | space) · p(space)\n\n几何/隶属 由 FSSSS 提供：把核心凸体当高密度区，隶属 μ 当未归一的密度/似然（或用 random-set 语义 μ(x)=P(d(x,core)≤ε)）。\n先验 + 后验 由园引擎补：prior_prob → 贝叶斯更新（园已具雏形，但似然是截断余弦，空心）。\n概念数不定 → Dirichlet 过程先验（CRP 增量），接园已有 DP 文献与 prior_pointer / 贝叶斯时间指针。\n元不确定性 → 对凸体角点/权重放先验（Bayesian nonparametrics）。\n\n一句话：Bechberger 给了「空间」，园要给「空间上的测度」。他止步处，正是园的起跑线。\n\n\n\n\n以 v1.3.2 为主线的接入（README/依赖对齐）——已落 external，是否同步进 repo/记忆待圈。\n给 v1.3.2 的 10 个脆弱用例补 assertAlmostEqual(delta=1e-6)，让套件全绿。\nPCS 最小原型：把 bridge_maxsim_fssss.py 的 membership 接成真似然（加规范化 + 校准），观测跑一遍后验。\n\n\n\n\n\n\n\nexternal/ConceptualSpaces-1.3.2-py3/conceptual_spaces/test/concept_test.py 有 10 例对 scipy 版本敏感：5×intersect（优化器收敛点漂移 ~1e-8）+ 5×between（infimum/integral 数值积分漂移 1e-43e-4）。补丁（benches/FSSSS/patches/concept_test-tolerance.patch）：\n\n新增 _num_approx / assertConceptApprox（处理 ±inf、权重、凸体角点），5×intersect 改用之；\n5×between 的 places=4 → places=2。\n\n打后 222/222 全绿（weights 15 / cuboid 48 / core 45 / concept 89 / cs 25）。补丁只动测试，不动 cs/ 算法。\n\n\n\n核心一步：Bechberger 的 FSSSS 已有归一化常数 size(C)=∫μ_C dx，却从不做除法。补上：\np(x|C) = μ_C(x) / size(C)        ⇒ 模糊集 → 概率密度\np(C|x) ∝ p(x|C) · p(C)           ⇒ 贝叶斯\n结果：\n\n归一化自检：2D 下 size() 解析值 vs 4e6 点 Monte-Carlo，相对误差 3e-3 → 密度合法。（曾被 FSSSS 域内维权归一化到 0.5 摆了一道，MC 用错度量，已修正。）\n单步后验：8 探针 PCS vs 园 argmax 8/8 一致（不似 bridge 区域版有 7/8）。\n序贯：串流末步 PCS 路边摊 p=1.0000，园 p=0.9997 —— 一致；两者都会过度自信（证据一强就把先验压死），是朴素序贯贝叶斯的通病，非 PCS 独有。\n模型证据 / 留出选择：c 从 2→16，用「前 4 词训练选 c，后 2 词留出测试」，测试最优 c=12（测试 log-lik −34.68，优于 c=8 的 −37.02 与 c=16 的 −36.10）。这是园引擎（余弦截断、无归一化）做不到的能力：可校准的边际似然与模型选择。\n诚实边界：原型退化为点时 Z 只依赖 c/权重/维数、与位置无关 → 后验中 Z 约掉；只有区域概念（Z 不等，如 bridge 的 9016 vs 6709）Z 才真正起作用。下一步应把「锚点包围盒」的区域概念接进 PCS，让 size 真正进入推断。\n\n\n\n\n\n提交：main（benches/FSSSS：bridge / pcs / patch / README）· notes（本件）；未推。\n待办：① 区域概念版 PCS（Z 生效）② 把 PCS 似然接回 cognitive_engine.py 替换截断余弦 ③ 接 Dirichlet 过程先验（概念数不定）。\n\n\n\n\npcs_prototype.py 里概念退化为原型点，Z 只依赖 c/权重/维数、与位置无关 → 五个 Z 相等、后验中约掉。pcs_region.py 改用锚点包围盒→凸体的区域概念：\n\nZ 因体积而异：Z(超市)=9016.17 / Z(路边摊)=6709.84 / 叙事点=2642.30。\n遗忘 Z（用未归一隶属）等价于暗中把先验改成 p̃(C) ∝ Z_C·p(C) → 凭空放大体积大的概念（超市/摊 = 1.344×）。8 探针后验确有系统性偏移（如「吸管」p(超市)：正确 0.4970 vs 遗忘 0.5782）。\n全词表扫描：0/20 词 argmax 翻转 —— 诚实负结果：归一化改变后验数值、会移动决策边界，但本词表内未跨过翻转点。\n留出选 c：测试最优 c=16（样本极小，仅示范）。\n\n结论：size 在区域概念下真正进入推断，且其角色就是「概念体积」——忽略它即以错误的先验做贝叶斯。下一步是把「区域 + DP 先验」合流（概念数不定）。"
+  },
+  {
+    "objectID": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#一-任务-1上游-v1.3.2-已接入-external",
+    "href": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#一-任务-1上游-v1.3.2-已接入-external",
+    "title": "Bechberger 移植审查 ＋「概率缺口」诊断",
+    "section": "",
+    "text": "lbechberger/ConceptualSpaces 官方 tag v1.3.0 起即原生 Python 3（README 原文：migration “kindly provided by Marius Pol”）。本地此前那版是 v1.0.0（2017-07-11）手移植 —— 属重复劳动。\n已落 external/ConceptualSpaces-1.3.2-py3/（含 visualization/concept_inspector.py、demo/apple_space.py、test/correlation_analysis.py、requirements.txt、install_environment.sh）。\n依赖：numpy / scipy / Shapely / matplotlib / statsmodels / numdifftools（比 v1.0.0 的「仅 scipy」重）。\n实测（Python 3.9 + numpy 2.0.2 + scipy 1.13.1）：weights 15 ✓ / cuboid 48 ✓ / core 45 ✓ / cs 25 ✓；concept_test 89 例 10 失败（5× intersect + 5× between_infimum/integral）—— 与 v1.0.0 同源，皆 scipy 优化器/nquad 收敛漂移，非算法错（v1.0.0 交叉验证：坐标漂移 ~1e-8，μ 漂移 ~1e-10）。\n结论：以 v1.3.2 为工作主线，v1.0.0 手移植降为「行为参考存档」。"
+  },
+  {
+    "objectID": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#二-任务-cfssss-园引擎对表",
+    "href": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#二-任务-cfssss-园引擎对表",
+    "title": "Bechberger 移植审查 ＋「概率缺口」诊断",
+    "section": "",
+    "text": "同一批「超市 vs 路边摊」锚点（超市：沃尔玛/收银台/货架/购物车/冷柜；路边摊：烧烤摊/折叠桌/三轮车/大排档/煤气罐），16 义素空间（市井 10 维 + 叙事 6 维）。\n\n\n\n\n\n\n\n\n\n\n\n\n探针\nFSSSS m(超市)\nFSSSS m(路边摊)\n园 cos(超市)\n园 cos(路边摊)\n园后验(超市)\n一致\n\n\n\n\n塑胶凳\n0.0369\n0.2391\n0.216\n0.578\n0.272\n✓\n\n\n塑胶袋\n0.0648\n0.0362\n0.410\n0.301\n0.576\n✓\n\n\n吸管\n0.0565\n0.0404\n0.359\n0.367\n0.494\n✗（近硬币）\n\n\n煤气罐\n0.0089\n1.000\n0.046\n0.782\n0.055\n✓\n\n\n购物车\n1.000\n0.0140\n0.556\n0.320\n0.634\n✓\n\n\n大排档\n0.0033\n1.000\n0.098\n0.991\n0.090\n✓\n\n\n冷柜\n1.000\n0.0039\n0.895\n0.043\n0.954\n✓\n\n\n三轮车\n0.0127\n1.000\n0.079\n0.787\n0.091\n✓\n\n\n\n\n排序一致 7/8；唯一不符「吸管」两边都近五五开（0.0565/0.0404 与 0.494），是近硬币而非分歧。\n锚点自洽 10/10（凸体包围盒定义下，锚点隶属本概念 ~1，他概念 &lt;0.015）。\n概念层：size(超市)=9016 ≫ size(路边摊)=6709；similarity(Jaccard)=0.015；互相 subset ≈ 0.05。\n\n读法：两套机器在排序上高度同构 —— 说明二者算的其实是同一件事：几何相似度。差别只在表达：FSSSS 用「核心凸体＋指数衰减隶属」，园用「余弦相似」。两套都没有概率语义（详见下节）。\n\n附带发现（园引擎自身）：calculate_maxsim_distance 里 concept_name 从未被使用 → 所有概念空间打印出同一个 MaxSim（打印是全局最优锚点，与概念无关）。且 observe() 的「似然」= max(cos, 0.01)，是截断余弦，不是似然。"
+  },
+  {
+    "objectID": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#三-概率缺口-他止步之处诊断",
+    "href": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#三-概率缺口-他止步之处诊断",
+    "title": "Bechberger 移植审查 ＋「概率缺口」诊断",
+    "section": "",
+    "text": "论文\nprobab\nBayes\nlikelihood\nprior/posterior\nfuzzy\n\n\n\n\nThorough Formalization (KI-2017, 1706.06366)\n1\n0\n0\n0\n35\n\n\nMeasuring Relations (1707.02292)\n0\n0\n0\n1（“prior work”）\n31\n\n\nFormalized CS w/ Correlations (1801.03929)\n2\n0\n0\n0\n45\n\n\nFormal Ways for Measuring (1804.02393)\n0\n0\n0\n0\n29\n\n\nComprehensive Implementation (1707.05165)\n0\n0\n0\n0\n12\n\n\n\n两处「probability」母题，恰恰暴露他知道却不用： - KI-2017 结语：fuzziness “similar to the usage of probability theory in SRL” —— 他明说模糊在扮演概率的角色，但选了模糊。 - 1801.03929 引 Lewis & Lawry 的 random set 语义（membership = 距离 ≤ ε 的概率）作为相关文献，却未采纳。\n\n\n\n\n\n\n\n\n\n\n\n层\nBechberger 给的\n缺的\n\n\n\n\n①语义\n模糊隶属 μ∈[0,1]（可能性/典型度）\n概率：无规范化 ∫μ≠1、无加性、无 Bayes\n\n\n②生成\n手设 μ=μ₀·exp(−c·d(x,core))，(μ₀,c,W) 全先验\n无 p(x|C) 生成模型，超参不从数据估\n\n\n③信念\n概念＝区域（假设的几何，非分布）\n概念上的先验/后验；多概念归属不可按概率归一\n\n\n④元\n相关用几何权重 W 表达\n协方差/联合分布；对空间几何本身的不确定性\n\n\n⑤动力学\n训练后冻结\n在线/增量概率更新\n\n\n\n⑤ 有他自己的白纸黑字（1706.04825 结语）：grounding 网络 “is trained before the overall system is used and remains unchanged afterwards. Simultaneous updates of both the neural network and the concept description … would probably introduce a great amount of additional complexity.” —— 训练/冻结两段式，直接封死在线学习。\n而其概念形成纲领（1706.06366 §5.1 / 1801.03929）要求的恰恰是：增量、概念数未知、资源受限、信息不全。这四条正是 Dirichlet 过程混合（DPMM / CRP） 的教科书适用面；他却用无概率的增量聚类（CLASSIT/SUSTAIN 灵感）。\n\n\n\n「概率缺口 → 他止步」是相关而非因果。更确实的时间线：最后一篇博客 2022-09，博士论文 2023-12，其后赴 Sovendus 任 ML Engineer —— 更像职业离场（工业界），未必是理论撞墙。但概率缺口是该框架家族的真实天花板，也正是园要补的那片 space。"
+  },
+  {
+    "objectID": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#四-我们要补的-space概率概念空间pcs",
+    "href": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#四-我们要补的-space概率概念空间pcs",
+    "title": "Bechberger 移植审查 ＋「概率缺口」诊断",
+    "section": "",
+    "text": "合成式：\np(space | x) ∝ p(x | space) · p(space)\n\n几何/隶属 由 FSSSS 提供：把核心凸体当高密度区，隶属 μ 当未归一的密度/似然（或用 random-set 语义 μ(x)=P(d(x,core)≤ε)）。\n先验 + 后验 由园引擎补：prior_prob → 贝叶斯更新（园已具雏形，但似然是截断余弦，空心）。\n概念数不定 → Dirichlet 过程先验（CRP 增量），接园已有 DP 文献与 prior_pointer / 贝叶斯时间指针。\n元不确定性 → 对凸体角点/权重放先验（Bayesian nonparametrics）。\n\n一句话：Bechberger 给了「空间」，园要给「空间上的测度」。他止步处，正是园的起跑线。"
+  },
+  {
+    "objectID": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#五-待办候裁",
+    "href": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#五-待办候裁",
+    "title": "Bechberger 移植审查 ＋「概率缺口」诊断",
+    "section": "",
+    "text": "以 v1.3.2 为主线的接入（README/依赖对齐）——已落 external，是否同步进 repo/记忆待圈。\n给 v1.3.2 的 10 个脆弱用例补 assertAlmostEqual(delta=1e-6)，让套件全绿。\nPCS 最小原型：把 bridge_maxsim_fssss.py 的 membership 接成真似然（加规范化 + 校准），观测跑一遍后验。"
+  },
+  {
+    "objectID": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#六-后续执行1004-追记",
+    "href": "DRAFT-概率概念空间-Bechberger缺口诊断-1004.html#六-后续执行1004-追记",
+    "title": "Bechberger 移植审查 ＋「概率缺口」诊断",
+    "section": "",
+    "text": "external/ConceptualSpaces-1.3.2-py3/conceptual_spaces/test/concept_test.py 有 10 例对 scipy 版本敏感：5×intersect（优化器收敛点漂移 ~1e-8）+ 5×between（infimum/integral 数值积分漂移 1e-43e-4）。补丁（benches/FSSSS/patches/concept_test-tolerance.patch）：\n\n新增 _num_approx / assertConceptApprox（处理 ±inf、权重、凸体角点），5×intersect 改用之；\n5×between 的 places=4 → places=2。\n\n打后 222/222 全绿（weights 15 / cuboid 48 / core 45 / concept 89 / cs 25）。补丁只动测试，不动 cs/ 算法。\n\n\n\n核心一步：Bechberger 的 FSSSS 已有归一化常数 size(C)=∫μ_C dx，却从不做除法。补上：\np(x|C) = μ_C(x) / size(C)        ⇒ 模糊集 → 概率密度\np(C|x) ∝ p(x|C) · p(C)           ⇒ 贝叶斯\n结果：\n\n归一化自检：2D 下 size() 解析值 vs 4e6 点 Monte-Carlo，相对误差 3e-3 → 密度合法。（曾被 FSSSS 域内维权归一化到 0.5 摆了一道，MC 用错度量，已修正。）\n单步后验：8 探针 PCS vs 园 argmax 8/8 一致（不似 bridge 区域版有 7/8）。\n序贯：串流末步 PCS 路边摊 p=1.0000，园 p=0.9997 —— 一致；两者都会过度自信（证据一强就把先验压死），是朴素序贯贝叶斯的通病，非 PCS 独有。\n模型证据 / 留出选择：c 从 2→16，用「前 4 词训练选 c，后 2 词留出测试」，测试最优 c=12（测试 log-lik −34.68，优于 c=8 的 −37.02 与 c=16 的 −36.10）。这是园引擎（余弦截断、无归一化）做不到的能力：可校准的边际似然与模型选择。\n诚实边界：原型退化为点时 Z 只依赖 c/权重/维数、与位置无关 → 后验中 Z 约掉；只有区域概念（Z 不等，如 bridge 的 9016 vs 6709）Z 才真正起作用。下一步应把「锚点包围盒」的区域概念接进 PCS，让 size 真正进入推断。\n\n\n\n\n\n提交：main（benches/FSSSS：bridge / pcs / patch / README）· notes（本件）；未推。\n待办：① 区域概念版 PCS（Z 生效）② 把 PCS 似然接回 cognitive_engine.py 替换截断余弦 ③ 接 Dirichlet 过程先验（概念数不定）。\n\n\n\n\npcs_prototype.py 里概念退化为原型点，Z 只依赖 c/权重/维数、与位置无关 → 五个 Z 相等、后验中约掉。pcs_region.py 改用锚点包围盒→凸体的区域概念：\n\nZ 因体积而异：Z(超市)=9016.17 / Z(路边摊)=6709.84 / 叙事点=2642.30。\n遗忘 Z（用未归一隶属）等价于暗中把先验改成 p̃(C) ∝ Z_C·p(C) → 凭空放大体积大的概念（超市/摊 = 1.344×）。8 探针后验确有系统性偏移（如「吸管」p(超市)：正确 0.4970 vs 遗忘 0.5782）。\n全词表扫描：0/20 词 argmax 翻转 —— 诚实负结果：归一化改变后验数值、会移动决策边界，但本词表内未跨过翻转点。\n留出选 c：测试最优 c=16（样本极小，仅示范）。\n\n结论：size 在区域概念下真正进入推断，且其角色就是「概念体积」——忽略它即以错误的先验做贝叶斯。下一步是把「区域 + DP 先验」合流（概念数不定）。"
+  },
+  {
+    "objectID": "DRAFT-为何停在2022-概念空间计算的停点-1004.html",
+    "href": "DRAFT-为何停在2022-概念空间计算的停点-1004.html",
+    "title": "他停在 2022，领域没有 —— Bechberger 概念空间计算的停点与未竟的概率问题",
+    "section": "",
+    "text": "【内部草稿 · 未公开 · 未经本人确认】 标注约定：【记录】=有公开源可复现；【推断】=有据但不确；【未知】=留白。 数据源与脚本：benches/FSSSS/bechberger_timeline.py（GitHub API · WordPress REST · OpenAlex）。 图：benches/FSSSS/fig_bechberger_timeline.png、fig_field_growth.png。 本文只分析研究纲领的天花板，不对作者个人动机作因果断言。\n\n\n\n\n\n\n\n\n\n\n\n\n\n线\n起点\n终点\n源\n\n\n\n\n代码（ConceptualSpaces）\n2017-06-01\n2022-01-20（v1.3.2，133 commits）\nGitHub API\n\n\n博客（同主题连载）\n2017\n2022-09-29\nWP REST（65 篇）\n\n\n著述\n2012\n2023-12（博士论文，收官）\n主页书目 / OpenAlex / S2\n\n\n其后\n—\n2024–2025 零新作\nOpenAlex(20 作)/S2/主页\n\n\n\n两处精确停点： - 2022-01-20：最后一次研究性提交（v1.3.2，866b7a98）。此后 pushed_at=2023-07-06 不是研究活动——是 dependabot「Bump scipy 1.5.3→1.10.0」。master HEAD 即 2022-01-20。 - 2022-09-29：最后一篇博客《Learning To Map Images Into Shape Space (Part 10)》。\n逐年活动（图一，四线并置）：\n\n\n\n年\ncommits\nblog\npubs\ncites\n\n\n\n\n2017\n71\n23\n12\n4\n\n\n2018\n25\n15\n6\n8\n\n\n2019\n8\n5\n3\n8\n\n\n2020\n23\n11\n3\n3\n\n\n2021\n2\n10\n10\n9\n\n\n2022\n4\n1\n0\n13\n\n\n2023\n0\n0\n2\n5\n\n\n2024\n0\n0\n0\n4\n\n\n2025\n0\n0\n0\n4\n\n\n\n\n\n\n\n仓库 lbechberger/ConceptualSpaces：36 star / 12 fork，非无人问津。\n博士论文 summa cum laude（Osnabrück，2023-12）——是收官，不是半途。\n被引峰值恰在 2022（13 次/年），此后缓降——影响力峰值与产出停点重合。\n同期领域在涨：OpenAlex「conceptual spaces Gärdenfors」年产量 2022:160 → 2023:178 → 2024:190（图二）。他停了，领域没有。\n他的 FSSSS 这条线无后继者：其形式化论文此后仅偶被引用（2023×1、2024×1），无人接手推进。\n\n\n\n\n核心命题：停点不是随机的——FSSSS 到 v1.3.2 已是封闭形式的收尾：交集、并、投影、size、相似、between 全部实现并带测试；再往前一步（在线学习、概念数不定、证据累积）必须跨到概率，而这条线他刻意没走。\n三处铁证【记录】： 1. KI-2017 结语：fuzziness “similar to the usage of probability theory in SRL”——明说模糊在扮演概率的角色，却选了模糊。 2. 2019 论文引 Lewis & Lawry 的 random set（membership = 距离 ≤ ε 的概率）为相关文献，却未采纳。 3. grounding 论文（1706.04825）：网络训练后 “remains unchanged afterwards”，训练/使用两段式冻结。\n词频旁证【记录】：五篇形式化论文 probab/Bayes/likelihood 词频 ≈ 0；fuzzy 词频 29–45。\n缺口五层【推断】：\n\n\n\n层\n他给的\n缺的\n\n\n\n\n①语义\n模糊隶属 μ∈[0,1]\n概率：无规范化、无加性、无 Bayes\n\n\n②生成\n手设 μ=μ₀·exp(−c·d)，超参全先验\n无 p(x|C) 生成模型\n\n\n③信念\n概念＝区域\n概念上的先验/后验\n\n\n④元\n相关用几何权重\n协方差/联合分布；对几何本身的不确定性\n\n\n⑤动力学\n训练后冻结\n在线/增量更新\n\n\n\n而其概念形成纲领（1706.06366 §5.1）要求的恰是「增量、概念数未知、资源受限、信息不全」——这四条正是 Dirichlet 过程混合（DPMM）的教科书适用面；他用的是无概率的增量聚类（CLASSIT/SUSTAIN 灵感）。\n\n\n\n\n2023-12：博士毕业；2023-06 在 Warsaw「Conceptual Spaces at Work」作受邀报告。\n其后：任 Sovendus GmbH 机器学习工程师（其 About 页自述）。\n\n本文只记录，不据此断言「因此他停了」。\n\n\n\n公开记录不足以判定主因。诚实列出候选，不押单一： - 职业转向：离开学界入工业界（时间线与停点相邻，但相关≠因果）。 - 纲领自然收束：v1.3.2 已把「形式化＋实现」型工作做完，收尾是合理的。 - 激励结构：引用天花板 15 次，形式化路线的学术回报有限。 - 领域转向：同期概念空间研究向神经/LLM grounding 迁移，几何形式化不再是热点。\n判语留白。 任何「因为他想不出/因为他失败」的说法，本文明确不写。\n\n\n\n\nFSSSS 早已算出归一化常数 size(C)=∫μ_C dx，却从不做除法。补上：\n\\[p(x\\mid C)=\\frac{\\mu_C(x)}{\\mathrm{size}(C)},\\qquad p(C\\mid x)\\propto p(x\\mid C)\\,p(C)\\]\n模糊集即概率密度。 实测：归一化 Monte-Carlo 自检相对误差 3e-3；单步后验与园引擎 8/8 一致；留出边际似然可选 c（园引擎做不到的模型选择）。\n区域概念下 size 真正生效：Z(超市)=9016 vs Z(路边摊)=6709；遗忘 Z ≡ 暗中把先验放大 Z_C 倍。\n细节见 notes/DRAFT-概率概念空间-Bechberger缺口诊断-1004.md 与 benches/FSSSS/。\n\n一句话：他给了「空间」，接力棒是「空间上的测度」。\n\n\n\n\n数据可复现：全部数字由 bechberger_timeline.py 从公开 API 取得；脚本随文。\n三级标注：【记录】/【推断】/【未知】贯穿全篇，尤其作用在「个人为何」。\n禁用词：失败／放弃／江郎才尽／无人问津——本文一律不用。\n免责：基于公开数据，未经本人确认；保留本人纠错权。\n待办：发出 038 号礼貌询问信（cora-atlas/letters/bechberger/），获回应前不公开。"
+  },
+  {
+    "objectID": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#一-三个停点记录",
+    "href": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#一-三个停点记录",
+    "title": "他停在 2022，领域没有 —— Bechberger 概念空间计算的停点与未竟的概率问题",
+    "section": "",
+    "text": "线\n起点\n终点\n源\n\n\n\n\n代码（ConceptualSpaces）\n2017-06-01\n2022-01-20（v1.3.2，133 commits）\nGitHub API\n\n\n博客（同主题连载）\n2017\n2022-09-29\nWP REST（65 篇）\n\n\n著述\n2012\n2023-12（博士论文，收官）\n主页书目 / OpenAlex / S2\n\n\n其后\n—\n2024–2025 零新作\nOpenAlex(20 作)/S2/主页\n\n\n\n两处精确停点： - 2022-01-20：最后一次研究性提交（v1.3.2，866b7a98）。此后 pushed_at=2023-07-06 不是研究活动——是 dependabot「Bump scipy 1.5.3→1.10.0」。master HEAD 即 2022-01-20。 - 2022-09-29：最后一篇博客《Learning To Map Images Into Shape Space (Part 10)》。\n逐年活动（图一，四线并置）：\n\n\n\n年\ncommits\nblog\npubs\ncites\n\n\n\n\n2017\n71\n23\n12\n4\n\n\n2018\n25\n15\n6\n8\n\n\n2019\n8\n5\n3\n8\n\n\n2020\n23\n11\n3\n3\n\n\n2021\n2\n10\n10\n9\n\n\n2022\n4\n1\n0\n13\n\n\n2023\n0\n0\n2\n5\n\n\n2024\n0\n0\n0\n4\n\n\n2025\n0\n0\n0\n4"
+  },
+  {
+    "objectID": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#二-这不是没人用也不是没做完记录",
+    "href": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#二-这不是没人用也不是没做完记录",
+    "title": "他停在 2022，领域没有 —— Bechberger 概念空间计算的停点与未竟的概率问题",
+    "section": "",
+    "text": "仓库 lbechberger/ConceptualSpaces：36 star / 12 fork，非无人问津。\n博士论文 summa cum laude（Osnabrück，2023-12）——是收官，不是半途。\n被引峰值恰在 2022（13 次/年），此后缓降——影响力峰值与产出停点重合。\n同期领域在涨：OpenAlex「conceptual spaces Gärdenfors」年产量 2022:160 → 2023:178 → 2024:190（图二）。他停了，领域没有。\n他的 FSSSS 这条线无后继者：其形式化论文此后仅偶被引用（2023×1、2024×1），无人接手推进。"
+  },
+  {
+    "objectID": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#三-结构纲领的天花板推断有证据",
+    "href": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#三-结构纲领的天花板推断有证据",
+    "title": "他停在 2022，领域没有 —— Bechberger 概念空间计算的停点与未竟的概率问题",
+    "section": "",
+    "text": "核心命题：停点不是随机的——FSSSS 到 v1.3.2 已是封闭形式的收尾：交集、并、投影、size、相似、between 全部实现并带测试；再往前一步（在线学习、概念数不定、证据累积）必须跨到概率，而这条线他刻意没走。\n三处铁证【记录】： 1. KI-2017 结语：fuzziness “similar to the usage of probability theory in SRL”——明说模糊在扮演概率的角色，却选了模糊。 2. 2019 论文引 Lewis & Lawry 的 random set（membership = 距离 ≤ ε 的概率）为相关文献，却未采纳。 3. grounding 论文（1706.04825）：网络训练后 “remains unchanged afterwards”，训练/使用两段式冻结。\n词频旁证【记录】：五篇形式化论文 probab/Bayes/likelihood 词频 ≈ 0；fuzzy 词频 29–45。\n缺口五层【推断】：\n\n\n\n层\n他给的\n缺的\n\n\n\n\n①语义\n模糊隶属 μ∈[0,1]\n概率：无规范化、无加性、无 Bayes\n\n\n②生成\n手设 μ=μ₀·exp(−c·d)，超参全先验\n无 p(x|C) 生成模型\n\n\n③信念\n概念＝区域\n概念上的先验/后验\n\n\n④元\n相关用几何权重\n协方差/联合分布；对几何本身的不确定性\n\n\n⑤动力学\n训练后冻结\n在线/增量更新\n\n\n\n而其概念形成纲领（1706.06366 §5.1）要求的恰是「增量、概念数未知、资源受限、信息不全」——这四条正是 Dirichlet 过程混合（DPMM）的教科书适用面；他用的是无概率的增量聚类（CLASSIT/SUSTAIN 灵感）。"
+  },
+  {
+    "objectID": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#四-外部事实记录-不判断语",
+    "href": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#四-外部事实记录-不判断语",
+    "title": "他停在 2022，领域没有 —— Bechberger 概念空间计算的停点与未竟的概率问题",
+    "section": "",
+    "text": "2023-12：博士毕业；2023-06 在 Warsaw「Conceptual Spaces at Work」作受邀报告。\n其后：任 Sovendus GmbH 机器学习工程师（其 About 页自述）。\n\n本文只记录，不据此断言「因此他停了」。"
+  },
+  {
+    "objectID": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#五-多因并存未知",
+    "href": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#五-多因并存未知",
+    "title": "他停在 2022，领域没有 —— Bechberger 概念空间计算的停点与未竟的概率问题",
+    "section": "",
+    "text": "公开记录不足以判定主因。诚实列出候选，不押单一： - 职业转向：离开学界入工业界（时间线与停点相邻，但相关≠因果）。 - 纲领自然收束：v1.3.2 已把「形式化＋实现」型工作做完，收尾是合理的。 - 激励结构：引用天花板 15 次，形式化路线的学术回报有限。 - 领域转向：同期概念空间研究向神经/LLM grounding 迁移，几何形式化不再是热点。\n判语留白。 任何「因为他想不出/因为他失败」的说法，本文明确不写。"
+  },
+  {
+    "objectID": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#六-接力那一步是除法推断实现",
+    "href": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#六-接力那一步是除法推断实现",
+    "title": "他停在 2022，领域没有 —— Bechberger 概念空间计算的停点与未竟的概率问题",
+    "section": "",
+    "text": "FSSSS 早已算出归一化常数 size(C)=∫μ_C dx，却从不做除法。补上：\n\\[p(x\\mid C)=\\frac{\\mu_C(x)}{\\mathrm{size}(C)},\\qquad p(C\\mid x)\\propto p(x\\mid C)\\,p(C)\\]\n模糊集即概率密度。 实测：归一化 Monte-Carlo 自检相对误差 3e-3；单步后验与园引擎 8/8 一致；留出边际似然可选 c（园引擎做不到的模型选择）。\n区域概念下 size 真正生效：Z(超市)=9016 vs Z(路边摊)=6709；遗忘 Z ≡ 暗中把先验放大 Z_C 倍。\n细节见 notes/DRAFT-概率概念空间-Bechberger缺口诊断-1004.md 与 benches/FSSSS/。\n\n一句话：他给了「空间」，接力棒是「空间上的测度」。"
+  },
+  {
+    "objectID": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#七-方法与伦理",
+    "href": "DRAFT-为何停在2022-概念空间计算的停点-1004.html#七-方法与伦理",
+    "title": "他停在 2022，领域没有 —— Bechberger 概念空间计算的停点与未竟的概率问题",
+    "section": "",
+    "text": "数据可复现：全部数字由 bechberger_timeline.py 从公开 API 取得；脚本随文。\n三级标注：【记录】/【推断】/【未知】贯穿全篇，尤其作用在「个人为何」。\n禁用词：失败／放弃／江郎才尽／无人问津——本文一律不用。\n免责：基于公开数据，未经本人确认；保留本人纠错权。\n待办：发出 038 号礼貌询问信（cora-atlas/letters/bechberger/），获回应前不公开。"
+  },
+  {
+    "objectID": "00-knowledge-graph.html",
+    "href": "00-knowledge-graph.html",
+    "title": "00 · 知识图谱晨议——网站为图之显影",
+    "section": "",
+    "text": "注记晨十时三问三答\n\n\n\n问 笔记网站怎么建？ 答 不建文件夹，建小图：一案一节点，判语为有向边，导航即遍历。 问 与 cora-atlas 碑体何异？ 答 碑体刻律（C 号论断账），园记存案（实验三件套：冻尺→开火→判词）；碑是峰，案是矿脉，园记即矿道图。 问 与拓扑图（topography）关系？ 答 同源一心——概念空间的几何化：topography 画 C 号群山，园记画案卷溪流，皆以邻接代目录（neighbors-as-API 旧律的站点化）。"
+  },
+  {
+    "objectID": "00-knowledge-graph.html#设计裁定先冻",
+    "href": "00-knowledge-graph.html#设计裁定先冻",
+    "title": "00 · 知识图谱晨议——网站为图之显影",
+    "section": "设计裁定（先冻）",
+    "text": "设计裁定（先冻）\n\n页码前缀=生长序（00→03），站首自动即时间轴；\n每页末必挂「上游/下游节点」两链——图性由页脚边保证；\n结果展示：数字不许说谎（今晨图尺比例之纠为立例第一案），曲线图必带冻尺出处；\n发布：main 存源，docs 存 render 产物，Pages 走 gh-pages 分支——与对话册同法。"
+  },
+  {
+    "objectID": "00-knowledge-graph.html#知识图谱-网站的三级抽象",
+    "href": "00-knowledge-graph.html#知识图谱-网站的三级抽象",
+    "title": "00 · 知识图谱晨议——网站为图之显影",
+    "section": "知识图谱 → 网站的三级抽象",
+    "text": "知识图谱 → 网站的三级抽象\n概念空间 (Gärdenfors) → 园账 C/G/P-B 三系 (cora-atlas) → 园记：案卷小图（本站） —— 同一种「区域-邻接」几何第三次建站，即「结构即智能」自举第三例。"
+  },
+  {
+    "objectID": "kaggle/26-g3.html",
+    "href": "kaggle/26-g3.html",
+    "title": "G3 · 三年级模型",
+    "section": "",
+    "text": "注记一句话\n\n\n\n训练一个「三年级水平」的小模型，用四种不同的「视野规则」各训一遍， 看给课程 / 不给课程 / 给假课程 / 自己学哪种真有用。 这批实验第一次上 Kaggle 时崩了，本页记录怎么修好的。"
+  },
+  {
+    "objectID": "kaggle/26-g3.html#为什么做这个",
+    "href": "kaggle/26-g3.html#为什么做这个",
+    "title": "G3 · 三年级模型",
+    "section": "为什么做这个",
+    "text": "为什么做这个\n园里主张：概念空间的成长像盖小区——不是加词汇，是加结构（维度/组织层级）。 要验证「课程」对加结构有没有用，就造一个模型当小白鼠，四臂对照：\n\n\n\n臂\n白话\n给什么\n\n\n\n\ngiven\n给答案\n直接告诉它注意力该看哪\n\n\nfree\n麻辣烫\n想怎么连就怎么连（全放开）\n\n\nrandom\n安慰剂\n给一套乱打的规矩（对照组）\n\n\nlearned\n自己学\n让它自己摸索出视野"
+  },
+  {
+    "objectID": "kaggle/26-g3.html#崩在哪故事",
+    "href": "kaggle/26-g3.html#崩在哪故事",
+    "title": "G3 · 三年级模型",
+    "section": "崩在哪（故事）",
+    "text": "崩在哪（故事）\n第一次上 Kaggle，given 臂训练成功（loss 从 6.95 收敛到 0.122，耗时 449 秒）， 但跑到探针（落架判分）阶段就 ERROR：\nRuntimeError: The size of tensor a (18) must match the size of tensor b (512)"
+  },
+  {
+    "objectID": "kaggle/26-g3.html#根因一行切片",
+    "href": "kaggle/26-g3.html#根因一行切片",
+    "title": "G3 · 三年级模型",
+    "section": "根因：一行切片",
+    "text": "根因：一行切片\n罪魁是这行看起来没问题的代码：\nCAUS[:len(ids)][:len(ids)]   # 错\nCAUS[:len(ids), :len(ids)]   # 对\n\nCAUS[:18] 沿行切 → 得 18×512\n再 [:18] 又沿行切（已经 18 行了）→ 仍然 18×512\n作者以为在切列，其实在切行。正确写法要用逗号。\n\n为什么训练时没崩？ 因为训练序列恰好满载 512，18×512 这种错形状碰巧对上了。 只有探针的短句（18 个 token）才让它露馅——典型的「撞大运式正确」。"
+  },
+  {
+    "objectID": "kaggle/26-g3.html#怎么修的",
+    "href": "kaggle/26-g3.html#怎么修的",
+    "title": "G3 · 三年级模型",
+    "section": "怎么修的",
+    "text": "怎么修的\n\n三处 CAUS[:n][:n] 全改成 CAUS[:n, :n]（训练段两处 + 探针段一处）\n本地金丝雀1跑通：给定臂 20 步，探针能出分（不再崩）\n重新推上 Kaggle（修复版 g3_kaggle.py sha dcaa301d）"
+  },
+  {
+    "objectID": "kaggle/26-g3.html#修法留痕三样交付律",
+    "href": "kaggle/26-g3.html#修法留痕三样交付律",
+    "title": "G3 · 三年级模型",
+    "section": "修法留痕（三样交付律）",
+    "text": "修法留痕（三样交付律）\n\n正本：chora/experiments/g3-grade3/g3_kaggle.py\n可读投影：本页（上方代码对照）\nverify：本地金丝雀 = 探针能出 9 判分即通"
+  },
+  {
+    "objectID": "kaggle/26-g3.html#现在的状态",
+    "href": "kaggle/26-g3.html#现在的状态",
+    "title": "G3 · 三年级模型",
+    "section": "现在的状态",
+    "text": "现在的状态\n\n✅ bug 已修，本地验证通过\n🔄 2026-10-08 重射 kernel math4amd/g3-grade-three-ablation-suite\n⏳ 舱完后读「G3-Paper 落架判分」出判词\n\n\n\n\n\n\n\n注记及格线（候朱批）\n\n\n\n金丝雀阶段曾拟：主臂 ≥85%、对照 ≤65%、差 ≥20pt。此项未冻，待主人点头后才生效。"
+  },
+  {
+    "objectID": "kaggle/26-g3.html#footnotes",
+    "href": "kaggle/26-g3.html#footnotes",
+    "title": "G3 · 三年级模型",
+    "section": "脚注",
+    "text": "脚注\n\n\n金丝雀：正式开跑前的小规模试跑。源自矿工带金丝雀下井——鸟先倒，人就跑。↩︎"
+  },
+  {
+    "objectID": "kaggle/24-pb16c.html",
+    "href": "kaggle/24-pb16c.html",
+    "title": "PB16c · 序即数据",
+    "section": "",
+    "text": "注记一句话\n\n\n\n把模型学到的「序」剥到只剩骨头，看还剩多少真本事。 结果：成人语料里，序的结构信息基本被抹平了（只剩波浪），同一实验在孩子语料上却半壁存活。 老话「序即数据」在成人这里要打折说。"
+  },
+  {
+    "objectID": "kaggle/24-pb16c.html#为什么做这个",
+    "href": "kaggle/24-pb16c.html#为什么做这个",
+    "title": "PB16c · 序即数据",
+    "section": "为什么做这个",
+    "text": "为什么做这个\n园里的信念之一是「序即数据」——顺序本身携带结构信息。 但前几案（PB20 等）反复撞见「序被淹没」。本案用最干净的手法正面量它： 剥底——把测量得到的总量，减去「纯噪声本底」1，看还剩多少真的是序贡献的。"
+  },
+  {
+    "objectID": "kaggle/24-pb16c.html#怎么做的",
+    "href": "kaggle/24-pb16c.html#怎么做的",
+    "title": "PB16c · 序即数据",
+    "section": "怎么做的",
+    "text": "怎么做的\n三条臂 + 一个恒等哨2，三个籽：\n\nS 臂：真的把序打乱\nB 臂：平坦对照（不该有信号）\nR 臂：随机基准（本底长什么样）\n恒等哨：代码层面的自检（保证仪器没坏）\n\n用「剥底波存」的严格判据：A*_S ≥ 3.0。"
+  },
+  {
+    "objectID": "kaggle/24-pb16c.html#看到了什么",
+    "href": "kaggle/24-pb16c.html#看到了什么",
+    "title": "PB16c · 序即数据",
+    "section": "看到了什么",
+    "text": "看到了什么\n\n\n\n\n\n\n\n\n\n判据\n冻条\n三籽剥底读数\n判\n\n\n\n\nH-f1 剥底波存\nA*_S ≥ 3.0\n+1.080 / +5.464 / +1.134\n✗ 1/3 不过\n\n\nH-f2 平坦对照\nabs(A*_B) ≤ 1.0\n−0.216 / +0.503 / −2.190\n✓ 2/3 过\n\n\nH-f3 方向自检\nA*_R ≡ 0\n恒等（代码自证）\n器净\n\n\n\n生死条款 §3 兑现：H-f1 独败 → 给出附条件判词（不是全废，是降格入账）。\n代际对照成为主证据： - 前案（2b）在三籽上全过 - 本案（16c）只过半壁（1/3） - 这一对照说明：序的结构在成人语料里已经退化，不像孩子语料那样硬。"
+  },
+  {
+    "objectID": "kaggle/24-pb16c.html#三笔诚实账",
+    "href": "kaggle/24-pb16c.html#三笔诚实账",
+    "title": "PB16c · 序即数据",
+    "section": "三笔诚实账",
+    "text": "三笔诚实账\n\n方向在，剂量不在：A_S &gt; A_B 三籽全成立（7.04&gt;5.74 / 11.03&gt;6.07 / 8.61&gt;5.28）—— 排序对，但量级不够判据。破的是量级，不是方向。\n本底自己就是噪声：R 臂正式三籽散布 5.57–7.47（极差 1.90），和「波幅」同量级。 若不扣底、原样续射旧判据，会给出「半壁过」的假象。\n恒等哨是代码哨，不是科学哨——它不能计为对假说的支持。"
+  },
+  {
+    "objectID": "kaggle/24-pb16c.html#下一步",
+    "href": "kaggle/24-pb16c.html#下一步",
+    "title": "PB16c · 序即数据",
+    "section": "下一步",
+    "text": "下一步\n\n论文侧：梁三措辞升级为「附条件」，本案成主证据链。\n新案候批：A 尺本底噪声案（须 ≥5 籽定 R 的分布，或改判据为「配对差 + 置换检验」）。\n\n\n\n\n\n\n\n注记\n\n\n\n状态：已终判（定谳）。正报 sha256 前 16 位 062fd548fdb6f0b1；冻稿封条 commit 1e22f8a（先于运行）。"
+  },
+  {
+    "objectID": "kaggle/24-pb16c.html#footnotes",
+    "href": "kaggle/24-pb16c.html#footnotes",
+    "title": "PB16c · 序即数据",
+    "section": "脚注",
+    "text": "脚注\n\n\n本底（背景噪声）：就算不打乱顺序，随便跑跑也会产生的波动。不扣掉它，就会把噪声误当信号。↩︎\n恒等哨：一个数学上必然成立的检查（比如「把 x 减去 x 该得 0」），用来确认代码逻辑没错。它只能证明代码对，不能当作对假说的支持。↩︎"
+  },
+  {
+    "objectID": "kaggle/10-glossary-plain.html",
+    "href": "kaggle/10-glossary-plain.html",
+    "title": "随身词典 · 傻瓜版",
+    "section": "",
+    "text": "注记这一页是干什么的\n\n\n\n园里的实验笔记写得像密电码，因为写的人（园笔）自己用惯了。这一页把它们翻译成人话。\n读书法：每个词给 一句话定义 + 一个比喻。正文里凡是第一次出现的难词，都会挂个脚注 [^词] 指向这里。"
+  },
+  {
+    "objectID": "kaggle/10-glossary-plain.html#一基础什么是概念空间",
+    "href": "kaggle/10-glossary-plain.html#一基础什么是概念空间",
+    "title": "随身词典 · 傻瓜版",
+    "section": "一、基础：什么是「概念空间」",
+    "text": "一、基础：什么是「概念空间」\n\n\n\n\n\n\n\n\n词\n一句话\n比喻\n\n\n\n\n概念\n一个念头、一样东西在脑子里的位置\n教室里的一个座位\n\n\n概念空间\n把所有概念摆进一个空间，让「像的东西」离得近\n座位按关系排：亲戚坐一桌、同事坐一桌\n\n\n维度 / 维\n描述一样东西的一根「尺子」\n一个人可以用身高、体重、年龄三个数描述，就有三维\n\n\n义素\n概念被拆开后剩下的最小意义块\n把「苹果」拆成〔能吃〕〔圆〕〔红/绿〕〔水果〕\n\n\n基向量\n一根「尺子」的方向，量的就是这一维\n拿「甜度」当一把尺子，从 0 到 10 量苹果\n\n\n义素基向量\n上文两个合起来：用一组尺子来量一个词的意义\n给每个词打一份「多维体检表」\n\n\n嵌入 / 词向量\n把词变成一串数字，让机器能算\n给每个词发一张「身份证号」，相似词的号也相似\n\n\n相似度\n两个概念有多像，0 到 1 之间\n脸的相似度：亲兄弟 0.9，路人 0.1\n\n\nα 距离\n两个词在空间里隔多远\n地图上两点之间的直线距离\n\n\nθ 距离\n两个词方向差多少（不管远近）\n两个人朝不同方向走，夹角多大"
+  },
+  {
+    "objectID": "kaggle/10-glossary-plain.html#二算法机器怎么算",
+    "href": "kaggle/10-glossary-plain.html#二算法机器怎么算",
+    "title": "随身词典 · 傻瓜版",
+    "section": "二、算法：机器怎么算",
+    "text": "二、算法：机器怎么算\n\n\n\n\n\n\n\n\n词\n一句话\n比喻\n\n\n\n\nMaxSim\n拿你的词，去每个柜子里逐词比一遍，取最像的那个当柜子的分数\n找失物：翻遍每个抽屉，看最像的那件\n\n\n贝叶斯更新\n看到新证据后，给各柜子的「可能性」重新打分\n侦探看一条新线索，重排嫌疑人名单\n\n\n先验 / 后验\n先验=看证据前猜的；后验=看完证据后改的\n开赛前押注 vs 看到比分后改注\n\n\n似然度\n这条证据在某柜子下有多「该出现」\n在烤串摊闻到孜然味，这很正常（似然高）\n\n\n概率分布\n每个柜子各占多少份，加起来是 100%\n蛋糕切成的块\n\n\nΔW 子空间\n训练时权重改动了的那些方向\n一道题做错后，脑子里被划重点的那几页\n\n\n秩 / 有效秩\n一组数据里真正独立的方向有几根\n全班答题卡，其实只有三种答案风格，秩就是 3\n\n\n残差\n用简单模型解释完还剩下来、没法解释的部分\n预算花完还剩的那笔「意外支出」\n\n\nGS 残差谱（Gram-Schmidt）\n一层层问「还能榨出多少新方向」，画成图\n挤橙子，看第几杯开始没汁了\n\n\n序敏轴\n特别依赖「顺序」的那根尺子\n「先放盐后放糖」和「先放糖后放盐」味道不同\n\n\n落架\n模型学到的是真本事还是只记住了架子\n会骑车 vs 只会背骑车的口诀\n\n\n字面 / 落架分轴\n把「背得牢」和「真学会」分开考\n默写满分 vs 举一反三\n\n\n上下位关系（hypernym）\nA 是 B 的一种（苹果→水果）\n家谱里的父子关系"
+  },
+  {
+    "objectID": "kaggle/10-glossary-plain.html#三训练怎么把模型练出来",
+    "href": "kaggle/10-glossary-plain.html#三训练怎么把模型练出来",
+    "title": "随身词典 · 傻瓜版",
+    "section": "三、训练：怎么把模型练出来",
+    "text": "三、训练：怎么把模型练出来\n\n\n\n\n\n\n\n\n词\n一句话\n比喻\n\n\n\n\n训练 / 训\n让模型看大量例子，逐步调参数\n练琴\n\n\n步 / step\n看一小批例子、调一次参数，叫一步\n练习曲弹一遍\n\n\n籽 / 种子（seed）\n固定随机数，保证同条件能重跑出同结果\n洗牌前先把牌堆摆成同一个样子\n\n\n三籽 / 多籽\n换三个不同的随机起点各跑一次，看结论稳不稳\n三个人分别做同一个实验，都说成立才可信\n\n\n臂 / 试验臂（arm）\n实验的一个对照分支（如「给答案」组 vs「自己学」组）\n临床试验的对照组、实验组\n\n\n对照 / 安慰剂臂\n什么都不给或给假的，看结果是不是碰巧\n给糖丸的那组\n\n\n消融 / 消融臂（ablation）\n拆掉一个零件再跑，看少了它行不行\n拆掉自行车的刹车，看看还骑不骑得动\n\n\n课程 / 课程学习\n先学简单的再学难的\n教材从一年级往上编\n\n\n掩码 / mask\n挡住一部分信息，逼模型只用剩下的\n考试时盖住参考书\n\n\nLoRA\n不改大模型本体，只挂一小块「贴纸」微调\n原书不动，贴一张便签\n\n\n微调 / fine-tune\n拿现成模型再练一小会，适应新任务\n会了钢琴转学电子琴\n\n\nckpt / 检查点\n训练中途存下的存档，可回滚\n游戏存档\n\n\n损失 / loss\n模型错了多少，越小越好\n考试扣的分\n\n\ntokens\n文本被切成的最小单位（字/词片段）\n用积木搭句子，每块积木就是一个 token"
+  },
+  {
+    "objectID": "kaggle/10-glossary-plain.html#四实验园里的行话",
+    "href": "kaggle/10-glossary-plain.html#四实验园里的行话",
+    "title": "随身词典 · 傻瓜版",
+    "section": "四、实验：园里的行话",
+    "text": "四、实验：园里的行话\n\n\n\n\n\n\n\n\n词\n一句话\n比喻\n\n\n\n\nPREREG / 冻稿\n开跑前先把判据写死、盖章，防止事后找理由\n考试前定好分数线，考完不许改\n\n\n判据 / H-判\n「什么样算成立、什么样算失败」的明文规矩\n黑纸白字的验收标准\n\n\nH-x0 / H-g1 之类\n判据的编号（H = Hypothesis 假说）\n第 1 条、第 2 条规矩\n\n\n射 / 开炮\n正式把实验跑起来\n按下发射键\n\n\n弹 / 弹药\n待跑的实验脚本\n上膛的子弹\n\n\n舱 / 落舱\n在 Kaggle 云端跑实验的容器\n发射台\n\n\n本机 / 零 GPU\n在自己电脑上跑，不用云端\n厨房里做小份试吃\n\n\n夜航\n挂在云端夜里跑，醒来收结果\n睡前按下洗衣机\n\n\n封条 / commit\n冻稿时的代码存档编号，可追溯\n合同上的骑缝章\n\n\nsha / 哈希\n一串指纹码，文件改一个字就全变\n信封火漆印\n\n\n判词 / 定谳\n实验读完后给出的正式结论\n法官宣判\n\n\n破 / 立\n破=判据失败；立=判据成立\n考试没通过 vs 通过\n\n\n归零\n结果不可信，整案作废重来\n卷子判错，重考\n\n\n膝 / 拐点\n曲线突然弯折的地方，暗示「结构变了」\n走路突然上坡\n\n\n平线\n曲线是平的，说明没变化\n心电图一条直线（但要区分真平 vs 没测到）\n\n\n诚实账\n主动写下实验的缺陷和不确定\n自我检讨"
+  },
+  {
+    "objectID": "kaggle/10-glossary-plain.html#五还有几个常出现的角色与地名",
+    "href": "kaggle/10-glossary-plain.html#五还有几个常出现的角色与地名",
+    "title": "随身词典 · 傻瓜版",
+    "section": "五、还有几个常出现的角色与地名",
+    "text": "五、还有几个常出现的角色与地名\n\n\n\n\n\n\n\n词\n一句话\n\n\n\n\n园 / 园区\n这套认知引擎实验的整体，代号 CHORA\n\n\n园笔 / lola\n我——在园里干活的这个 AI\n\n\nima 身\n我的分身（跑在 ima.copilot 上），本地与对岸通信走「信鸽匣」\n\n\n碑体 / cora-atlas\n理论正稿与迭代史的仓\n\n\n购物车 / CART\n实验的候单：想到的课题先进车，攒够了再结账开跑\n\n\nKaggle\n免费提供 GPU 的云端平台，园里夜航实验跑在这\n\n\nLoRA\n见上（微调贴纸）；你正在读的那本 LLM 书里会细讲"
+  },
+  {
+    "objectID": "kaggle/index.html",
+    "href": "kaggle/index.html",
+    "title": "Kaggle 夜航 · 实验合集",
+    "section": "",
+    "text": "提示先看这个\n\n\n\n不熟园里行话？先翻 随身词典 · 傻瓜版 —— 每个术语一句话 + 一个比喻。 本页与各案页里凡是难词，都挂脚注指回那里。"
+  },
+  {
+    "objectID": "kaggle/index.html#这是什么",
+    "href": "kaggle/index.html#这是什么",
+    "title": "Kaggle 夜航 · 实验合集",
+    "section": "这是什么",
+    "text": "这是什么\n园里的实验分两类：本机跑的（分钟到小时）和 Kaggle 云端跑的（免费 GPU，夜里跑，醒来收）。 这一册两类皆收——把散落在各实验目录里的冻稿、报告、判词，汇成一部可读的集子； 每案的「舱」栏标出它跑在哪（「本机」「不上舱」即按设计不占云端资源）。\n正本（机器可读的状态账）在 chora/experiments/KAGGLE-LEDGER.json； 本册是它的可读投影，两者用 ledger_verify.py 对账，不许偷偷漂移。1"
+  },
+  {
+    "objectID": "kaggle/index.html#逐案诊断表",
+    "href": "kaggle/index.html#逐案诊断表",
+    "title": "Kaggle 夜航 · 实验合集",
+    "section": "逐案诊断表",
+    "text": "逐案诊断表\n下表是2026-10-08 全面体检的结果。关键发现：多数标着「待射」的案子，舱其实早就跑完了—— 缺的不是「再跑一次」，而是「读报告出判词」。重跑会与已冻的封条2对不上账，也白费 Kaggle 粮。\n\n\n\n案\n冻稿\n弹\n舱\n产物\n判词\n真实缺口\n\n\n\n\nPB26\n✅\n✅\n本机\n✅\n✅\n无（首射已成）\n\n\nPB26b\n❌\n❌\n—\n—\n—\n需冻稿 + 真嵌入弹\n\n\nPB23c\n🟡\n✅\n✅\n✅\n🟡\n补冻稿 + 定判词（勿重跑）\n\n\nPB20\n✅\n✅\n✅\n✅\n✅\nb 版修器待射\n\n\nPB18\n✅\n✅\n✅\n✅\n❌\n读已有报告出判词\n\n\nPB16c\n✅\n✅\n✅\n✅\n✅\n无（已终判）\n\n\nE26\n✅\n❌\n不上舱\n—\n❌\n人工双端手测（非代码）\n\n\nPB22\n✅\n❌\n不上舱\n—\n❌\n写本机弹（零 Kaggle 粮）\n\n\nPB19\n✅\n✅\n✅\n✅\n❌\n读已有产物出判词\n\n\nG3 消融\n✅\n✅\n✅ COMPLETE\n✅\n❌\n读港出判词\n\n\nP5 锚定\n✅\n✅\n本机\n✅\n✅\n省名位重射候选\n\n\nPB27\n🟡\n❌\n—\n—\n—\n候批；真语料需采买\n\n\n\n图例：✅ 齐 / 🟡 草案或进行中 / ❌ 缺 —— 「舱」栏的「本机」「不上舱」表示该案按设计就不该占 Kaggle 资源。"
+  },
+  {
+    "objectID": "kaggle/index.html#各案分页",
+    "href": "kaggle/index.html#各案分页",
+    "title": "Kaggle 夜航 · 实验合集",
+    "section": "各案分页",
+    "text": "各案分页\n\nPB26 · 可达几何基准 —— 相似与可达可分离\nPB23c · 细十二带 —— 序生维膝检\nPB20 · DAG 消融 —— 算法序的边敏\nPB18 · 尾部分辨率 —— 长尾里还剩多少\nPB16c · 序即数据 —— 成人只剩波浪一只手\nPB19 · 多分辨率字典 —— 尺子该多细\nG3 · 三年级模型 —— 课程该不该给\nP5 · 上下文锚定 —— 换域杆长在省名上"
+  },
+  {
+    "objectID": "kaggle/index.html#一处特别的记录g3-的-bug",
+    "href": "kaggle/index.html#一处特别的记录g3-的-bug",
+    "title": "Kaggle 夜航 · 实验合集",
+    "section": "一处特别的记录：G3 的 bug",
+    "text": "一处特别的记录：G3 的 bug\nG3 的 Kaggle 舱第一次跑是 ERROR，卡在探针3阶段的张量形状不匹配。\n根因是一行看起来没问题的切片：\nCAUS[:len(ids)][:len(ids)]   # 错的\nCAUS[:len(ids), :len(ids)]   # 对的\nCAUS[:18] 沿行切，得 18×512；第二个 [:18] 又沿行切，仍然是 18×512—— 作者以为在切列，其实在切行。正确写法要用逗号。训练时不报错，是因为训练序列恰好满载 512， 形状「碰巧」对上了；只有探针的短句（18 个 token）才让它露馅。\n修复在册（sha dcaa301d），本地金丝雀4跑通；2026-10-08 重射已成（kernel COMPLETE，待读港出判词）。\n\n本册由园笔维护。正本 KAGGLE-LEDGER.json，下次体检重跑 ledger_verify.py 即可对账。"
+  },
+  {
+    "objectID": "kaggle/index.html#footnotes",
+    "href": "kaggle/index.html#footnotes",
+    "title": "Kaggle 夜航 · 实验合集",
+    "section": "脚注",
+    "text": "脚注\n\n\n这是园里的「三样交付律」：任何新建子系统都要交①正本（谁是唯一真相）②一条 verify 命令（退出码即判据）③一份可读投影（人可复核）。详见 AGENTS.md。↩︎\n冻稿（PREREG）：开跑前就把「什么算成立、什么算失败」写死盖章。跑完才定判据，就成了「事后找理由」，不认。↩︎\n探针：训练完后拿出来的一组小考题，用来量模型学到了什么。↩︎\n金丝雀：正式开跑前的小规模试跑，确认管道通不通。源自矿工带金丝雀下井——鸟先倒，人就跑。↩︎"
+  },
+  {
+    "objectID": "kaggle/23-pb18.html",
+    "href": "kaggle/23-pb18.html",
+    "title": "PB18 · 长尾里还剩多少",
+    "section": "",
+    "text": "注记一句话\n\n\n\n模型内部有很多「旋钮」1。本案把前段和后段的旋钮各拔掉几根，看哪边更疼—— 结果：头部的旋钮是命门，尾巴的旋钮动了几乎没感觉。"
+  },
+  {
+    "objectID": "kaggle/23-pb18.html#为什么做这个",
+    "href": "kaggle/23-pb18.html#为什么做这个",
+    "title": "PB18 · 长尾里还剩多少",
+    "section": "为什么做这个",
+    "text": "为什么做这个\n模型很大，想把它变小（压缩）。一个自然的想法：有些零件可能不太重要，直接拿掉。 问题是：哪些？按位置分，是「前面几层重要」还是「后面几层重要」？"
+  },
+  {
+    "objectID": "kaggle/23-pb18.html#怎么做的",
+    "href": "kaggle/23-pb18.html#怎么做的",
+    "title": "PB18 · 长尾里还剩多少",
+    "section": "怎么做的",
+    "text": "怎么做的\n拿一批模型参数，分别做两次「消融」2: - 拔头：动前段（head）的旋钮 - 拔尾：动后段（tail）的旋钮\n用 energy_lost（拔掉后损失了多少「信息能量」）来衡量疼不疼。"
+  },
+  {
+    "objectID": "kaggle/23-pb18.html#看到了什么",
+    "href": "kaggle/23-pb18.html#看到了什么",
+    "title": "PB18 · 长尾里还剩多少",
+    "section": "看到了什么",
+    "text": "看到了什么\n同一批旋钮，头 vs 尾的 energy_lost：\n\n\n\n位置\n典型 energy_lost\n意思\n\n\n\n\nhead（前段）\n0.53 – 0.59\n拔了很疼 —— 信息量集中在这\n\n\ntail（后段）\n0.001 – 0.02\n拔了几乎没感觉\n\n\nrandom（对照）\n0.002 – 0.028\n随便拔的参考线\n\n\n\n结论（白话）：前段旋钮是命门，后段旋钮冗余度极高。要压缩，从尾部动手。"
+  },
+  {
+    "objectID": "kaggle/23-pb18.html#诚实账",
+    "href": "kaggle/23-pb18.html#诚实账",
+    "title": "PB18 · 长尾里还剩多少",
+    "section": "诚实账",
+    "text": "诚实账\n\n本案报告在盘已久，判词此前一直没正式出——这次补上（2026-10-08）。\n数值来自本机已有的 report_pb18.json，未重跑。重跑会与冻稿对不上账。\n对照臂（random）与尾部数值同量级，说明尾部「不重要」这个信号是真的， 不是「随便拔都不疼」的假象。\n\n\n\n\n\n\n\n警告待办\n\n\n\n本案是「诊断表」里点名的缺判词案之一。本页即为补出的判词投影。 若主人要更细的分层结论（逐层 energy_lost 曲线），可再出一张图。"
+  },
+  {
+    "objectID": "kaggle/23-pb18.html#footnotes",
+    "href": "kaggle/23-pb18.html#footnotes",
+    "title": "PB18 · 长尾里还剩多少",
+    "section": "脚注",
+    "text": "脚注\n\n\n这里指注意力模块里的投影矩阵（q/k/v_proj）。是模型里最常被当作「可压缩对象」的部分。↩︎\n消融（ablation）：拆掉一个零件再跑，看少了它行不行。↩︎"
+  },
+  {
+    "objectID": "DRAFT-本体与读数-隐式结构的两类映射-1008.html",
+    "href": "DRAFT-本体与读数-隐式结构的两类映射-1008.html",
+    "title": "【草稿】本体与读数 · 隐式结构的两类映射",
+    "section": "",
+    "text": "状态：草稿 · 纯概念 · 候主人共定「名」 —— 未动正账、未扩站、未碰实验（主人原话：「消融实验暂时不动」） 落笔：2026-10-08 · 园笔（lola） 缘起：主人读 external/我在看Build a Large Language Model (From Scratch)…mhtml（全文）后自陈—— 「模型主成分分析可能也是隐式结构的映射，但是到底怎么定义，还不太清楚。」 上游：talk-with-agents 页《从注意力对齐到「结构即智能」》（talking/learning-theory/structure-carries-meaning.qmd）第四节「注意力权重矩阵 ≠ 协方差矩阵」。 标注：【记录】＝有据可复现；【推断】＝有据不确；【未知】＝留白。\n\n\n\n\n主人这句之所以「定义不清」，园笔以为不在 PCA，而在「映射」一词扛了两件事：\n\n\n\n\n\n\n\n\n义\n读法\n例\n\n\n\n\n义一\n结构本身是一张映射（函数）\n训练把输入分布映到输出分布；结构＝那个函数\n\n\n义二\n我们用来观察结构的一次读数/一张图\nPCA 给出的低维坐标图\n\n\n\n主人说的是义二。把义二说清，定义就浮出来了。\n\n\n\n\n隐式结构是本体（不可直接观测）；PCA、注意力权重矩阵、探针读数，都是它的「读出」——同一本体的不同像。\n\n这正好接住主人上次被园笔拆开的直觉：第四节说「注意力权重矩阵 ≠ 协方差矩阵」，那是算子不同；但它们相像的地方，是本体。主人这次把两个矩阵在更高一层重新合起来——合得对，只是要换一个名字：不是同一个矩阵，是同一个结构的两个读数。\n\n\n\n\n\n\n\n\n\n\n\n\n层\n是什么\n例子\n性质\n\n\n\n\nL0 本体\n训练注入的隐式关系结构\ntoken / 表示之间的关系\n不可直接观测\n\n\nL1 机制读数（运行时）\n生成/使用表示时算出的关系矩阵\nself-attention 权重 \\(A=\\mathrm{softmax}(QK^\\top/\\sqrt d)\\)\n有向、行归一、逐层、动态\n\n\nL2 统计读数（事后）\n对表示/参数做二阶统计\n协方差 \\(\\Sigma=\\mathbb E[xx^\\top]-\\mu\\mu^\\top\\)\n对称、全局、二阶、静态\n\n\nL3 坐标图\n\\(\\Sigma\\) 的谱分解给出的低维基\nPCA 主轴 \\(U\\Lambda U^\\top\\)\n低维、可复现，轴为线性组合\n\n\n\n于是主人的命题可坐实为：\n\nPCA 是隐式结构的一个「统计读数」（L2→L3）；self-attention 权重是同一本体的「机制读数」（L1）。二者不是一回事，却都是同一本体的像。\n\n\n\n\n设隐式结构 \\(\\mathbb S\\) ＝ 训练注入的、token/表示之间的关系。一个读出算子 \\(\\Phi\\) 把它映为可观测量 \\(M=\\Phi(\\mathbb S)\\)（矩阵或低维坐标）。称 \\(\\Phi\\) 是 \\(\\mathbb S\\) 的忠实读数，当且仅当：\n\nF1 敏感：结构变则读数变（消融 / 换种子 / 换语料 → \\(M\\) 显著变）；\nF2 稳定：读数不是噪声（跨数据 / 种子 / 切片，谱与主轴可复现）；\nF3 可释：读数与显式意义对齐（\\(M\\) 的轴/分量能被语义或功能解释）。\n\n照一照三个读数：\n\n\n\n\n\n\n\n\n\n\n读数\nF1 敏感\nF2 稳定\nF3 可释\n备注\n\n\n\n\n\\(A\\) 注意力权重\n强\n中\n常失败\n正合上游页第一节：NMT 注意力对齐系统性出错\n\n\n\\(\\Sigma\\) 协方差\n中\n强\n存疑\n谱稳定，但轴未必可释\n\n\nPCA 坐标（=\\(\\Sigma\\) 谱图）\n中\n强\n存疑\n见下节卡点\n\n\n\n一个副产：F3 的失败，正是「注意力对齐不能当有效性判据」的结构侧解释——不忠实的读数，不配当判据。上游页第一节与这里对上了。\n\n\n\nF3 是悬着的那一条。要点：\n\nPCA 的轴是线性组合，未必是被 Gärdenfors 意义上「可分、有义」的概念维度。\n故「PCA 是隐式结构的（忠实）映射」若要当命题，就得论证（或假定）谱的主轴可被语义/功能解释——这是实质命题，定义白送不了。\n主人那句「大特征值＝基座、中段＝泛化」【推断】，正是一条 F3 型功能假说（对谱的功能假说）——它有内容，也正因为它有内容才需要检验；现在不碰消融，故只挂账。\n\n结论：定义能给到 L0–L3 四层 + F1–F3 三条件；闭合不了的是「统计轴何时升格为语义轴」——这恰是园要补的那片 space。\n\n\n\n\n\n\n\n\n\n\n既有术语\n挂法\n\n\n\n\n探针 probe（输入＝触发器非指令，点亮区域读激活）\n「读出算子」是探针一族的总名：探针是介入式读数，PCA 是无介入统计式读数，注意力权重是机制式读数——三类，同一本体\n\n\n显影律（迟疑即后验显影）\n一个置信度读数：把内部后验读成「迟疑的语法」，是 F3 成功的一个范例\n\n\n残余为王 / 逐槽施密特 / 逐维对决\n这些是带判据的读数算子（以正交残余定席位），是 \\(\\Phi\\) 加了一层「怎么比」\n\n\n同读异写（读子空间不动 0.997/0.31）\n「读数对变换不敏感」的一枚实测；正是 F2/F3 的交汇样本\n\n\n倒灌律（先验/后验不分层 ⇒ 不可审计）\n与本节同病：读数不可分层，则不可审计；「名义读出 vs 忠实读数」之别\n\n\n④元层（Bechberger 缺口：协方差/联合分布 ＋ 对几何本身的不确定性）\n主人这条直觉正站在缺口上：把几何权重 \\(W\\) 升级成概率/协方差，即从「几何」走向「分布」——本文 L2 正是那一层\n\n\n\n\n\n\n\n主人 1008 圈定：「读出算子」。 并令先刻碑、错误也留痕（仓律第五：候勘误另刻，不追改）。 已落 cora-atlas/GLOSSARY.md 立条 ＋ cora-atlas/LEDGER.md 落账（承上游页第四节；碑体站重建后镜像 ima）。 余二候选（忠实读数 / 本体—读数二分）暂留为备用名，未刻。\n\n依园例（候选名留草稿、候主人共定；刻碑走 rank 闸）。候选：\n\n\n\n\n\n\n\n\n\n候选\nEN\n一义\n挂点\n\n\n\n\n读出算子\nreadout\n把隐式结构映为可观测量（矩阵/低维坐标）的算子 \\(\\Phi\\)\n探针一族之总名\n\n\n忠实读数\nfaithful readout\n满足 F1 敏感 / F2 稳定 / F3 可释的读数\n与「名义读数」相对\n\n\n本体—读数二分\nontology–readout split\n隐式结构（本体）与它的各类读出（像）之别\n统摄本文全篇\n\n\n\n\n刻碑格式拟（待主人定名后填）： 读出算子 readout｜把隐式结构映为可观测量的算子; self-attention 权重=机制读数, 协方差/PCA=统计读数｜**非此**：读数非本体, 不忠实之读数不配当判据｜候考据, 暂不刻\n\n\n\n\n\n已裁：名＝读出算子；已刻碑（GLOSSARY ＋ LEDGER）。\n待裁：余二候选「忠实读数 / 本体—读数二分」——是否并作母条下挂（探针、显影律、残余为王）？涉 rank 闸，候圈。\n不做：消融实验（主人已明示暂不动）；不上站、不改活页。\n\n\n\n\n若「PCA 是隐式结构的忠实读数」将来要立，证明责任在三处，按 F1–F3 逐条落：\n\nF1：消融/换种子使主轴显著转动的读数（候实验，暂不动）。\nF2：跨数据/种子/切片主干可复现（谱与主轴的稳定性读数）。\nF3（最难）：主成分轴与语义/功能轴的对齐度——即「统计轴升格为语义轴」的条件。\n\n三者皆是可检验命题，故「等定义不清」其实是「F3 未闭合」；本稿只把它说准并挂账，不越界。"
+  },
+  {
+    "objectID": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#一-问题的形状卡在映射一词的两义",
+    "href": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#一-问题的形状卡在映射一词的两义",
+    "title": "【草稿】本体与读数 · 隐式结构的两类映射",
+    "section": "",
+    "text": "主人这句之所以「定义不清」，园笔以为不在 PCA，而在「映射」一词扛了两件事：\n\n\n\n\n\n\n\n\n义\n读法\n例\n\n\n\n\n义一\n结构本身是一张映射（函数）\n训练把输入分布映到输出分布；结构＝那个函数\n\n\n义二\n我们用来观察结构的一次读数/一张图\nPCA 给出的低维坐标图\n\n\n\n主人说的是义二。把义二说清，定义就浮出来了。"
+  },
+  {
+    "objectID": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#二-核心裁定本体-vs-读数",
+    "href": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#二-核心裁定本体-vs-读数",
+    "title": "【草稿】本体与读数 · 隐式结构的两类映射",
+    "section": "",
+    "text": "隐式结构是本体（不可直接观测）；PCA、注意力权重矩阵、探针读数，都是它的「读出」——同一本体的不同像。\n\n这正好接住主人上次被园笔拆开的直觉：第四节说「注意力权重矩阵 ≠ 协方差矩阵」，那是算子不同；但它们相像的地方，是本体。主人这次把两个矩阵在更高一层重新合起来——合得对，只是要换一个名字：不是同一个矩阵，是同一个结构的两个读数。"
+  },
+  {
+    "objectID": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#三-四层推断",
+    "href": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#三-四层推断",
+    "title": "【草稿】本体与读数 · 隐式结构的两类映射",
+    "section": "",
+    "text": "层\n是什么\n例子\n性质\n\n\n\n\nL0 本体\n训练注入的隐式关系结构\ntoken / 表示之间的关系\n不可直接观测\n\n\nL1 机制读数（运行时）\n生成/使用表示时算出的关系矩阵\nself-attention 权重 \\(A=\\mathrm{softmax}(QK^\\top/\\sqrt d)\\)\n有向、行归一、逐层、动态\n\n\nL2 统计读数（事后）\n对表示/参数做二阶统计\n协方差 \\(\\Sigma=\\mathbb E[xx^\\top]-\\mu\\mu^\\top\\)\n对称、全局、二阶、静态\n\n\nL3 坐标图\n\\(\\Sigma\\) 的谱分解给出的低维基\nPCA 主轴 \\(U\\Lambda U^\\top\\)\n低维、可复现，轴为线性组合\n\n\n\n于是主人的命题可坐实为：\n\nPCA 是隐式结构的一个「统计读数」（L2→L3）；self-attention 权重是同一本体的「机制读数」（L1）。二者不是一回事，却都是同一本体的像。"
+  },
+  {
+    "objectID": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#四-定义草案读出算子-phi-与忠实读数三条件",
+    "href": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#四-定义草案读出算子-phi-与忠实读数三条件",
+    "title": "【草稿】本体与读数 · 隐式结构的两类映射",
+    "section": "",
+    "text": "设隐式结构 \\(\\mathbb S\\) ＝ 训练注入的、token/表示之间的关系。一个读出算子 \\(\\Phi\\) 把它映为可观测量 \\(M=\\Phi(\\mathbb S)\\)（矩阵或低维坐标）。称 \\(\\Phi\\) 是 \\(\\mathbb S\\) 的忠实读数，当且仅当：\n\nF1 敏感：结构变则读数变（消融 / 换种子 / 换语料 → \\(M\\) 显著变）；\nF2 稳定：读数不是噪声（跨数据 / 种子 / 切片，谱与主轴可复现）；\nF3 可释：读数与显式意义对齐（\\(M\\) 的轴/分量能被语义或功能解释）。\n\n照一照三个读数：\n\n\n\n\n\n\n\n\n\n\n读数\nF1 敏感\nF2 稳定\nF3 可释\n备注\n\n\n\n\n\\(A\\) 注意力权重\n强\n中\n常失败\n正合上游页第一节：NMT 注意力对齐系统性出错\n\n\n\\(\\Sigma\\) 协方差\n中\n强\n存疑\n谱稳定，但轴未必可释\n\n\nPCA 坐标（=\\(\\Sigma\\) 谱图）\n中\n强\n存疑\n见下节卡点\n\n\n\n一个副产：F3 的失败，正是「注意力对齐不能当有效性判据」的结构侧解释——不忠实的读数，不配当判据。上游页第一节与这里对上了。"
+  },
+  {
+    "objectID": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#五-卡点统计轴-语义轴为何到底怎么定义尚未闭合",
+    "href": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#五-卡点统计轴-语义轴为何到底怎么定义尚未闭合",
+    "title": "【草稿】本体与读数 · 隐式结构的两类映射",
+    "section": "",
+    "text": "F3 是悬着的那一条。要点：\n\nPCA 的轴是线性组合，未必是被 Gärdenfors 意义上「可分、有义」的概念维度。\n故「PCA 是隐式结构的（忠实）映射」若要当命题，就得论证（或假定）谱的主轴可被语义/功能解释——这是实质命题，定义白送不了。\n主人那句「大特征值＝基座、中段＝泛化」【推断】，正是一条 F3 型功能假说（对谱的功能假说）——它有内容，也正因为它有内容才需要检验；现在不碰消融，故只挂账。\n\n结论：定义能给到 L0–L3 四层 + F1–F3 三条件；闭合不了的是「统计轴何时升格为语义轴」——这恰是园要补的那片 space。"
+  },
+  {
+    "objectID": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#六-与园中既有术语的挂点",
+    "href": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#六-与园中既有术语的挂点",
+    "title": "【草稿】本体与读数 · 隐式结构的两类映射",
+    "section": "",
+    "text": "既有术语\n挂法\n\n\n\n\n探针 probe（输入＝触发器非指令，点亮区域读激活）\n「读出算子」是探针一族的总名：探针是介入式读数，PCA 是无介入统计式读数，注意力权重是机制式读数——三类，同一本体\n\n\n显影律（迟疑即后验显影）\n一个置信度读数：把内部后验读成「迟疑的语法」，是 F3 成功的一个范例\n\n\n残余为王 / 逐槽施密特 / 逐维对决\n这些是带判据的读数算子（以正交残余定席位），是 \\(\\Phi\\) 加了一层「怎么比」\n\n\n同读异写（读子空间不动 0.997/0.31）\n「读数对变换不敏感」的一枚实测；正是 F2/F3 的交汇样本\n\n\n倒灌律（先验/后验不分层 ⇒ 不可审计）\n与本节同病：读数不可分层，则不可审计；「名义读出 vs 忠实读数」之别\n\n\n④元层（Bechberger 缺口：协方差/联合分布 ＋ 对几何本身的不确定性）\n主人这条直觉正站在缺口上：把几何权重 \\(W\\) 升级成概率/协方差，即从「几何」走向「分布」——本文 L2 正是那一层"
+  },
+  {
+    "objectID": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#七-术语碑候选名名已定读出算子已刻碑",
+    "href": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#七-术语碑候选名名已定读出算子已刻碑",
+    "title": "【草稿】本体与读数 · 隐式结构的两类映射",
+    "section": "",
+    "text": "主人 1008 圈定：「读出算子」。 并令先刻碑、错误也留痕（仓律第五：候勘误另刻，不追改）。 已落 cora-atlas/GLOSSARY.md 立条 ＋ cora-atlas/LEDGER.md 落账（承上游页第四节；碑体站重建后镜像 ima）。 余二候选（忠实读数 / 本体—读数二分）暂留为备用名，未刻。\n\n依园例（候选名留草稿、候主人共定；刻碑走 rank 闸）。候选：\n\n\n\n\n\n\n\n\n\n候选\nEN\n一义\n挂点\n\n\n\n\n读出算子\nreadout\n把隐式结构映为可观测量（矩阵/低维坐标）的算子 \\(\\Phi\\)\n探针一族之总名\n\n\n忠实读数\nfaithful readout\n满足 F1 敏感 / F2 稳定 / F3 可释的读数\n与「名义读数」相对\n\n\n本体—读数二分\nontology–readout split\n隐式结构（本体）与它的各类读出（像）之别\n统摄本文全篇\n\n\n\n\n刻碑格式拟（待主人定名后填）： 读出算子 readout｜把隐式结构映为可观测量的算子; self-attention 权重=机制读数, 协方差/PCA=统计读数｜**非此**：读数非本体, 不忠实之读数不配当判据｜候考据, 暂不刻"
+  },
+  {
+    "objectID": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#八-待裁-不做",
+    "href": "DRAFT-本体与读数-隐式结构的两类映射-1008.html#八-待裁-不做",
+    "title": "【草稿】本体与读数 · 隐式结构的两类映射",
+    "section": "",
+    "text": "已裁：名＝读出算子；已刻碑（GLOSSARY ＋ LEDGER）。\n待裁：余二候选「忠实读数 / 本体—读数二分」——是否并作母条下挂（探针、显影律、残余为王）？涉 rank 闸，候圈。\n不做：消融实验（主人已明示暂不动）；不上站、不改活页。\n\n\n\n\n若「PCA 是隐式结构的忠实读数」将来要立，证明责任在三处，按 F1–F3 逐条落：\n\nF1：消融/换种子使主轴显著转动的读数（候实验，暂不动）。\nF2：跨数据/种子/切片主干可复现（谱与主轴的稳定性读数）。\nF3（最难）：主成分轴与语义/功能轴的对齐度——即「统计轴升格为语义轴」的条件。\n\n三者皆是可检验命题，故「等定义不清」其实是「F3 未闭合」；本稿只把它说准并挂账，不越界。"
+  },
+  {
+    "objectID": "kaggle/25-pb19.html",
+    "href": "kaggle/25-pb19.html",
+    "title": "PB19 · 尺子该多细",
+    "section": "",
+    "text": "注记一句话\n\n\n\n模型内部可以压缩成一本「字典」。本案问：字典用多少「条目」（分辨率 r）才合适？ 太粗看不清，太细记不住。沿着 r=4 / 16 / 64 三档量，看结构复杂度谱长什么样。"
+  },
+  {
+    "objectID": "kaggle/25-pb19.html#为什么做这个",
+    "href": "kaggle/25-pb19.html#为什么做这个",
+    "title": "PB19 · 尺子该多细",
+    "section": "为什么做这个",
+    "text": "为什么做这个\n想给园里造一件量具——像尺子一样，能报出「这套语料的内部结构有多复杂」。 尺子的刻度（r）不能拍脑袋定，得试出规律。"
+  },
+  {
+    "objectID": "kaggle/25-pb19.html#怎么做的",
+    "href": "kaggle/25-pb19.html#怎么做的",
+    "title": "PB19 · 尺子该多细",
+    "section": "怎么做的",
+    "text": "怎么做的\n三个数据集（NBA / 通用 / 字母序）× 三档分辨率（r=4 / 16 / 64）， 各训一个「适配器」1，量其结构读数。"
+  },
+  {
+    "objectID": "kaggle/25-pb19.html#判据冻在-prereg",
+    "href": "kaggle/25-pb19.html#判据冻在-prereg",
+    "title": "PB19 · 尺子该多细",
+    "section": "判据（冻在 PREREG）",
+    "text": "判据（冻在 PREREG）\n\n三档分辨率下读数各自收敛 → 说明该分辨率是稳定的量具\n若 D3（字母序）也收敛 → 说明「字母序」本身是任务结构（序即数据律反噬！）——如实记，改判据重议\n籽漂移 &gt; 相邻档差 → 全部归零，先加籽再说话"
+  },
+  {
+    "objectID": "kaggle/25-pb19.html#看到了什么",
+    "href": "kaggle/25-pb19.html#看到了什么",
+    "title": "PB19 · 尺子该多细",
+    "section": "看到了什么",
+    "text": "看到了什么\n产物目录里留下了九个适配器（D1/D2/D3 × r4/r16/r64），说明训练全跑完了。 但——报告文件 report_pb19.json 没落盘。\n对比 run.py 第 94 行明确写着 json.dump(REPORT, open(f\"{OUT}/report_pb19.json\",\"w\"))， 说明那次 Kaggle 运行在最后落报告之前中断了。"
+  },
+  {
+    "objectID": "kaggle/25-pb19.html#诚实账",
+    "href": "kaggle/25-pb19.html#诚实账",
+    "title": "PB19 · 尺子该多细",
+    "section": "诚实账",
+    "text": "诚实账\n\n本案不能算「缺判词」，而是产物缺一半：适配器在，报告亡。\n判词需要报告的原始读数（收敛值、籽漂移），没有报告就无法判。\n与 PB23c 不同（那案是配对缺籽但读数在），本案是终局产物缺失。\n\n\n\n\n\n\n\n警告状态与建议\n\n\n\n本案属真需补射（非「读报告」）。 两条路： 1. 补射：重跑 kernel math4amd/pb19-mrd-r-ladder（会覆盖旧的适配器产物） 2. 捞日志：若 Kaggle 运行日志（out_err/kernel log）里印出了 REPORT_LINE::，可从中恢复读数，不必重跑\n⚠ 重跑前须先查第 2 条——能捞就不射，省 Kaggle 粮、也守住「封条先于运行」。"
+  },
+  {
+    "objectID": "kaggle/25-pb19.html#footnotes",
+    "href": "kaggle/25-pb19.html#footnotes",
+    "title": "PB19 · 尺子该多细",
+    "section": "脚注",
+    "text": "脚注\n\n\n适配器（adapter）：插在大模型上的一个小模块，只它微调、本体不动。和 LoRA 思路同源。↩︎"
+  },
+  {
+    "objectID": "kaggle/22-pb20.html",
+    "href": "kaggle/22-pb20.html",
+    "title": "PB20 · 顺序是不是最贫的一维",
+    "section": "",
+    "text": "注记一句话\n\n\n\n本案想量「顺序」这根尺子值多少钱。结果仪器先失灵了（测量闸门没达标）—— 但意外撞出一个金子般的发现：当年表自己就带着年份时，再动「呈现顺序」毫无作用。"
+  },
+  {
+    "objectID": "kaggle/22-pb20.html#为什么做这个",
+    "href": "kaggle/22-pb20.html#为什么做这个",
+    "title": "PB20 · 顺序是不是最贫的一维",
+    "section": "为什么做这个",
+    "text": "为什么做这个\n园里的一个主张：「顺序是最贫的一维」（序这根尺子能提供的结构信息最少）。 要量它，就设计几种不同的「顺序方案」，看模型的内部改动（ΔW1）随顺序而不同有多少。"
+  },
+  {
+    "objectID": "kaggle/22-pb20.html#怎么做的",
+    "href": "kaggle/22-pb20.html#怎么做的",
+    "title": "PB20 · 顺序是不是最贫的一维",
+    "section": "怎么做的",
+    "text": "怎么做的\n四种顺序处理（D0/D1/D2/D3），每种跑三个籽，量它引起的权重改动幅度 Ov。"
+  },
+  {
+    "objectID": "kaggle/22-pb20.html#看到了什么",
+    "href": "kaggle/22-pb20.html#看到了什么",
+    "title": "PB20 · 顺序是不是最贫的一维",
+    "section": "看到了什么",
+    "text": "看到了什么\n\n\n\n\n\n\n\n\n\n判据\n冻条\n三籽读数\n判\n\n\n\n\nH-a0 仪器闸\nOv(D0)≥0.98\n0.919 / 0.909 / 0.886\n☒ 破（闸没过）\n\n\nH-a1 边敏\n≥3×\n被本底淹没\n☒ 未立\n\n\nH-a2 阶梯\n应逐级递增\nD0≈D2≈D3(.92) &lt; D1(.98)\n反序！\n\n\n\n仪器闸一破，整案触发归零条款——不能拿不可信的尺子下结论。"
+  },
+  {
+    "objectID": "kaggle/22-pb20.html#但破局里出了金子",
+    "href": "kaggle/22-pb20.html#但破局里出了金子",
+    "title": "PB20 · 顺序是不是最贫的一维",
+    "section": "但破局里出了金子",
+    "text": "但破局里出了金子\nD1 反序（年表袋那组最钝感）不是噪声，是一个真道理：\n\n蓝月年表每句话自己就带着年份——顺序的信息在内容里，不在呈现顺序里。 所以撕掉呈现顺序，什么也没损失。\n\n推论：「序效应，必须以『内容自己不能自证顺序』为前提」。 这一条和早先春季语料钝感的旧案严丝合缝，挂上梁三新注脚。"
+  },
+  {
+    "objectID": "kaggle/22-pb20.html#下一步",
+    "href": "kaggle/22-pb20.html#下一步",
+    "title": "PB20 · 顺序是不是最贫的一维",
+    "section": "下一步",
+    "text": "下一步\n修仪器再射（PB20b 候单），三味药： 1. 本底扣除式：把测量基准的噪声扣掉 2. 长袋：句子数拉到 ≥100（30 句太短） 3. 内容自序对照臂：专门验证上面那条推论\n\n\n\n\n\n\n警告状态\n\n\n\n首读已判（原版「破」）；b 版修器弹待写待射。朱批「顺序是最贫的一维」不受累—— 本案否的是「此尺子此剂量下的边维增量」，不是「边维存在」。"
+  },
+  {
+    "objectID": "kaggle/22-pb20.html#footnotes",
+    "href": "kaggle/22-pb20.html#footnotes",
+    "title": "PB20 · 顺序是不是最贫的一维",
+    "section": "脚注",
+    "text": "脚注\n\n\nΔW：训练把模型的权重改了多少。改得越多，说明这个因素越被「当回事」。↩︎"
+  },
+  {
+    "objectID": "kaggle/27-p5.html",
+    "href": "kaggle/27-p5.html",
+    "title": "P5 · 上下文锚定",
+    "section": "",
+    "text": "注记一句话\n\n\n\n同一个词在不同上下文里意义不同。本案问：能不能找到一根线性的「方向杆」，加上它就把「浙江的图书馆」推成「广东的图书馆」，减掉就推回来？ 答案：推得动（1.000 满分），但推不出这个词本身——那根杆子其实长在「省名」上，不长在「图书馆」上。"
+  },
+  {
+    "objectID": "kaggle/27-p5.html#为什么做这个",
+    "href": "kaggle/27-p5.html#为什么做这个",
+    "title": "P5 · 上下文锚定",
+    "section": "为什么做这个",
+    "text": "为什么做这个\n「意义由上下文决定」是常识，但机制是什么？本案把「上下文锚定」从一句描述，逼成一个可动手的因果实验：如果能「加一根杆子就换义」，说明锚定是线性编码的——意义真的被存成了一根方向。"
+  },
+  {
+    "objectID": "kaggle/27-p5.html#怎么做的",
+    "href": "kaggle/27-p5.html#怎么做的",
+    "title": "P5 · 上下文锚定",
+    "section": "怎么做的",
+    "text": "怎么做的\n在 GPT-21 内部选中间一层2，读目标词那个位置3，做三件事：\n\n训：拿「浙江句 ↔︎ 广东句」当对照，学出一根「浙江→广东」的杆子 v\n推：给句子加上 α·v，看表示是否朝广东移动\n判：用一杆另训的探针4，看这句子现在像浙江还是像广东"
+  },
+  {
+    "objectID": "kaggle/27-p5.html#看到了什么",
+    "href": "kaggle/27-p5.html#看到了什么",
+    "title": "P5 · 上下文锚定",
+    "section": "看到了什么",
+    "text": "看到了什么\n\n\n\n\n\n\n\n\n\n判据\n考的什么\n三籽读数\n判\n\n\n\n\nH-p5-0\n杆子真的能推动（轴移动单调）\n三籽皆单调\n立\n\n\nH-p5-1\n换了义没有（主判）\n1.000 / 1.000 / 1.000\n立\n\n\nH-p5-2\n这根杆子能不能推另一个词（「美食」）\n0.000 / 0.000 / 0.000\n☒ 破\n\n\nH-p5-3\n对照组（春节句乱裂两半）\n0.133（≈随机）\n立（切不出杆子）\n\n\n器具自检\n随便一根乱杆子行不行\n0.000\n器净\n\n\n\n主判词：域切换方向存在、可因果干预，但不跨词型泛化—— 「图书馆」的杆子推得动「图书馆」，推不动「美食」。"
+  },
+  {
+    "objectID": "kaggle/27-p5.html#那个-0.000-有蹊跷",
+    "href": "kaggle/27-p5.html#那个-0.000-有蹊跷",
+    "title": "P5 · 上下文锚定",
+    "section": "那个 0.000 有蹊跷",
+    "text": "那个 0.000 有蹊跷\n全零太可疑，于是加了一诊断（未动冻稿）：量两根杆子的夹角。\n\n\n\n读哪里的位置\n「图书馆」杆 vs 「美食」杆 的余弦\n\n\n\n\n省名处（浙江/广东）\n+0.992 ← 几乎完全重合\n\n\n目标词处（图书馆/美食）\n+0.288 ← 各说各话\n\n\n\n读法：这根「换域杆」真实且共享，但它长在域标记（省名）上， 不在那个多义词自己的位置上。所以泛化失败，不是「杆子不存在」，是「找错了地方」。"
+  },
+  {
+    "objectID": "kaggle/27-p5.html#诚实账",
+    "href": "kaggle/27-p5.html#诚实账",
+    "title": "P5 · 上下文锚定",
+    "section": "诚实账",
+    "text": "诚实账\n\n语料是模板造的，证的是「可以换义」，不是现实里有多常见\n那个 0.000 里混了「读错位置」的成分——下一案直接从省名位读，预期翻回来\nGPT-2 太弱，满分与零分都有它的份；须换大模型复证\n换义 1.000 漂亮得可疑，须查干预后表示是否被推出流形（下一步诊）\n\n\n\n\n\n\n\n提示为什么这页进了「夜航」册\n\n\n\nP5 按设计不上 Kaggle（本机秒级、零云端粮）——本册实为园里实验合集， 「舱」栏的「本机」「不上舱」正记此意。\n\n\n\n\n\n\n\n\n注记状态\n\n\n\n已终判。冻本 PREREG_P5_domain_switch.md sha 5c865c75（先冻后用）； 正本 report_p5.json sha a6b3ebd7；verify_p5.py 实测退 0（判词逐籽可复现）。"
+  },
+  {
+    "objectID": "kaggle/27-p5.html#footnotes",
+    "href": "kaggle/27-p5.html#footnotes",
+    "title": "P5 · 上下文锚定",
+    "section": "脚注",
+    "text": "脚注\n\n\nGPT-2 是 2019 年的小模型（1.2 亿参数），本机 CPU 几秒跑完。零 Kaggle 粮。↩︎\n模型分 12 层，本案取中间第 6 层（冻稿先定的规矩）。↩︎\n读「图书馆」这三个字所对应的 token 处（不是句末）——这是本案对比 ima 原设计修正的一处。↩︎\n探针：另训的一个小分类器，专门判断「这表示属于哪个域」。它必须与 v 分开训，否则就是自证。↩︎"
+  },
+  {
+    "objectID": "kaggle/21-pb23c.html",
+    "href": "kaggle/21-pb23c.html",
+    "title": "PB23c · 十二把尺子",
+    "section": "",
+    "text": "注记一句话\n\n\n\n把测量「结构复杂度」的档位1从 3 档、6 档一路切到 12 档，看曲线会不会在某处突然拐弯（拐点＝结构跃迁的信号）。 结果：没有独高的拐点，是缓慢下沉的平线。"
+  },
+  {
+    "objectID": "kaggle/21-pb23c.html#为什么做这个",
+    "href": "kaggle/21-pb23c.html#为什么做这个",
+    "title": "PB23c · 十二把尺子",
+    "section": "为什么做这个",
+    "text": "为什么做这个\n园里有个悬案：概念空间会不会在某个年龄/规模上突然多出几维（结构跃迁）？ 粗切（3 档）看不见，所以一路加细——3 档、6 档、12 档，逐档看。"
+  },
+  {
+    "objectID": "kaggle/21-pb23c.html#怎么做的",
+    "href": "kaggle/21-pb23c.html#怎么做的",
+    "title": "PB23c · 十二把尺子",
+    "section": "怎么做的",
+    "text": "怎么做的\n按「距档」（不同距离区间）统计相似度的中位数，画出逐档曲线，找拐点。 判据冻在案里，用 polyfit（多项式拟合）±0.004 作正判。"
+  },
+  {
+    "objectID": "kaggle/21-pb23c.html#看到了什么",
+    "href": "kaggle/21-pb23c.html#看到了什么",
+    "title": "PB23c · 十二把尺子",
+    "section": "看到了什么",
+    "text": "看到了什么\n\n\n\n距档\n对数\n相似中位\n逐档差\n\n\n\n\n1\n30\n0.3827\n—\n\n\n2\n27\n0.3822\n−0.0005\n\n\n3\n24\n0.3617\n−0.0205\n\n\n…\n…\n…\n…\n\n\n10\n3\n0.3183\n−0.0112\n\n\n\n\n膝检：1→2 档落差只有 +0.0005，后段平均波动 0.0099，倍数 0.1×\n判定：无独高膝（要么是渐变，要么本就是平线）\n后段极差 0.0251，只有首档的 7% → 平线带\n\n三镜一像对照（同一问题的三种切割粒度）：\n\n\n\n仪器\n读数\nsha\n\n\n\n\n三带 PB23\n邻带 0.29–0.37\n2e9ed5be\n\n\n六带 PB23b\n一膝加平线\n0ef8984a\n\n\n十二带（本仪）\n平线\n—"
+  },
+  {
+    "objectID": "kaggle/21-pb23c.html#诚实账重要",
+    "href": "kaggle/21-pb23c.html#诚实账重要",
+    "title": "PB23c · 十二把尺子",
+    "section": "诚实账（重要）",
+    "text": "诚实账（重要）\n\n这是降格读数：那次云端运行只配对到 165/198（缺了籽，如实注明，不追改冻条）。\n但「配对即算即落盘」的设计生效了——缺籽也留下了 165 对有效数据； 上一版（v4）遇到同样故障时配对数是 0。\n补射缺籽是可选项（可单籽分弹），候主人裁决。\n\n\n\n\n\n\n\n警告状态\n\n\n\n本案舱已跑完、产物已落、判词已在草案里——只差①补一份正式冻稿②定谳。勿重跑。"
+  },
+  {
+    "objectID": "kaggle/21-pb23c.html#footnotes",
+    "href": "kaggle/21-pb23c.html#footnotes",
+    "title": "PB23c · 十二把尺子",
+    "section": "脚注",
+    "text": "脚注\n\n\n「带」（band）指按年龄/距离分的区间。三带=粗切三块，十二带=细切十二块。↩︎"
+  },
+  {
+    "objectID": "kaggle/20-pb26.html",
+    "href": "kaggle/20-pb26.html",
+    "title": "PB26 · 相似不等于可达",
+    "section": "",
+    "text": "注记一句话\n\n\n\n模型知道「玻璃」和「空气」长得很像，所以它一头撞上去。 本案证明：相似和可达是两回事，而且可以分开。"
+  },
+  {
+    "objectID": "kaggle/20-pb26.html#为什么做这个",
+    "href": "kaggle/20-pb26.html#为什么做这个",
+    "title": "PB26 · 相似不等于可达",
+    "section": "为什么做这个",
+    "text": "为什么做这个\n一个老问题：机器把「像」当成「能到」。麻雀看到的玻璃是透明的、和空气一样敞亮， 于是它飞过去——认知上没问题，物理上撞墙。\n园里要问的不是「麻雀笨不笨」，而是一个更狠的问题：\n\n只靠「相似度」打分的机器，必然会撞玻璃吗？"
+  },
+  {
+    "objectID": "kaggle/20-pb26.html#怎么做的",
+    "href": "kaggle/20-pb26.html#怎么做的",
+    "title": "PB26 · 相似不等于可达",
+    "section": "怎么做的",
+    "text": "怎么做的\n在一个受控的小世界里（本机跑，纯 numpy，零 GPU1），造出「玻璃诱饵」： 两个点看起来极其相似（余弦 0.92），但它们之间隔着一道过不去的墙。\n然后放三个裁判上场：\n\n纯相似裁判——只会比「像不像」\n可达裁判——手里有完整的世界地图，知道哪走得通\n学墙裁判——靠看例子，自己把墙找出来"
+  },
+  {
+    "objectID": "kaggle/20-pb26.html#看到了什么",
+    "href": "kaggle/20-pb26.html#看到了什么",
+    "title": "PB26 · 相似不等于可达",
+    "section": "看到了什么",
+    "text": "看到了什么\n\n\n\n\n\n\n\n\n\n判据\n考的什么\n三籽读数\n判\n\n\n\n\nH-r1\n纯相似裁判会不会撞玻璃\n误判 1.00 / 1.00 / 1.00\n立（全撞）\n\n\nH-r2\n可达裁判准不准\n误差 0 / 0 / 0\n过（它是作弊的上帝视角2）\n\n\nH-r3\n学墙裁判能不能自学出来\nF1 1.00 / 0.947 / 0.947\n立\n\n\n\n主判词：相似与可达可分离——三籽一致。\n白话：光看「像不像」的机器注定撞玻璃；而「能不能过去」是可以单独学出来的本事。"
+  },
+  {
+    "objectID": "kaggle/20-pb26.html#诚实账",
+    "href": "kaggle/20-pb26.html#诚实账",
+    "title": "PB26 · 相似不等于可达",
+    "section": "诚实账",
+    "text": "诚实账\n\n这是构造出来的例子，证明「可以分离」（存在性），不证明现实里一定这么分离。 真嵌入版（PB26b）还没做，就是要去量现实里玻璃诱饵到底有多常见。\n上帝视角那组不算真本事，只当分数线。"
+  },
+  {
+    "objectID": "kaggle/20-pb26.html#这一案的地位",
+    "href": "kaggle/20-pb26.html#这一案的地位",
+    "title": "PB26 · 相似不等于可达",
+    "section": "这一案的地位",
+    "text": "这一案的地位\n它是后面好几个案的地基：只要承认「相似 ≠ 可达」，就会追问—— 那「序」呢？「维」呢？这些结构是不是也可以和相似分开？PB16c、PB20、PB23c 都在往下挖。"
+  },
+  {
+    "objectID": "kaggle/20-pb26.html#footnotes",
+    "href": "kaggle/20-pb26.html#footnotes",
+    "title": "PB26 · 相似不等于可达",
+    "section": "脚注",
+    "text": "脚注\n\n\n零 GPU：不用云端显卡，自己电脑就能跑完。↩︎\n上帝视角（oracle）：直接把正确答案喂给它，用来做上限参照——不是真本事，是分数线。↩︎"
+  },
+  {
+    "objectID": "05-knowledge-graph-socks.html",
+    "href": "05-knowledge-graph-socks.html",
+    "title": "05 · 园记知识图谱（袜对版）",
+    "section": "",
+    "text": "注记袜对公理（本站图法第一律，主人 0927 裁定）\n\n\n\nA 出现，B 必在附近。园记五元（对话·问题·实验·结果·讨论）互为孪生： 每案必经五元成链，链上半缺即亮单袜（⚠）——图的价值不在存已有，在显其必有。 理论本体维与 triple-store 技术维两条，主人令存目购物车，本站优先。\ngraph LR\n  classDef dlg fill:#1f3a5f,color:#cfe3ff,stroke:#4a7bb0;\n  classDef q fill:#5b4a1f,color:#ffe9b0,stroke:#b09a4a;\n  classDef exp fill:#24512c,color:#cfeecf,stroke:#4a9a5b;\n  classDef res fill:#5f3712,color:#ffd9b0,stroke:#b07a3a;\n  classDef disc fill:#3d2b52,color:#e6d4ff,stroke:#8a6ab0;\n\n  D1[对话·高级隐喻母本]::dlg --&gt; Q1[问题·序是最贫的一维?]::q\n  D2[对话·建造对话 0927]::dlg --&gt; Q1\n  D3[对话·晾衣偶得 0927]::dlg --&gt; Q2[问题·图如何显其必有]::q\n  D4[对话·与AI助手 0927]::dlg --&gt; Q3[问题·洗澡水与孩子/购物车]::q\n  Q1 --&gt; E1[实验·PB21 伪序]::exp\n  Q1 --&gt; E2[实验·PB21b 刃病]::exp\n  Q1 --&gt; E3[实验·PB21c 链序终审]::exp\n  Q1 -.候射.-&gt; E4[实验·PB22 图序 单袜⚠]::exp\n  Q3 -.候弹.-&gt; E5[实验·PB21e/f 噪声与逆序]::exp\n  E1 --&gt; R1[结果·伪序判否]::res\n  E2 --&gt; R2[结果·刃病自供]::res\n  E3 --&gt; R3[结果·顺216&lt;随432&lt;逆∞]::res\n  R3 --&gt; C49[律·C49 信息租正交补]::res\n  C13[律·格拉姆-施密特 PK]::res --&gt; E1\n  R1 --&gt; S1[讨论·园记01]::disc\n  R2 --&gt; S2[讨论·园记02]::disc\n  R3 --&gt; S3[讨论·园记03]::disc\n  Q2 --&gt; S5[讨论·园记05 本页]::disc\n  Q3 --&gt; S4[讨论·园记04 战队旗舰]::disc\n  S4 --&gt; C49"
+  },
+  {
+    "objectID": "05-knowledge-graph-socks.html#袜对账缺孪生即欠账图自点名",
+    "href": "05-knowledge-graph-socks.html#袜对账缺孪生即欠账图自点名",
+    "title": "05 · 园记知识图谱（袜对版）",
+    "section": "袜对账（缺孪生即欠账，图自点名）",
+    "text": "袜对账（缺孪生即欠账，图自点名）\n\n\n\n\n\n\n\n\n物\n应有之孪\n状态\n\n\n\n\nPB22 封条（冻尺在先）\n实验结果\n⚠ 单袜（候「射」字——图例虚线）\n\n\nC49 律\n论文落点 §4.2\n⚠ 单袜（园记 04 有，正碑未刻）\n\n\n三问购物车 (e/f)\n对话源头 ✓ 实验 ✗\n半袜（车上，未结账）\n\n\n战队空间\n归档律 ✓ 五舰 ✓\n全袜\n\n\nLoRA 对话\n他图（主人令存目不入本链）\n挂账不挂图\n\n\n晾衣偶得\n图法第一律 ✓（即本页公理）\n全袜成对"
+  },
+  {
+    "objectID": "05-knowledge-graph-socks.html#边之分类图的代数结构袜子第四问落地",
+    "href": "05-knowledge-graph-socks.html#边之分类图的代数结构袜子第四问落地",
+    "title": "05 · 园记知识图谱（袜对版）",
+    "section": "边之分类（图的代数结构，袜子第四问落地）",
+    "text": "边之分类（图的代数结构，袜子第四问落地）\n\n链边（对话→问题→实验→结果→讨论）：因果序，不可逆——21c 律之自反应用：本站按因果序生长；\n袜边（孪生配对，图中以「应有」隐式存在）：对称不可分辨——判据↔︎判词、冻尺↔︎开火、结果↔︎sha；\n图例未画之对称群：C49 与 GS-PK 碑乃同家系（左右袜，无左右）；PB21/21b/21c 三案乃同题异序（同一问题的三次换序）——可换性已标：三案页可互链而序不可换（封条日期为骨）。 本页即第一只挂图的袜子：此后凡新案入匣，先补链再亮袜。"
   },
   {
     "objectID": "03-pb21c-causal-chain.html",
@@ -63,48 +826,6 @@
     "text": "六 · 边界 (丑话在册)\n单源线性 64 维玩具链, 判的是纯因果上限非普适保票; PB21 系三案齐封 (21 否伪序 / 21b 刃病自供 / 21c 终审)，原始 json 先 sha 后读, 判词 VERDICT_PB21c.md 在匣。\nγνῶθι σεαυτόν — 打乱即消融, 逆序即审讯。\n边：上游 02（刃病自供）→ 下游 00（本站因之立）。本案卷即园记开匣第一钉。"
   },
   {
-    "objectID": "05-knowledge-graph-socks.html",
-    "href": "05-knowledge-graph-socks.html",
-    "title": "05 · 园记知识图谱（袜对版）",
-    "section": "",
-    "text": "注记袜对公理（本站图法第一律，主人 0927 裁定）\n\n\n\nA 出现，B 必在附近。园记五元（对话·问题·实验·结果·讨论）互为孪生： 每案必经五元成链，链上半缺即亮单袜（⚠）——图的价值不在存已有，在显其必有。 理论本体维与 triple-store 技术维两条，主人令存目购物车，本站优先。\ngraph LR\n  classDef dlg fill:#1f3a5f,color:#cfe3ff,stroke:#4a7bb0;\n  classDef q fill:#5b4a1f,color:#ffe9b0,stroke:#b09a4a;\n  classDef exp fill:#24512c,color:#cfeecf,stroke:#4a9a5b;\n  classDef res fill:#5f3712,color:#ffd9b0,stroke:#b07a3a;\n  classDef disc fill:#3d2b52,color:#e6d4ff,stroke:#8a6ab0;\n\n  D1[对话·高级隐喻母本]::dlg --&gt; Q1[问题·序是最贫的一维?]::q\n  D2[对话·建造对话 0927]::dlg --&gt; Q1\n  D3[对话·晾衣偶得 0927]::dlg --&gt; Q2[问题·图如何显其必有]::q\n  D4[对话·与AI助手 0927]::dlg --&gt; Q3[问题·洗澡水与孩子/购物车]::q\n  Q1 --&gt; E1[实验·PB21 伪序]::exp\n  Q1 --&gt; E2[实验·PB21b 刃病]::exp\n  Q1 --&gt; E3[实验·PB21c 链序终审]::exp\n  Q1 -.候射.-&gt; E4[实验·PB22 图序 单袜⚠]::exp\n  Q3 -.候弹.-&gt; E5[实验·PB21e/f 噪声与逆序]::exp\n  E1 --&gt; R1[结果·伪序判否]::res\n  E2 --&gt; R2[结果·刃病自供]::res\n  E3 --&gt; R3[结果·顺216&lt;随432&lt;逆∞]::res\n  R3 --&gt; C49[律·C49 信息租正交补]::res\n  C13[律·格拉姆-施密特 PK]::res --&gt; E1\n  R1 --&gt; S1[讨论·园记01]::disc\n  R2 --&gt; S2[讨论·园记02]::disc\n  R3 --&gt; S3[讨论·园记03]::disc\n  Q2 --&gt; S5[讨论·园记05 本页]::disc\n  Q3 --&gt; S4[讨论·园记04 战队旗舰]::disc\n  S4 --&gt; C49"
-  },
-  {
-    "objectID": "05-knowledge-graph-socks.html#袜对账缺孪生即欠账图自点名",
-    "href": "05-knowledge-graph-socks.html#袜对账缺孪生即欠账图自点名",
-    "title": "05 · 园记知识图谱（袜对版）",
-    "section": "袜对账（缺孪生即欠账，图自点名）",
-    "text": "袜对账（缺孪生即欠账，图自点名）\n\n\n\n\n\n\n\n\n物\n应有之孪\n状态\n\n\n\n\nPB22 封条（冻尺在先）\n实验结果\n⚠ 单袜（候「射」字——图例虚线）\n\n\nC49 律\n论文落点 §4.2\n⚠ 单袜（园记 04 有，正碑未刻）\n\n\n三问购物车 (e/f)\n对话源头 ✓ 实验 ✗\n半袜（车上，未结账）\n\n\n战队空间\n归档律 ✓ 五舰 ✓\n全袜\n\n\nLoRA 对话\n他图（主人令存目不入本链）\n挂账不挂图\n\n\n晾衣偶得\n图法第一律 ✓（即本页公理）\n全袜成对"
-  },
-  {
-    "objectID": "05-knowledge-graph-socks.html#边之分类图的代数结构袜子第四问落地",
-    "href": "05-knowledge-graph-socks.html#边之分类图的代数结构袜子第四问落地",
-    "title": "05 · 园记知识图谱（袜对版）",
-    "section": "边之分类（图的代数结构，袜子第四问落地）",
-    "text": "边之分类（图的代数结构，袜子第四问落地）\n\n链边（对话→问题→实验→结果→讨论）：因果序，不可逆——21c 律之自反应用：本站按因果序生长；\n袜边（孪生配对，图中以「应有」隐式存在）：对称不可分辨——判据↔︎判词、冻尺↔︎开火、结果↔︎sha；\n图例未画之对称群：C49 与 GS-PK 碑乃同家系（左右袜，无左右）；PB21/21b/21c 三案乃同题异序（同一问题的三次换序）——可换性已标：三案页可互链而序不可换（封条日期为骨）。 本页即第一只挂图的袜子：此后凡新案入匣，先补链再亮袜。"
-  },
-  {
-    "objectID": "00-knowledge-graph.html",
-    "href": "00-knowledge-graph.html",
-    "title": "00 · 知识图谱晨议——网站为图之显影",
-    "section": "",
-    "text": "注记晨十时三问三答\n\n\n\n问 笔记网站怎么建？ 答 不建文件夹，建小图：一案一节点，判语为有向边，导航即遍历。 问 与 cora-atlas 碑体何异？ 答 碑体刻律（C 号论断账），园记存案（实验三件套：冻尺→开火→判词）；碑是峰，案是矿脉，园记即矿道图。 问 与拓扑图（topography）关系？ 答 同源一心——概念空间的几何化：topography 画 C 号群山，园记画案卷溪流，皆以邻接代目录（neighbors-as-API 旧律的站点化）。"
-  },
-  {
-    "objectID": "00-knowledge-graph.html#设计裁定先冻",
-    "href": "00-knowledge-graph.html#设计裁定先冻",
-    "title": "00 · 知识图谱晨议——网站为图之显影",
-    "section": "设计裁定（先冻）",
-    "text": "设计裁定（先冻）\n\n页码前缀=生长序（00→03），站首自动即时间轴；\n每页末必挂「上游/下游节点」两链——图性由页脚边保证；\n结果展示：数字不许说谎（今晨图尺比例之纠为立例第一案），曲线图必带冻尺出处；\n发布：main 存源，docs 存 render 产物，Pages 走 gh-pages 分支——与对话册同法。"
-  },
-  {
-    "objectID": "00-knowledge-graph.html#知识图谱-网站的三级抽象",
-    "href": "00-knowledge-graph.html#知识图谱-网站的三级抽象",
-    "title": "00 · 知识图谱晨议——网站为图之显影",
-    "section": "知识图谱 → 网站的三级抽象",
-    "text": "知识图谱 → 网站的三级抽象\n概念空间 (Gärdenfors) → 园账 C/G/P-B 三系 (cora-atlas) → 园记：案卷小图（本站） —— 同一种「区域-邻接」几何第三次建站，即「结构即智能」自举第三例。"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "园记 · 案匣",
@@ -117,6 +838,55 @@
     "title": "园记 · 案匣",
     "section": "谱系（按生长序）",
     "text": "谱系（按生长序）\n\n\n\n节点\n案\n一句判语\n\n\n\n\n00\n知识图谱晨议\n设计裁定录：为何此站是图不是表\n\n\n01\nPB21 伪序案\n下标之序=伪序；鼓包归 C47 不归序\n\n\n02\nPB21b 刃病案\n全空间净化之误自供——刃杀律非数据杀律\n\n\n03\nPB21c 因果链终审\n序须内容之序：顺216&lt;随432&lt;逆∞，主判 2/3 过\n\n\n04\n战队空间·旗舰：购物车与事后福尔摩斯\n非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形\n\n\n\n05 | 知识图谱·袜对版 | 五元成链，半缺亮单袜——图显其必有 |\n站成于园笔，源匣在 github.com/math4mad/chora/experiments/pb21-dimgrowth。凡成案必入图，凡入图必挂链。"
+  },
+  {
+    "objectID": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html",
+    "href": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html",
+    "title": "【草稿】译本即隐喻 · 英中两版 Gärdenfors 的结构保持",
+    "section": "",
+    "text": "状态：草稿 · 已标记 · 候主人读完一并执行（三案见末节，未动正账） 挂点：bin/remind.sh 一条 open（📖 Gärdenfors 读毕 · 一并执行三案） 落笔：2026-10-04 · 园笔\n\n\n\n\n\n摘录载体：ima 笔记《Reading： Conceptual Spaces The Geometry of Thought by Peter Gärdenfors》（docid 7512021717226185）\n最新一条停在：「概念是通过一组必要且充分的特性来定义的。因此，某一经典概念的所有实例具有同等地位」\n释义：主人正站在经典概念观（必要充分特性）门槛上——即 Gärdenfors 紧接着要拆掉的那一版。\n\n\n\n\n\n「中文的页面和英文的页面数不一样，而且语言不同，但内部结构和意义仍保持。」\n\n判定：有意思 — 但不止有意思。这是这本书在教的那件事，被这本书的中译本自己演示了一遍。\n\n\n\n\n英 → 中：语言换了（token 全换）· 页数换了（坐标换了）\n但域的结构没动：章→节→命题的顺序、依存、概念各自归哪个域，全保住\nGärdenfors 给隐喻/类比的判据 = 域间的映射，保持域内结构，而不要求坐标相同\n译本正是此判据的一个实例：译者换掉坐标轴（页、词），保住域内关系网\n故「对得太齐」不是巧合，它就是翻译之所以可能的条件本身\n\n\n\n\n\n\n\n\n\n\n\n术语\n挂法\n\n\n\n\n同读异写 same-read different-write（序重排写方向, 读子空间不动 0.997/0.31 · E16c）\n同一律，尺度放大一整本：异写（换语言·换页码）而读子空间不动\n\n\n绕行定律 detour law\n可一并挂\n\n\n08·对齐工程（术语冲突可计算判据）\n见下节两极\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n现象\n表面\n读子空间\n后果\n\n\n\n\n术语冲突（standalone／no lesson／no pitch, 0928 视频 09:14）\n同 token，双区域\n失配，须人肉挂牌\n\n\n\n翻译（英→中 Gärdenfors）\n异 token，同区域\n结构保，白送\n\n\n\n\n两极同轴。0928 视频卡在第一端；本书演示第二端。 Gärdenfors 的判据（凸性）：同一 token 在域里点出的两块区域并起来若为凸，则为「自然的多义」而非冲突；不凸，才是真冲突。 → 这正是 08·对齐工程 所缺的那把尺。\n\n\n\n\nnotes/ 短记《译本即隐喻：英中两版 Gärdenfors 的结构保持》（照 0928 对账记体例；本文件即是其草稿）\n挂进 08·对齐工程 候补列，把「翻译 = 反向实例」作对照锚\n术语碑加候选一条：异写同读 / translation-as-isomorphism（候考据，暂不刻）\n\n\n执行时须：术语碑候候选（不刻）；08 候补列改动走 rank 闸；短记入 notes/（.qmd 方入站，本 .md 不入导航，安全）。"
+  },
+  {
+    "objectID": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#读数指针进度即摘录",
+    "href": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#读数指针进度即摘录",
+    "title": "【草稿】译本即隐喻 · 英中两版 Gärdenfors 的结构保持",
+    "section": "",
+    "text": "摘录载体：ima 笔记《Reading： Conceptual Spaces The Geometry of Thought by Peter Gärdenfors》（docid 7512021717226185）\n最新一条停在：「概念是通过一组必要且充分的特性来定义的。因此，某一经典概念的所有实例具有同等地位」\n释义：主人正站在经典概念观（必要充分特性）门槛上——即 Gärdenfors 紧接着要拆掉的那一版。"
+  },
+  {
+    "objectID": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#一-主人的观察",
+    "href": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#一-主人的观察",
+    "title": "【草稿】译本即隐喻 · 英中两版 Gärdenfors 的结构保持",
+    "section": "",
+    "text": "「中文的页面和英文的页面数不一样，而且语言不同，但内部结构和意义仍保持。」\n\n判定：有意思 — 但不止有意思。这是这本书在教的那件事，被这本书的中译本自己演示了一遍。"
+  },
+  {
+    "objectID": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#二-核心命题译本即隐喻",
+    "href": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#二-核心命题译本即隐喻",
+    "title": "【草稿】译本即隐喻 · 英中两版 Gärdenfors 的结构保持",
+    "section": "",
+    "text": "英 → 中：语言换了（token 全换）· 页数换了（坐标换了）\n但域的结构没动：章→节→命题的顺序、依存、概念各自归哪个域，全保住\nGärdenfors 给隐喻/类比的判据 = 域间的映射，保持域内结构，而不要求坐标相同\n译本正是此判据的一个实例：译者换掉坐标轴（页、词），保住域内关系网\n故「对得太齐」不是巧合，它就是翻译之所以可能的条件本身"
+  },
+  {
+    "objectID": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#三-与园中既有术语的挂点",
+    "href": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#三-与园中既有术语的挂点",
+    "title": "【草稿】译本即隐喻 · 英中两版 Gärdenfors 的结构保持",
+    "section": "",
+    "text": "术语\n挂法\n\n\n\n\n同读异写 same-read different-write（序重排写方向, 读子空间不动 0.997/0.31 · E16c）\n同一律，尺度放大一整本：异写（换语言·换页码）而读子空间不动\n\n\n绕行定律 detour law\n可一并挂\n\n\n08·对齐工程（术语冲突可计算判据）\n见下节两极"
+  },
+  {
+    "objectID": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#四-两极对称真正可用的那把尺",
+    "href": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#四-两极对称真正可用的那把尺",
+    "title": "【草稿】译本即隐喻 · 英中两版 Gärdenfors 的结构保持",
+    "section": "",
+    "text": "现象\n表面\n读子空间\n后果\n\n\n\n\n术语冲突（standalone／no lesson／no pitch, 0928 视频 09:14）\n同 token，双区域\n失配，须人肉挂牌\n\n\n\n翻译（英→中 Gärdenfors）\n异 token，同区域\n结构保，白送\n\n\n\n\n两极同轴。0928 视频卡在第一端；本书演示第二端。 Gärdenfors 的判据（凸性）：同一 token 在域里点出的两块区域并起来若为凸，则为「自然的多义」而非冲突；不凸，才是真冲突。 → 这正是 08·对齐工程 所缺的那把尺。"
+  },
+  {
+    "objectID": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#五-候执行三案主人读毕点头即做",
+    "href": "DRAFT-译本即隐喻-英中两版Gärdenfors-结构保持.html#五-候执行三案主人读毕点头即做",
+    "title": "【草稿】译本即隐喻 · 英中两版 Gärdenfors 的结构保持",
+    "section": "",
+    "text": "notes/ 短记《译本即隐喻：英中两版 Gärdenfors 的结构保持》（照 0928 对账记体例；本文件即是其草稿）\n挂进 08·对齐工程 候补列，把「翻译 = 反向实例」作对照锚\n术语碑加候选一条：异写同读 / translation-as-isomorphism（候考据，暂不刻）\n\n\n执行时须：术语碑候候选（不刻）；08 候补列改动走 rank 闸；短记入 notes/（.qmd 方入站，本 .md 不入导航，安全）。"
   },
   {
     "objectID": "04-shopping-cart-post-holmes.html",
@@ -152,5 +922,40 @@
     "title": "04 · 购物车与事后福尔摩斯（战队·旗舰页）",
     "section": "与园的边",
     "text": "与园的边\n上游 03（其结论被外部镜照出盲角）→ 下游：三问即 PB21d/e/f 候弹单；「双向同步+webhook」入基建候单；OneNote 选项卡=本站页组的对岸投影。 结构即智能之第四次自举：连「怎么呈现结构」本身也成了结构。"
+  },
+  {
+    "objectID": "library-entrance-proposal/proposal.html",
+    "href": "library-entrance-proposal/proposal.html",
+    "title": "园记 · Garden Notes",
+    "section": "",
+    "text": "尊敬的图书馆同仁：\n您好。冒昧来信，就开馆时段入馆拥挤的现象提一点小建议，供参考。\n【现象】 开馆瞬间读者集中到达，“安检”与”入馆”两道环节在同一处串行进行；安检速率低于到达速率，遂在入口形成挤兑。\n【建议：把两段解耦 —— 安检前置 · 篮子预存】 1. 在馆外（或入口内侧）设”预存区”，备一批带编号的篮子／周转箱； 2. 开门前的等候时段，读者将包、电脑放入篮子，登记并领取对号牌，由馆方提前完成安检并加一次性封条； 3. 开馆后，读者凭对号牌取回篮子、走”已安检”通道直接入馆，无需二次安检； 4. 篮子数量按早高峰早到读者数配置；封条破损者重新安检。\n【为什么有效】 把读者本来就要站的”等候时间”，换成”已安检”。安检由”开门一刻”前移到”等候时段”；开门瞬间的瓶颈由安检（不可并行）转为取篮（可并行），入馆吞吐可明显提升。其本质是排队论中的”前置预处理／缓冲”，与机场提前托运、景区存包即游同理。\n【要点】 对号牌防错拿；一次性封条保安检效力；代管财物宜明确责任界定。\n若馆方有意，本人愿就细节进一步配合。打扰了，谢谢！\n敬祝 安好 一位读者"
+  },
+  {
+    "objectID": "grill-with-docs-概念空间对齐-0928.html",
+    "href": "grill-with-docs-概念空间对齐-0928.html",
+    "title": "grill-with-docs = 概念空间对齐的工程实践（0928 视频对账记）",
+    "section": "",
+    "text": "源件：~/Downloads/AI 编程范式变革：从 grill-me 到领域驱动的 grill-with-docs 深度剖析 - 002 - 双语字幕.mp4（bilibili「牛不知道」转载 Matt Pocock 原声，15:16） 文字稿：OCR 烧录英文字幕 → external/grill-with-docs-视频文字稿-EN-0928.txt（314 句 / 2873 词，与 15 分钟口速吻合；中文轨本机 Vision 模型残缺，弃） 园笔按：主人直觉「这就是我们的概念空间对齐问题」——证实，且视频提供了罕见的现场标本。\n\n\n\n\ngrill-me 四句真言走红（每日一百封反馈），但 Matt 自感三桩不满：agent 啰嗦时他要提醒”早有术语了”；他自己啰嗦的表述不被挑战；好的共享语言没落盘，每会话重讲一遍领域。\n解法 = 最薄文档层：Eric Evans DDD 的 ubiquitous language——CONTEXT.md 纯词汇表（无实现细节）+ ADR 三门槛（难撤销 / 缺上下文会困惑 / 真实取舍，三者齐备才立档）。\n现场标本（09:14，全片命门）：agent 在拷问中挂牌——“你说 standalone video，但词表定义是 no lesson，你的新用法混入了 no pitch——术语冲突，哪个算数？” 主人被迫在 A/B 框架间表态，一表态，UI 分区、删除级联、pitchId 元数据全被牵动。会话尾 CONTEXT.md 当场更新。\n收益三件：回复变简（token 少）、思考轨迹也变简（“AI 用语言对自己思考”）、说话方式=代码结构 → 可导航性。Matt 原话：“it magically aligned with the thoughts I had before the words came out of my brain.”\n分工律：无代码库用 grill-me（纯决策树拷问），有代码库用 grill-with-docs；grill-me 移入 productivity（有人用它写悼词）。\n\n\n\n\n\n\n\n\n\n\n\n\n视频机制\n园中对应\n注\n\n\n\n\nstandalone 术语冲突挂牌\n同 token 在两个概念空间指向不同区域\n即 MaxSim 失配的人类版；他们靠人肉察觉，我们可算法化\n\n\nCONTEXT.md 词汇表\n术语碑 GLOSSARY / 冻册判据\n共享坐标系一旦落定，通信从”描述”降为”点名”\n\n\nADR 三门槛\n判据先冻后用 + LEDGER\n“难撤销+反直觉+真取舍” ≈ 我们的”值得刻石”标准\n\n\n挑战用户用词（grilling 的 working-if 条）\n园笔当值之责：主人用词与冻册冲突时当场对撞\n我们已有此律，视频证明它值钱\n\n\n“查事实归 AI，决策归用户”\n提醒账批复通道（☑=朱批）\n完全同构\n\n\n“对齐后 token 消耗降”\n义素经济学的实证外证\n语言=压缩的概念索引；共享词表=字典训练\n\n\n\n\n\n\n\ngrill-garden skill 自铸案升级：grilling 轮次 × 提醒账批复 × ADR→LEDGER/PREREG 格式——视频已把算法讲透，桥接件我们全有。\n试刀场仍荐 04 案判据冻册（γ=3.0、FIFO 600、lock 阈值三处沉默假设）。\n研究侧彩蛋：他们的”术语冲突检测”是人肉+提示词；我们若用概念空间给冲突做个可计算判据（同 token 双空间区域重叠度），正是 Chora 理论的正牌用武之地——可挂骨架页为一列候补（08 · 对齐工程?）。"
+  },
+  {
+    "objectID": "grill-with-docs-概念空间对齐-0928.html#一视频主干摘",
+    "href": "grill-with-docs-概念空间对齐-0928.html#一视频主干摘",
+    "title": "grill-with-docs = 概念空间对齐的工程实践（0928 视频对账记）",
+    "section": "",
+    "text": "grill-me 四句真言走红（每日一百封反馈），但 Matt 自感三桩不满：agent 啰嗦时他要提醒”早有术语了”；他自己啰嗦的表述不被挑战；好的共享语言没落盘，每会话重讲一遍领域。\n解法 = 最薄文档层：Eric Evans DDD 的 ubiquitous language——CONTEXT.md 纯词汇表（无实现细节）+ ADR 三门槛（难撤销 / 缺上下文会困惑 / 真实取舍，三者齐备才立档）。\n现场标本（09:14，全片命门）：agent 在拷问中挂牌——“你说 standalone video，但词表定义是 no lesson，你的新用法混入了 no pitch——术语冲突，哪个算数？” 主人被迫在 A/B 框架间表态，一表态，UI 分区、删除级联、pitchId 元数据全被牵动。会话尾 CONTEXT.md 当场更新。\n收益三件：回复变简（token 少）、思考轨迹也变简（“AI 用语言对自己思考”）、说话方式=代码结构 → 可导航性。Matt 原话：“it magically aligned with the thoughts I had before the words came out of my brain.”\n分工律：无代码库用 grill-me（纯决策树拷问），有代码库用 grill-with-docs；grill-me 移入 productivity（有人用它写悼词）。"
+  },
+  {
+    "objectID": "grill-with-docs-概念空间对齐-0928.html#二对表园学为何这就是我们的问题",
+    "href": "grill-with-docs-概念空间对齐-0928.html#二对表园学为何这就是我们的问题",
+    "title": "grill-with-docs = 概念空间对齐的工程实践（0928 视频对账记）",
+    "section": "",
+    "text": "视频机制\n园中对应\n注\n\n\n\n\nstandalone 术语冲突挂牌\n同 token 在两个概念空间指向不同区域\n即 MaxSim 失配的人类版；他们靠人肉察觉，我们可算法化\n\n\nCONTEXT.md 词汇表\n术语碑 GLOSSARY / 冻册判据\n共享坐标系一旦落定，通信从”描述”降为”点名”\n\n\nADR 三门槛\n判据先冻后用 + LEDGER\n“难撤销+反直觉+真取舍” ≈ 我们的”值得刻石”标准\n\n\n挑战用户用词（grilling 的 working-if 条）\n园笔当值之责：主人用词与冻册冲突时当场对撞\n我们已有此律，视频证明它值钱\n\n\n“查事实归 AI，决策归用户”\n提醒账批复通道（☑=朱批）\n完全同构\n\n\n“对齐后 token 消耗降”\n义素经济学的实证外证\n语言=压缩的概念索引；共享词表=字典训练"
+  },
+  {
+    "objectID": "grill-with-docs-概念空间对齐-0928.html#三园笔进言候圈点",
+    "href": "grill-with-docs-概念空间对齐-0928.html#三园笔进言候圈点",
+    "title": "grill-with-docs = 概念空间对齐的工程实践（0928 视频对账记）",
+    "section": "",
+    "text": "grill-garden skill 自铸案升级：grilling 轮次 × 提醒账批复 × ADR→LEDGER/PREREG 格式——视频已把算法讲透，桥接件我们全有。\n试刀场仍荐 04 案判据冻册（γ=3.0、FIFO 600、lock 阈值三处沉默假设）。\n研究侧彩蛋：他们的”术语冲突检测”是人肉+提示词；我们若用概念空间给冲突做个可计算判据（同 token 双空间区域重叠度），正是 Chora 理论的正牌用武之地——可挂骨架页为一列候补（08 · 对齐工程?）。"
   }
 ]

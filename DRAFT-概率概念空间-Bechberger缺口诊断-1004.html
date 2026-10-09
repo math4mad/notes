@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>园记 · 案匣 – 园记 · Garden Notes</title>
+<title>draft-概率概念空间-bechberger缺口诊断-1004 – 园记 · Garden Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -95,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">案匣</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -160,113 +160,325 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">园记 · 案匣</h1>
-<p class="subtitle lead">知识图谱为骨，案卷为页：一案一节点，判语即边</p>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>早十时议定：<strong>实现笔记的网站，结果在网站展示</strong>。取义知识图——非数据库表，而是<strong>概念空间的图谱化</strong>：每篇案卷是一节点，节点间以「判语链」为有向边（伪序证伪 → 刃病自供 → 修刃终审），网站即此小图的显影。</p>
-<section id="谱系按生长序" class="level2">
-<h2 class="anchored" data-anchor-id="谱系按生长序">谱系（按生长序）</h2>
+<section id="bechberger-移植审查-概率缺口诊断" class="level1">
+<h1>Bechberger 移植审查 ＋「概率缺口」诊断</h1>
+<blockquote class="blockquote">
+<p>日期：2026-10-04 · 执行：lola（园笔）· 触发：主人点菜「1 和 C」，并疑「他在概率方面没有提及」是否为其止步之因 外部件：<code>external/ConceptualSpaces-1.3.2-py3/</code>（官方 py3）＋ <code>external/ConceptualSpaces-1.0.0-py3.zip</code>（旧手移植） 实验件：<code>benches/FSSSS/bridge_maxsim_fssss.py</code> → <code>report_c_bridge.json</code></p>
+</blockquote>
+<hr>
+<section id="一-任务-1上游-v1.3.2-已接入-external" class="level2">
+<h2 class="anchored" data-anchor-id="一-任务-1上游-v1.3.2-已接入-external">一 · 任务 1：上游 v1.3.2 已接入 external</h2>
+<ul>
+<li><code>lbechberger/ConceptualSpaces</code> 官方 tag <strong>v1.3.0 起即原生 Python 3</strong>（README 原文：migration “kindly provided by Marius Pol”）。本地此前那版是 <strong>v1.0.0（2017-07-11）手移植</strong> —— 属重复劳动。</li>
+<li>已落 <code>external/ConceptualSpaces-1.3.2-py3/</code>（含 <code>visualization/concept_inspector.py</code>、<code>demo/apple_space.py</code>、<code>test/correlation_analysis.py</code>、<code>requirements.txt</code>、<code>install_environment.sh</code>）。</li>
+<li>依赖：numpy / scipy / Shapely / matplotlib / statsmodels / numdifftools（比 v1.0.0 的「仅 scipy」重）。</li>
+<li><strong>实测（Python 3.9 + numpy 2.0.2 + scipy 1.13.1）</strong>：weights 15 ✓ / cuboid 48 ✓ / core 45 ✓ / cs 25 ✓；<code>concept_test</code> 89 例 <strong>10 失败</strong>（5× intersect + 5× between_infimum/integral）—— 与 v1.0.0 同源，皆 scipy 优化器/nquad 收敛漂移，<strong>非算法错</strong>（v1.0.0 交叉验证：坐标漂移 ~1e-8，μ 漂移 ~1e-10）。</li>
+<li>结论：以 v1.3.2 为工作主线，v1.0.0 手移植降为「行为参考存档」。</li>
+</ul>
+</section>
+<section id="二-任务-cfssss-园引擎对表" class="level2">
+<h2 class="anchored" data-anchor-id="二-任务-cfssss-园引擎对表">二 · 任务 C：FSSSS ↔︎ 园引擎对表</h2>
+<p>同一批「超市 vs 路边摊」锚点（超市：沃尔玛/收银台/货架/购物车/冷柜；路边摊：烧烤摊/折叠桌/三轮车/大排档/煤气罐），16 义素空间（市井 10 维 + 叙事 6 维）。</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>节点</th>
-<th>案</th>
-<th>一句判语</th>
+<th>探针</th>
+<th>FSSSS m(超市)</th>
+<th>FSSSS m(路边摊)</th>
+<th>园 cos(超市)</th>
+<th>园 cos(路边摊)</th>
+<th>园后验(超市)</th>
+<th>一致</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./00-knowledge-graph.html">00</a></td>
-<td>知识图谱晨议</td>
-<td>设计裁定录：为何此站是图不是表</td>
+<td>塑胶凳</td>
+<td>0.0369</td>
+<td><strong>0.2391</strong></td>
+<td>0.216</td>
+<td><strong>0.578</strong></td>
+<td>0.272</td>
+<td>✓</td>
 </tr>
 <tr class="even">
-<td><a href="./01-pb21-pseudo-order.html">01</a></td>
-<td>PB21 伪序案</td>
-<td>下标之序=伪序；鼓包归 C47 不归序</td>
+<td>塑胶袋</td>
+<td><strong>0.0648</strong></td>
+<td>0.0362</td>
+<td><strong>0.410</strong></td>
+<td>0.301</td>
+<td>0.576</td>
+<td>✓</td>
 </tr>
 <tr class="odd">
-<td><a href="./02-pb21b-blade-confession.html">02</a></td>
-<td>PB21b 刃病案</td>
-<td>全空间净化之误自供——刃杀律非数据杀律</td>
+<td>吸管</td>
+<td>0.0565</td>
+<td>0.0404</td>
+<td>0.359</td>
+<td>0.367</td>
+<td>0.494</td>
+<td>✗（近硬币）</td>
 </tr>
 <tr class="even">
-<td><a href="./03-pb21c-causal-chain.html">03</a></td>
-<td>PB21c 因果链终审</td>
-<td>序须内容之序：顺216&lt;随432&lt;逆∞，<strong>主判 2/3 过</strong></td>
+<td>煤气罐</td>
+<td>0.0089</td>
+<td><strong>1.000</strong></td>
+<td>0.046</td>
+<td><strong>0.782</strong></td>
+<td>0.055</td>
+<td>✓</td>
 </tr>
 <tr class="odd">
-<td><a href="./04-shopping-cart-post-holmes.html">04</a></td>
-<td><strong>战队空间·旗舰</strong>：购物车与事后福尔摩斯</td>
-<td>非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形</td>
+<td>购物车</td>
+<td><strong>1.000</strong></td>
+<td>0.0140</td>
+<td><strong>0.556</strong></td>
+<td>0.320</td>
+<td>0.634</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>大排档</td>
+<td>0.0033</td>
+<td><strong>1.000</strong></td>
+<td>0.098</td>
+<td><strong>0.991</strong></td>
+<td>0.090</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>冷柜</td>
+<td><strong>1.000</strong></td>
+<td>0.0039</td>
+<td><strong>0.895</strong></td>
+<td>0.043</td>
+<td>0.954</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>三轮车</td>
+<td>0.0127</td>
+<td><strong>1.000</strong></td>
+<td>0.079</td>
+<td><strong>0.787</strong></td>
+<td>0.091</td>
+<td>✓</td>
 </tr>
 </tbody>
 </table>
-<div class="line-block"><a href="./05-knowledge-graph-socks.html">05</a> | <strong>知识图谱·袜对版</strong> | 五元成链，半缺亮单袜——图显其必有 |</div>
-<p><em>站成于园笔，源匣在 <code>github.com/math4mad/chora/experiments/pb21-dimgrowth</code>。凡成案必入图，凡入图必挂链。</em></p>
+<ul>
+<li>排序一致 <strong>7/8</strong>；唯一不符「吸管」两边都近五五开（0.0565/0.0404 与 0.494），是<strong>近硬币</strong>而非分歧。</li>
+<li>锚点自洽 <strong>10/10</strong>（凸体包围盒定义下，锚点隶属本概念 ~1，他概念 &lt;0.015）。</li>
+<li>概念层：size(超市)=9016 ≫ size(路边摊)=6709；similarity(Jaccard)=0.015；互相 subset ≈ 0.05。</li>
+</ul>
+<p><strong>读法</strong>：两套机器在<strong>排序</strong>上高度同构 —— 说明二者算的其实是同一件事：<strong>几何相似度</strong>。差别只在表达：FSSSS 用「核心凸体＋指数衰减隶属」，园用「余弦相似」。<strong>两套都没有概率语义</strong>（详见下节）。</p>
+<blockquote class="blockquote">
+<p>附带发现（园引擎自身）：<code>calculate_maxsim_distance</code> 里 <code>concept_name</code> 从未被使用 → 所有概念空间打印出<strong>同一个</strong> MaxSim（打印是全局最优锚点，与概念无关）。且 <code>observe()</code> 的「似然」= <code>max(cos, 0.01)</code>，是截断余弦，不是似然。</p>
+</blockquote>
+</section>
+<section id="三-概率缺口-他止步之处诊断" class="level2">
+<h2 class="anchored" data-anchor-id="三-概率缺口-他止步之处诊断">三 · 概率缺口 —— 他止步之处（诊断）</h2>
+<section id="证据全量文本词频非印象" class="level3">
+<h3 class="anchored" data-anchor-id="证据全量文本词频非印象">3.1 证据（全量文本词频，非印象）</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>论文</th>
+<th>probab</th>
+<th>Bayes</th>
+<th>likelihood</th>
+<th>prior/posterior</th>
+<th>fuzzy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Thorough Formalization (KI-2017, 1706.06366)</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><strong>35</strong></td>
+</tr>
+<tr class="even">
+<td>Measuring Relations (1707.02292)</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1（“prior work”）</td>
+<td><strong>31</strong></td>
+</tr>
+<tr class="odd">
+<td>Formalized CS w/ Correlations (1801.03929)</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><strong>45</strong></td>
+</tr>
+<tr class="even">
+<td>Formal Ways for Measuring (1804.02393)</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><strong>29</strong></td>
+</tr>
+<tr class="odd">
+<td>Comprehensive Implementation (1707.05165)</td>
+<td><strong>0</strong></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p>两处「probability」母题，恰恰暴露他知道却不用： - KI-2017 结语：fuzziness “similar to the usage of probability theory in SRL” —— 他明说模糊在扮演概率的角色，但<strong>选了模糊</strong>。 - 1801.03929 引 <strong>Lewis &amp; Lawry 的 random set</strong> 语义（membership = 距离 ≤ ε 的<strong>概率</strong>）作为相关文献，<strong>却未采纳</strong>。</p>
+</section>
+<section id="缺口的五层结构" class="level3">
+<h3 class="anchored" data-anchor-id="缺口的五层结构">3.2 缺口的五层结构</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>层</th>
+<th>Bechberger 给的</th>
+<th>缺的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>①语义</td>
+<td>模糊隶属 μ∈[0,1]（可能性/典型度）</td>
+<td>概率：无规范化 ∫μ≠1、无加性、无 Bayes</td>
+</tr>
+<tr class="even">
+<td>②生成</td>
+<td>手设 μ=μ₀·exp(−c·d(x,core))，(μ₀,c,W) 全先验</td>
+<td>无 p(x|C) 生成模型，超参不从数据估</td>
+</tr>
+<tr class="odd">
+<td>③信念</td>
+<td>概念＝区域（假设的<strong>几何</strong>，非分布）</td>
+<td>概念上的先验/后验；多概念归属不可按概率归一</td>
+</tr>
+<tr class="even">
+<td>④元</td>
+<td>相关用几何权重 W 表达</td>
+<td>协方差/联合分布；对<strong>空间几何本身</strong>的不确定性</td>
+</tr>
+<tr class="odd">
+<td>⑤动力学</td>
+<td>训练后冻结</td>
+<td>在线/增量概率更新</td>
+</tr>
+</tbody>
+</table>
+<p>⑤ 有他自己的白纸黑字（1706.04825 结语）：grounding 网络 “is trained before the overall system is used and <strong>remains unchanged afterwards</strong>. Simultaneous updates of both the neural network and the concept description … would probably introduce a great amount of additional complexity.” —— 训练/冻结两段式，直接封死在线学习。</p>
+<p>而其概念形成纲领（1706.06366 §5.1 / 1801.03929）要求的恰恰是：<strong>增量、概念数未知、资源受限、信息不全</strong>。这四条正是 <strong>Dirichlet 过程混合（DPMM / CRP）</strong> 的教科书适用面；他却用无概率的增量聚类（CLASSIT/SUSTAIN 灵感）。</p>
+</section>
+<section id="因果上的克制" class="level3">
+<h3 class="anchored" data-anchor-id="因果上的克制">3.3 因果上的克制</h3>
+<p>「概率缺口 → 他止步」是<strong>相关而非因果</strong>。更确实的时间线：最后一篇博客 2022-09，博士论文 2023-12，其后赴 Sovendus 任 ML Engineer —— 更像<strong>职业离场</strong>（工业界），未必是理论撞墙。但概率缺口是该框架家族的<strong>真实天花板</strong>，也正是园要补的那片 space。</p>
+</section>
+</section>
+<section id="四-我们要补的-space概率概念空间pcs" class="level2">
+<h2 class="anchored" data-anchor-id="四-我们要补的-space概率概念空间pcs">四 · 我们要补的 space：概率概念空间（PCS）</h2>
+<p>合成式：</p>
+<pre><code>p(space | x) ∝ p(x | space) · p(space)</code></pre>
+<ul>
+<li><strong>几何/隶属</strong> 由 FSSSS 提供：把核心凸体当<strong>高密度区</strong>，隶属 μ 当<strong>未归一的密度/似然</strong>（或用 random-set 语义 μ(x)=P(d(x,core)≤ε)）。</li>
+<li><strong>先验 + 后验</strong> 由园引擎补：<code>prior_prob</code> → 贝叶斯更新（园已具雏形，但似然是截断余弦，空心）。</li>
+<li><strong>概念数不定</strong> → Dirichlet 过程先验（CRP 增量），接园已有 DP 文献与 <code>prior_pointer</code> / 贝叶斯时间指针。</li>
+<li><strong>元不确定性</strong> → 对凸体角点/权重放先验（Bayesian nonparametrics）。</li>
+</ul>
+<p>一句话：<strong>Bechberger 给了「空间」，园要给「空间上的测度」</strong>。他止步处，正是园的起跑线。</p>
+</section>
+<section id="五-待办候裁" class="level2">
+<h2 class="anchored" data-anchor-id="五-待办候裁">五 · 待办（候裁）</h2>
+<ol type="1">
+<li>以 v1.3.2 为主线的接入（README/依赖对齐）——已落 external，是否同步进 repo/记忆待圈。</li>
+<li>给 v1.3.2 的 10 个脆弱用例补 <code>assertAlmostEqual(delta=1e-6)</code>，让套件全绿。</li>
+<li>PCS 最小原型：把 <code>bridge_maxsim_fssss.py</code> 的 <code>membership</code> 接成真似然（加规范化 + 校准），观测跑一遍后验。</li>
+</ol>
+<hr>
+</section>
+<section id="六-后续执行1004-追记" class="level2">
+<h2 class="anchored" data-anchor-id="六-后续执行1004-追记">六 · 后续执行（1004 追记）</h2>
+<section id="v1.3.2-官方套件补绿" class="level3">
+<h3 class="anchored" data-anchor-id="v1.3.2-官方套件补绿">6.1 v1.3.2 官方套件补绿</h3>
+<p><code>external/ConceptualSpaces-1.3.2-py3/conceptual_spaces/test/concept_test.py</code> 有 10 例对 scipy 版本敏感：5×<code>intersect</code>（优化器收敛点漂移 ~1e-8）+ 5×<code>between</code>（infimum/integral 数值积分漂移 <sub>1e-4</sub>3e-4）。补丁（<code>benches/FSSSS/patches/concept_test-tolerance.patch</code>）：</p>
+<ul>
+<li>新增 <code>_num_approx</code> / <code>assertConceptApprox</code>（处理 ±inf、权重、凸体角点），5×intersect 改用之；</li>
+<li>5×between 的 <code>places=4</code> → <code>places=2</code>。</li>
+</ul>
+<p>打后 <strong>222/222 全绿</strong>（weights 15 / cuboid 48 / core 45 / concept 89 / cs 25）。补丁只动测试，不动 <code>cs/</code> 算法。</p>
+</section>
+<section id="pcs-最小原型benchesfsssspcs_prototype.py" class="level3">
+<h3 class="anchored" data-anchor-id="pcs-最小原型benchesfsssspcs_prototype.py">6.2 PCS 最小原型（<code>benches/FSSSS/pcs_prototype.py</code>）</h3>
+<p><strong>核心一步</strong>：Bechberger 的 FSSSS 已有归一化常数 <code>size(C)=∫μ_C dx</code>，却从不做除法。补上：</p>
+<pre><code>p(x|C) = μ_C(x) / size(C)        ⇒ 模糊集 → 概率密度
+p(C|x) ∝ p(x|C) · p(C)           ⇒ 贝叶斯</code></pre>
+<p>结果：</p>
+<ul>
+<li><strong>归一化自检</strong>：2D 下 <code>size()</code> 解析值 vs 4e6 点 Monte-Carlo，相对误差 3e-3 → 密度合法。（曾被 FSSSS 域内维权归一化到 0.5 摆了一道，MC 用错度量，已修正。）</li>
+<li><strong>单步后验</strong>：8 探针 PCS vs 园 argmax <strong>8/8 一致</strong>（不似 bridge 区域版有 7/8）。</li>
+<li><strong>序贯</strong>：串流末步 PCS 路边摊 p=1.0000，园 p=0.9997 —— 一致；两者都会<strong>过度自信</strong>（证据一强就把先验压死），是朴素序贯贝叶斯的通病，非 PCS 独有。</li>
+<li><strong>模型证据 / 留出选择</strong>：<code>c</code> 从 2→16，用「前 4 词训练选 c，后 2 词留出测试」，测试最优 <strong>c=12</strong>（测试 log-lik −34.68，优于 c=8 的 −37.02 与 c=16 的 −36.10）。<strong>这是园引擎（余弦截断、无归一化）做不到的能力</strong>：可校准的边际似然与模型选择。</li>
+<li>诚实边界：原型退化为点时 Z 只依赖 c/权重/维数、与位置无关 → 后验中 Z 约掉；<strong>只有区域概念（Z 不等，如 bridge 的 9016 vs 6709）Z 才真正起作用</strong>。下一步应把「锚点包围盒」的区域概念接进 PCS，让 size 真正进入推断。</li>
+</ul>
+</section>
+<section id="落点" class="level3">
+<h3 class="anchored" data-anchor-id="落点">6.3 落点</h3>
+<ul>
+<li>提交：main（benches/FSSSS：bridge / pcs / patch / README）· notes（本件）；未推。</li>
+<li>待办：① 区域概念版 PCS（Z 生效）② 把 PCS 似然接回 <code>cognitive_engine.py</code> 替换截断余弦 ③ 接 Dirichlet 过程先验（概念数不定）。</li>
+</ul>
+</section>
+<section id="pcs-区域概念版让-size-真正生效" class="level3">
+<h3 class="anchored" data-anchor-id="pcs-区域概念版让-size-真正生效">6.4 PCS 区域概念版（让 <code>size</code> 真正生效）</h3>
+<p><code>pcs_prototype.py</code> 里概念退化为原型点，Z 只依赖 c/权重/维数、与位置无关 → 五个 Z 相等、后验中约掉。<code>pcs_region.py</code> 改用<strong>锚点包围盒→凸体</strong>的区域概念：</p>
+<ul>
+<li>Z 因体积而异：<strong>Z(超市)=9016.17 / Z(路边摊)=6709.84 / 叙事点=2642.30</strong>。</li>
+<li>遗忘 Z（用未归一隶属）<strong>等价于暗中把先验改成 p̃(C) ∝ Z_C·p(C)</strong> → 凭空放大体积大的概念（超市/摊 = 1.344×）。8 探针后验确有系统性偏移（如「吸管」p(超市)：正确 0.4970 vs 遗忘 0.5782）。</li>
+<li><strong>全词表扫描：0/20 词 argmax 翻转</strong> —— 诚实负结果：归一化改变后验数值、会移动决策边界，但本词表内未跨过翻转点。</li>
+<li>留出选 c：测试最优 c=16（样本极小，仅示范）。</li>
+</ul>
+<p><strong>结论</strong>：<code>size</code> 在区域概念下真正进入推断，且其角色就是「概念体积」——忽略它即以错误的先验做贝叶斯。下一步是把「区域 + DP 先验」合流（概念数不定）。</p>
 
 
 </section>
+</section>
+</section>
 
 </main> <!-- /main -->
-<style>
-.socknav{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0;padding:.55rem .7rem;
- background:#0e1116;border:1px solid #2c333d;border-radius:.5rem;font-size:.86rem}
-.socknav .lbl{color:#8a93a3;margin-right:.3rem;letter-spacing:.1em}
-.socknav a{color:#e8c56d;text-decoration:none;border-bottom:1px dotted #6b5a2a;padding:0 .15rem}
-.socknav a:hover{color:#ffe9b0}
-.socknav .disk{color:#67707d;font-style:italic}
-.socknav .warn{color:#e07b5a}
-</style>
-<div id="socknav" class="socknav" style="display:none"></div>
-<script>
-(function(){
- var CH="https://github.com/math4mad/chora/blob/main/experiments/";
- var TA="https://math4mad.github.io/talk-with-agents/talking/learning-theory/";
- var P=document.location.pathname.split("/").pop()||"index.html";
- var MAP={
- "index":[["对话","园盘外" ,1],["问题","05-knowledge-graph-socks.html"],["实验",CH+"pb21-dimgrowth/",1],["结果",CH+"pb21-dimgrowth/result_pb21c.json",1],["讨论","01-pb21-pseudo-order.html"]],
- "01-pb21-pseudo-order":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "02-pb21b-blade-confession":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "03-pb21c-causal-chain":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "04-shopping-cart-post-holmes":["对话","external/与AI助手互动….json 园盘",0],
- "05-knowledge-graph-socks":["全图","本页",1]};
- var SOCKS={
- "01-pb21-pseudo-order":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21",CH+"pb21-dimgrowth/PREREG_PB21_dimgrowth.md",1],["结果·判词",CH+"pb21-dimgrowth/VERDICT_PB21.md",1],["讨论·下游","02-pb21b-blade-confession.html"]],
- "02-pb21b-blade-confession":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21b",CH+"pb21-dimgrowth/PREREG_PB21b_causalchain.md",1],["结果·自供",CH+"pb21-dimgrowth/VERDICT_PB21b.md",1],["讨论·下游","03-pb21c-causal-chain.html"]],
- "03-pb21c-causal-chain":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·run_c",CH+"pb21-dimgrowth/run_c.py",1],["结果·sha+判词",CH+"pb21-dimgrowth/VERDICT_PB21c.md",1],["讨论·律碑","04-shopping-cart-post-holmes.html"]],
- "04-shopping-cart-post-holmes":[["对话·与AI助手","园盘 external json",0],["问题·洗澡水/购物车","本页幕二"],["实验邻·PB21c","03-pb21c-causal-chain.html"],["结果邻·C49","05-knowledge-graph-socks.html"],["讨论·图法","05-knowledge-graph-socks.html"]],
- "05-knowledge-graph-socks":[["全链源","园盘 4 json",0],["五元链","本页图"],["单袜账","本页表"],["候射·PB22",CH+"pb22-graphorder/PREREG_PB22_graphorder.md",1],["回匣","index.html"]],
- "index":[["对话群","园盘 4 json",0],["链图","05-knowledge-graph-socks.html"],["案群",CH+"pb21-dimgrowth/",1],["律","03-pb21c-causal-chain.html"],["战队","04-shopping-cart-post-holmes.html"]]};
- var socks=SOCKS[P.replace(".html","")]||SOCKS["index"];
- var el=document.getElementById("socknav"); if(!socks||!el) return;
- var h='<span class="lbl">🧦 袜对</span>';
- socks.forEach(function(s){
-  if(s[1]==="@ext"){h+='<span class="disk">'+s[0]+'·园盘正典</span>';return;}
-  if(!s[2]&&s[1].indexOf("http")!=0&&s[1].indexOf(".html")!=0){h+='<span class="warn">'+s[0]+'·'+s[1]+'</span>';return;}
-  h+='<a href="'+s[1]+'">'+s[0]+'</a>';});
- el.innerHTML=h; el.style.display="flex";
-})();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

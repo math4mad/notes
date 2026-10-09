@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>园记 · 案匣 – 园记 · Garden Notes</title>
+<title>draft-本体与读数-隐式结构的两类映射-1008 – 园记 · Garden Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -74,6 +74,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -95,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">案匣</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -160,113 +189,277 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">园记 · 案匣</h1>
-<p class="subtitle lead">知识图谱为骨，案卷为页：一案一节点，判语即边</p>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>早十时议定：<strong>实现笔记的网站，结果在网站展示</strong>。取义知识图——非数据库表，而是<strong>概念空间的图谱化</strong>：每篇案卷是一节点，节点间以「判语链」为有向边（伪序证伪 → 刃病自供 → 修刃终审），网站即此小图的显影。</p>
-<section id="谱系按生长序" class="level2">
-<h2 class="anchored" data-anchor-id="谱系按生长序">谱系（按生长序）</h2>
+<section id="草稿本体与读数-隐式结构的两类映射" class="level1">
+<h1>【草稿】本体与读数 · 隐式结构的两类映射</h1>
+<blockquote class="blockquote">
+<p><strong>状态</strong>：草稿 · 纯概念 · <strong>候主人共定「名」</strong> —— 未动正账、未扩站、未碰实验（主人原话：「消融实验暂时不动」） <strong>落笔</strong>：2026-10-08 · 园笔（lola） <strong>缘起</strong>：主人读 <code>external/我在看Build a Large Language Model (From Scratch)…mhtml</code>（全文）后自陈—— 「模型主成分分析可能也是隐式结构的映射，但是到底怎么定义，还不太清楚。」 <strong>上游</strong>：talk-with-agents 页《从注意力对齐到「结构即智能」》（<code>talking/learning-theory/structure-carries-meaning.qmd</code>）第四节「注意力权重矩阵 ≠ 协方差矩阵」。 <strong>标注</strong>：<strong>【记录】</strong>＝有据可复现；<strong>【推断】</strong>＝有据不确；<strong>【未知】</strong>＝留白。</p>
+</blockquote>
+<hr>
+<section id="一-问题的形状卡在映射一词的两义" class="level2">
+<h2 class="anchored" data-anchor-id="一-问题的形状卡在映射一词的两义">一 · 问题的形状：卡在「映射」一词的两义</h2>
+<p>主人这句之所以「定义不清」，园笔以为<strong>不在 PCA，而在「映射」一词扛了两件事</strong>：</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>节点</th>
-<th>案</th>
-<th>一句判语</th>
+<th>义</th>
+<th>读法</th>
+<th>例</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./00-knowledge-graph.html">00</a></td>
-<td>知识图谱晨议</td>
-<td>设计裁定录：为何此站是图不是表</td>
+<td><strong>义一</strong></td>
+<td>结构<strong>本身是一张映射</strong>（函数）</td>
+<td>训练把输入分布映到输出分布；结构＝那个函数</td>
 </tr>
 <tr class="even">
-<td><a href="./01-pb21-pseudo-order.html">01</a></td>
-<td>PB21 伪序案</td>
-<td>下标之序=伪序；鼓包归 C47 不归序</td>
-</tr>
-<tr class="odd">
-<td><a href="./02-pb21b-blade-confession.html">02</a></td>
-<td>PB21b 刃病案</td>
-<td>全空间净化之误自供——刃杀律非数据杀律</td>
-</tr>
-<tr class="even">
-<td><a href="./03-pb21c-causal-chain.html">03</a></td>
-<td>PB21c 因果链终审</td>
-<td>序须内容之序：顺216&lt;随432&lt;逆∞，<strong>主判 2/3 过</strong></td>
-</tr>
-<tr class="odd">
-<td><a href="./04-shopping-cart-post-holmes.html">04</a></td>
-<td><strong>战队空间·旗舰</strong>：购物车与事后福尔摩斯</td>
-<td>非鱼，乃星河战队——五舰同龙骨：决策在证据流中成形</td>
+<td><strong>义二</strong></td>
+<td>我们用来<strong>观察结构的一次读数/一张图</strong></td>
+<td>PCA 给出的低维坐标图</td>
 </tr>
 </tbody>
 </table>
-<div class="line-block"><a href="./05-knowledge-graph-socks.html">05</a> | <strong>知识图谱·袜对版</strong> | 五元成链，半缺亮单袜——图显其必有 |</div>
-<p><em>站成于园笔，源匣在 <code>github.com/math4mad/chora/experiments/pb21-dimgrowth</code>。凡成案必入图，凡入图必挂链。</em></p>
+<p>主人说的是<strong>义二</strong>。把义二说清，定义就浮出来了。</p>
+</section>
+<section id="二-核心裁定本体-vs-读数" class="level2">
+<h2 class="anchored" data-anchor-id="二-核心裁定本体-vs-读数">二 · 核心裁定：本体 vs 读数</h2>
+<blockquote class="blockquote">
+<p><strong>隐式结构是本体（不可直接观测）；PCA、注意力权重矩阵、探针读数，都是它的「读出」——同一本体的不同像。</strong></p>
+</blockquote>
+<p>这正好<strong>接住</strong>主人上次被园笔拆开的直觉：第四节说「注意力权重矩阵 ≠ 协方差矩阵」，那是<strong>算子不同</strong>；但它们相像的地方，是<strong>本体</strong>。主人这次把两个矩阵在更高一层重新合起来——<strong>合得对</strong>，只是要换一个名字：不是同一个矩阵，是<strong>同一个结构的两个读数</strong>。</p>
+</section>
+<section id="三-四层推断" class="level2">
+<h2 class="anchored" data-anchor-id="三-四层推断">三 · 四层【推断】</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>层</th>
+<th>是什么</th>
+<th>例子</th>
+<th>性质</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>L0 本体</strong></td>
+<td>训练注入的隐式关系结构</td>
+<td>token / 表示之间的关系</td>
+<td><strong>不可直接观测</strong></td>
+</tr>
+<tr class="even">
+<td><strong>L1 机制读数（运行时）</strong></td>
+<td>生成/使用表示时算出的关系矩阵</td>
+<td>self-attention 权重 <span class="math inline">\(A=\mathrm{softmax}(QK^\top/\sqrt d)\)</span></td>
+<td>有向、行归一、逐层、动态</td>
+</tr>
+<tr class="odd">
+<td><strong>L2 统计读数（事后）</strong></td>
+<td>对表示/参数做二阶统计</td>
+<td>协方差 <span class="math inline">\(\Sigma=\mathbb E[xx^\top]-\mu\mu^\top\)</span></td>
+<td>对称、全局、二阶、静态</td>
+</tr>
+<tr class="even">
+<td><strong>L3 坐标图</strong></td>
+<td><span class="math inline">\(\Sigma\)</span> 的谱分解给出的低维基</td>
+<td>PCA 主轴 <span class="math inline">\(U\Lambda U^\top\)</span></td>
+<td>低维、可复现，轴为线性组合</td>
+</tr>
+</tbody>
+</table>
+<p>于是主人的命题可坐实为：</p>
+<blockquote class="blockquote">
+<p><strong>PCA 是隐式结构的一个「统计读数」（L2→L3）；self-attention 权重是同一本体的「机制读数」（L1）。二者不是一回事，却都是同一本体的像。</strong></p>
+</blockquote>
+</section>
+<section id="四-定义草案读出算子-phi-与忠实读数三条件" class="level2">
+<h2 class="anchored" data-anchor-id="四-定义草案读出算子-phi-与忠实读数三条件">四 · 定义草案：读出算子 <span class="math inline">\(\Phi\)</span> 与「忠实读数」三条件</h2>
+<p>设隐式结构 <span class="math inline">\(\mathbb S\)</span> ＝ 训练注入的、token/表示之间的关系。一个<strong>读出算子</strong> <span class="math inline">\(\Phi\)</span> 把它映为可观测量 <span class="math inline">\(M=\Phi(\mathbb S)\)</span>（矩阵或低维坐标）。称 <span class="math inline">\(\Phi\)</span> 是 <span class="math inline">\(\mathbb S\)</span> 的<strong>忠实读数</strong>，当且仅当：</p>
+<ul>
+<li><strong>F1 敏感</strong>：结构变则读数变（消融 / 换种子 / 换语料 → <span class="math inline">\(M\)</span> 显著变）；</li>
+<li><strong>F2 稳定</strong>：读数不是噪声（跨数据 / 种子 / 切片，谱与主轴可复现）；</li>
+<li><strong>F3 可释</strong>：读数与显式意义对齐（<span class="math inline">\(M\)</span> 的轴/分量能被语义或功能解释）。</li>
+</ul>
+<p>照一照三个读数：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>读数</th>
+<th>F1 敏感</th>
+<th>F2 稳定</th>
+<th>F3 可释</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span> 注意力权重</td>
+<td>强</td>
+<td>中</td>
+<td><strong>常失败</strong></td>
+<td>正合上游页第一节：NMT 注意力对齐系统性出错</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Sigma\)</span> 协方差</td>
+<td>中</td>
+<td>强</td>
+<td><strong>存疑</strong></td>
+<td>谱稳定，但轴未必可释</td>
+</tr>
+<tr class="odd">
+<td>PCA 坐标（=<span class="math inline">\(\Sigma\)</span> 谱图）</td>
+<td>中</td>
+<td>强</td>
+<td><strong>存疑</strong></td>
+<td>见下节卡点</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一个副产</strong>：F3 的失败，正是「注意力对齐不能当有效性判据」的<strong>结构侧解释</strong>——<strong>不忠实的读数，不配当判据</strong>。上游页第一节与这里对上了。</p>
+</section>
+<section id="五-卡点统计轴-语义轴为何到底怎么定义尚未闭合" class="level2">
+<h2 class="anchored" data-anchor-id="五-卡点统计轴-语义轴为何到底怎么定义尚未闭合">五 · 卡点：统计轴 ≠ 语义轴（为何「到底怎么定义」尚未闭合）</h2>
+<p>F3 是悬着的那一条。要点：</p>
+<ul>
+<li><strong>PCA 的轴是线性组合</strong>，未必是被 Gärdenfors 意义上「可分、有义」的<strong>概念维度</strong>。</li>
+<li>故「PCA 是隐式结构的（忠实）映射」若要当<strong>命题</strong>，就得论证（或假定）<strong>谱的主轴可被语义/功能解释</strong>——这是<strong>实质命题，定义白送不了</strong>。</li>
+<li>主人那句「<strong>大特征值＝基座、中段＝泛化</strong>」【推断】，正是一条 <strong>F3 型功能假说</strong>（对谱的功能假说）——它有内容，也正因为它有内容才需要检验；<strong>现在不碰消融</strong>，故只挂账。</li>
+</ul>
+<p><strong>结论</strong>：定义能给到 L0–L3 四层 + F1–F3 三条件；<strong>闭合不了的是「统计轴何时升格为语义轴」</strong>——这恰是园要补的那片 space。</p>
+</section>
+<section id="六-与园中既有术语的挂点" class="level2">
+<h2 class="anchored" data-anchor-id="六-与园中既有术语的挂点">六 · 与园中既有术语的挂点</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>既有术语</th>
+<th>挂法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>探针 probe</strong>（输入＝触发器非指令，点亮区域读激活）</td>
+<td>「读出算子」是探针一族的<strong>总名</strong>：探针是<strong>介入式</strong>读数，PCA 是<strong>无介入统计式</strong>读数，注意力权重是<strong>机制式</strong>读数——三类，同一本体</td>
+</tr>
+<tr class="even">
+<td><strong>显影律</strong>（迟疑即后验显影）</td>
+<td>一个<strong>置信度读数</strong>：把内部后验读成「迟疑的语法」，是 F3 成功的一个范例</td>
+</tr>
+<tr class="odd">
+<td><strong>残余为王 / 逐槽施密特 / 逐维对决</strong></td>
+<td>这些是<strong>带判据的读数算子</strong>（以正交残余定席位），是 <span class="math inline">\(\Phi\)</span> 加了一层「怎么比」</td>
+</tr>
+<tr class="even">
+<td><strong>同读异写</strong>（读子空间不动 0.997/0.31）</td>
+<td>「读数对变换不敏感」的一枚实测；正是 F2/F3 的交汇样本</td>
+</tr>
+<tr class="odd">
+<td><strong>倒灌律</strong>（先验/后验不分层 ⇒ 不可审计）</td>
+<td>与本节同病：<strong>读数不可分层，则不可审计</strong>；「名义读出 vs 忠实读数」之别</td>
+</tr>
+<tr class="even">
+<td><strong>④元层</strong>（Bechberger 缺口：协方差/联合分布 ＋ 对几何本身的不确定性）</td>
+<td>主人这条直觉正站在缺口上：把几何权重 <span class="math inline">\(W\)</span> 升级成<strong>概率/协方差</strong>，即从「几何」走向「分布」——本文 L2 正是那一层</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="七-术语碑候选名名已定读出算子已刻碑" class="level2">
+<h2 class="anchored" data-anchor-id="七-术语碑候选名名已定读出算子已刻碑">七 · 术语碑候选名（<strong>名已定：读出算子；已刻碑</strong>）</h2>
+<blockquote class="blockquote">
+<p><strong>主人 1008 圈定：「读出算子」。</strong> 并令<strong>先刻碑、错误也留痕</strong>（仓律第五：候勘误另刻，不追改）。 已落 <code>cora-atlas/GLOSSARY.md</code> 立条 ＋ <code>cora-atlas/LEDGER.md</code> 落账（承上游页第四节；碑体站重建后镜像 ima）。 余二候选（忠实读数 / 本体—读数二分）暂留为<strong>备用名</strong>，未刻。</p>
+</blockquote>
+<p>依园例（候选名留草稿、候主人共定；刻碑走 rank 闸）。候选：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>候选</th>
+<th>EN</th>
+<th>一义</th>
+<th>挂点</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>读出算子</strong></td>
+<td>readout</td>
+<td>把隐式结构映为可观测量（矩阵/低维坐标）的算子 <span class="math inline">\(\Phi\)</span></td>
+<td>探针一族之总名</td>
+</tr>
+<tr class="even">
+<td><strong>忠实读数</strong></td>
+<td>faithful readout</td>
+<td>满足 F1 敏感 / F2 稳定 / F3 可释的读数</td>
+<td>与「名义读数」相对</td>
+</tr>
+<tr class="odd">
+<td><strong>本体—读数二分</strong></td>
+<td>ontology–readout split</td>
+<td>隐式结构（本体）与它的各类读出（像）之别</td>
+<td>统摄本文全篇</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>刻碑格式拟（待主人定名后填）： <code>读出算子 readout｜把隐式结构映为可观测量的算子; self-attention 权重=机制读数, 协方差/PCA=统计读数｜**非此**：读数非本体, 不忠实之读数不配当判据｜候考据, 暂不刻</code></p>
+</blockquote>
+</section>
+<section id="八-待裁-不做" class="level2">
+<h2 class="anchored" data-anchor-id="八-待裁-不做">八 · 待裁 / 不做</h2>
+<ul>
+<li><strong>已裁</strong>：名＝<strong>读出算子</strong>；已刻碑（GLOSSARY ＋ LEDGER）。</li>
+<li><strong>待裁</strong>：余二候选「忠实读数 / 本体—读数二分」——是否并作<strong>母条</strong>下挂（探针、显影律、残余为王）？涉 rank 闸，候圈。</li>
+<li><strong>不做</strong>：消融实验（主人已明示暂不动）；不上站、不改活页。</li>
+</ul>
+<hr>
+<section id="附-证明责任挂账不现在动" class="level3">
+<h3 class="anchored" data-anchor-id="附-证明责任挂账不现在动">附 · 证明责任（挂账，不现在动）</h3>
+<p>若「PCA 是隐式结构的忠实读数」将来要立，证明责任在三处，按 F1–F3 逐条落：</p>
+<ol type="1">
+<li><strong>F1</strong>：消融/换种子使主轴显著转动的读数（候实验，暂不动）。</li>
+<li><strong>F2</strong>：跨数据/种子/切片主干可复现（谱与主轴的稳定性读数）。</li>
+<li><strong>F3</strong>（最难）：主成分轴与语义/功能轴的对齐度——即「统计轴升格为语义轴」的条件。</li>
+</ol>
+<p>三者皆是<strong>可检验命题</strong>，故「等定义不清」其实是「F3 未闭合」；本稿只把它<strong>说准并挂账</strong>，不越界。</p>
 
 
 </section>
+</section>
+</section>
 
 </main> <!-- /main -->
-<style>
-.socknav{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0;padding:.55rem .7rem;
- background:#0e1116;border:1px solid #2c333d;border-radius:.5rem;font-size:.86rem}
-.socknav .lbl{color:#8a93a3;margin-right:.3rem;letter-spacing:.1em}
-.socknav a{color:#e8c56d;text-decoration:none;border-bottom:1px dotted #6b5a2a;padding:0 .15rem}
-.socknav a:hover{color:#ffe9b0}
-.socknav .disk{color:#67707d;font-style:italic}
-.socknav .warn{color:#e07b5a}
-</style>
-<div id="socknav" class="socknav" style="display:none"></div>
-<script>
-(function(){
- var CH="https://github.com/math4mad/chora/blob/main/experiments/";
- var TA="https://math4mad.github.io/talk-with-agents/talking/learning-theory/";
- var P=document.location.pathname.split("/").pop()||"index.html";
- var MAP={
- "index":[["对话","园盘外" ,1],["问题","05-knowledge-graph-socks.html"],["实验",CH+"pb21-dimgrowth/",1],["结果",CH+"pb21-dimgrowth/result_pb21c.json",1],["讨论","01-pb21-pseudo-order.html"]],
- "01-pb21-pseudo-order":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "02-pb21b-blade-confession":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "03-pb21c-causal-chain":["对话",TA+"gram-schmidt-dimension-growth.html",1],
- "04-shopping-cart-post-holmes":["对话","external/与AI助手互动….json 园盘",0],
- "05-knowledge-graph-socks":["全图","本页",1]};
- var SOCKS={
- "01-pb21-pseudo-order":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21",CH+"pb21-dimgrowth/PREREG_PB21_dimgrowth.md",1],["结果·判词",CH+"pb21-dimgrowth/VERDICT_PB21.md",1],["讨论·下游","02-pb21b-blade-confession.html"]],
- "02-pb21b-blade-confession":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·PB21b",CH+"pb21-dimgrowth/PREREG_PB21b_causalchain.md",1],["结果·自供",CH+"pb21-dimgrowth/VERDICT_PB21b.md",1],["讨论·下游","03-pb21c-causal-chain.html"]],
- "03-pb21c-causal-chain":[["对话·建造","@ext",1],["问题·序最贫","05-knowledge-graph-socks.html"],["实验·run_c",CH+"pb21-dimgrowth/run_c.py",1],["结果·sha+判词",CH+"pb21-dimgrowth/VERDICT_PB21c.md",1],["讨论·律碑","04-shopping-cart-post-holmes.html"]],
- "04-shopping-cart-post-holmes":[["对话·与AI助手","园盘 external json",0],["问题·洗澡水/购物车","本页幕二"],["实验邻·PB21c","03-pb21c-causal-chain.html"],["结果邻·C49","05-knowledge-graph-socks.html"],["讨论·图法","05-knowledge-graph-socks.html"]],
- "05-knowledge-graph-socks":[["全链源","园盘 4 json",0],["五元链","本页图"],["单袜账","本页表"],["候射·PB22",CH+"pb22-graphorder/PREREG_PB22_graphorder.md",1],["回匣","index.html"]],
- "index":[["对话群","园盘 4 json",0],["链图","05-knowledge-graph-socks.html"],["案群",CH+"pb21-dimgrowth/",1],["律","03-pb21c-causal-chain.html"],["战队","04-shopping-cart-post-holmes.html"]]};
- var socks=SOCKS[P.replace(".html","")]||SOCKS["index"];
- var el=document.getElementById("socknav"); if(!socks||!el) return;
- var h='<span class="lbl">🧦 袜对</span>';
- socks.forEach(function(s){
-  if(s[1]==="@ext"){h+='<span class="disk">'+s[0]+'·园盘正典</span>';return;}
-  if(!s[2]&&s[1].indexOf("http")!=0&&s[1].indexOf(".html")!=0){h+='<span class="warn">'+s[0]+'·'+s[1]+'</span>';return;}
-  h+='<a href="'+s[1]+'">'+s[0]+'</a>';});
- el.innerHTML=h; el.style.display="flex";
-})();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
