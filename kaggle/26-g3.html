@@ -301,21 +301,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="现在的状态" class="level2">
 <h2 class="anchored" data-anchor-id="现在的状态">现在的状态</h2>
 <ul>
-<li>✅ bug 已修，本地验证通过</li>
-<li>🔄 2026-10-08 重射 kernel <code>math4amd/g3-grade-three-ablation-suite</code></li>
-<li>⏳ 舱完后读「G3-Paper 落架判分」出判词</li>
+<li>✅ 双 bug 已修（<code>CAUS</code> 切片 + <code>rperm</code> 设备），本地五段金丝雀通</li>
+<li>✅ <strong>2026-10-09 舱 COMPLETE</strong>（kernel <code>math4amd/g3-grade-three-ablation-suite</code>）</li>
+<li>📊 <strong>canary 判分</strong>：given 字面5/9 落架8/9 · free 4/7 · random <strong>6/8</strong> · learned 4/7</li>
 </ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">警告</span>一个大警告：这是<strong>金丝雀</strong>规模
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>本舱模型仅 <strong>10M</strong>（d384/L6）、2500 步、语料 166 篇——<strong>不是</strong>冻本所指的主炮（~130M / ~1B token / 5090）。</p>
+<p>在此规模下，<strong>主臂 given（89%）与对照 random（89%）无差</strong>（差 0pt &lt; 冻条 20pt）——按冻本可证伪条款 「对照臂同样过 → 结构非承重」，<strong>苗头</strong>指向「给定的注意力非承重」。</p>
+<p>但小语料上各臂<strong>皆在记熟</strong>（落架 7–8/9 极可能系探针被记而非学会），故<strong>不足以下定谳</strong>。 <strong>判词暂缓，候主炮</strong>（那才是冻本所指之实验）。</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>及格线（候朱批）
+<span class="screen-reader-only">注记</span>及格线（冻本）
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>金丝雀阶段曾拟：主臂 ≥85%、对照 ≤65%、差 ≥20pt。<strong>此项未冻</strong>，待主人点头后才生效。</p>
+<p>主臂 ≥85% 且对照 ≤65%，差 ≥20pt。本舱读数：主臂 89% 过、对照 89% <strong>不达</strong>、差 0pt <strong>不达</strong>。</p>
 </div>
 </div>
 
