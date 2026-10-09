@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>P5 · 上下文锚定 – 园记 · Garden Notes</title>
+<title>P5 · 上下文锚定（三部曲） – 园记 · Garden Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -164,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">P5 · 上下文锚定</h1>
+<h1 class="title">P5 · 上下文锚定（三部曲）</h1>
 <p class="subtitle lead">「省图」在浙江和广东意思不同——能不能找到一根「换域」的杆子把它推过去？</p>
 </div>
 
@@ -192,77 +192,96 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>同一个词在不同上下文里意义不同。本案问：<strong>能不能找到一根线性的「方向杆」，加上它就把「浙江的图书馆」推成「广东的图书馆」，减掉就推回来？</strong> 答案：<strong>推得动（1.000 满分），但推不出这个词本身——那根杆子其实长在「省名」上，不长在「图书馆」上。</strong></p>
+<p>同一个词在不同上下文里意义不同。本案问：<strong>能不能找到一根线性的「方向杆」，加上它就把「浙江的图书馆」推成「广东的图书馆」？</strong> 三步下去，答案收紧成一个准确的判词：<strong>同词型内推得动（满分）；跨词型推不动——而且这推不动不是模型太弱，是任务本身如此。</strong></p>
 </div>
 </div>
 <section id="为什么做这个" class="level2">
 <h2 class="anchored" data-anchor-id="为什么做这个">为什么做这个</h2>
-<p>「意义由上下文决定」是常识，但<strong>机制</strong>是什么？本案把「上下文锚定」从一句<strong>描述</strong>，逼成一个<strong>可动手的因果实验</strong>：如果能「加一根杆子就换义」，说明锚定是<strong>线性编码</strong>的——意义真的被存成了一根方向。</p>
+<p>「意义由上下文决定」是常识，但<strong>机制</strong>是什么？本案把「上下文锚定」从一句<strong>描述</strong>，逼成一个<strong>可动手的因果实验</strong>：能「加一根杆子就换义」，就说明锚定是<strong>线性编码</strong>的——意义真被存成了一根方向。</p>
 </section>
-<section id="怎么做的" class="level2">
-<h2 class="anchored" data-anchor-id="怎么做的">怎么做的</h2>
-<p>在 GPT-2<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 内部选中间一层<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>，读<strong>目标词</strong>那个位置<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>，做三件事：</p>
-<ol type="1">
-<li><strong>训</strong>：拿「浙江句 ↔︎ 广东句」当对照，学出一根「浙江→广东」的杆子 v</li>
-<li><strong>推</strong>：给句子加上 α·v，看表示是否朝广东移动</li>
-<li><strong>判</strong>：用一杆<strong>另训的探针</strong><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>，看这句子现在像浙江还是像广东</li>
-</ol>
-</section>
-<section id="看到了什么" class="level2">
-<h2 class="anchored" data-anchor-id="看到了什么">看到了什么</h2>
+<section id="三步走" class="level2">
+<h2 class="anchored" data-anchor-id="三步走">三步走</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>判据</th>
-<th>考的什么</th>
-<th>三籽读数</th>
-<th>判</th>
+<th>步</th>
+<th>做了什么</th>
+<th>主结果</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>H-p5-0</strong></td>
-<td>杆子真的能推动（轴移动单调）</td>
-<td>三籽皆单调</td>
-<td>立</td>
+<td><strong>P5</strong></td>
+<td>GPT-2，读<strong>目标词</strong>处，训「浙江→广东」杆，推</td>
+<td>换义 <strong>1.000</strong> 立 / 跨词型泛化 <strong>0.000</strong> 破</td>
 </tr>
 <tr class="even">
-<td><strong>H-p5-1</strong></td>
-<td>换了义没有（主判）</td>
-<td><strong>1.000 / 1.000 / 1.000</strong></td>
-<td><strong>立</strong></td>
+<td><strong>P5b</strong></td>
+<td>只改一处：读<strong>省名</strong>处</td>
+<td>泛化 <strong>1.000</strong> 立——但这是「同一 token 的方向」，<strong>非</strong>语义泛化</td>
 </tr>
 <tr class="odd">
-<td><strong>H-p5-2</strong></td>
-<td>这根杆子能不能推另一个词（「美食」）</td>
-<td><strong>0.000 / 0.000 / 0.000</strong></td>
-<td><strong>☒ 破</strong></td>
-</tr>
-<tr class="even">
-<td><strong>H-p5-3</strong></td>
-<td>对照组（春节句乱裂两半）</td>
-<td>0.133（≈随机）</td>
-<td>立（切不出杆子）</td>
-</tr>
-<tr class="odd">
-<td>器具自检</td>
-<td>随便一根乱杆子行不行</td>
-<td>0.000</td>
-<td>器净</td>
+<td><strong>P5c</strong></td>
+<td>换强得多的中文模型 <strong>Qwen2.5-0.5B</strong> 复证</td>
+<td>目标词位泛化仍 <strong>0.095</strong> 破 → <strong>非模型太弱所致</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>主判词</strong>：域切换方向<strong>存在、可因果干预</strong>，但<strong>不跨词型泛化</strong>—— 「图书馆」的杆子推得动「图书馆」，推不动「美食」。</p>
 </section>
-<section id="那个-0.000-有蹊跷" class="level2">
-<h2 class="anchored" data-anchor-id="那个-0.000-有蹊跷">那个 0.000 有蹊跷</h2>
-<p>全零太可疑，于是加了一诊断（<strong>未动冻稿</strong>）：量两根杆子的夹角。</p>
+<section id="判词" class="level2">
+<h2 class="anchored" data-anchor-id="判词">判词</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>检验</th>
+<th>GPT-2</th>
+<th>Qwen2.5-0.5B</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>换义（同词型内）</td>
+<td>1.000</td>
+<td>1.000</td>
+<td><strong>恒立</strong>——方向真实、可干预</td>
+</tr>
+<tr class="even">
+<td>泛化 <span class="citation" data-cites="目标词位">@目标词位</span></td>
+<td>0.000</td>
+<td>0.095</td>
+<td><strong>恒破</strong>——跨词型推不动</td>
+</tr>
+<tr class="odd">
+<td>泛化 <span class="citation" data-cites="省名位">@省名位</span></td>
+<td>1.000</td>
+<td>1.000</td>
+<td>立，但系 token 同一性（循环之嫌）</td>
+</tr>
+<tr class="even">
+<td>器具自检（乱杆子）</td>
+<td>0.000</td>
+<td>0.083</td>
+<td>器净</td>
+</tr>
+<tr class="odd">
+<td>干预是否出流形</td>
+<td>未出（余弦 .979）</td>
+<td>—</td>
+<td>1.000 非 OOD 假象</td>
+</tr>
+</tbody>
+</table>
+<p><strong>综合判词</strong>： &gt; <strong>「域切换方向」在同一词型内真实可干预；跨词型不存在独立于域标记 token 的语义域方向。 &gt; 双模型（124M + 490M）一致，故非容量之限。</strong></p>
+</section>
+<section id="一个关键诊断" class="level2">
+<h2 class="anchored" data-anchor-id="一个关键诊断">一个关键诊断</h2>
+<p>P5 那个 0.000 太可疑，于是量了两根杆子的夹角：</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -281,15 +300,15 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p><strong>读法</strong>：这根「换域杆」<strong>真实且共享</strong>，但它长在<strong>域标记（省名）</strong>上， <strong>不在</strong>那个多义词自己的位置上。所以泛化失败，不是「杆子不存在」，是「<strong>找错了地方</strong>」。</p>
+<p>层扫描显示：省名位这根杆子<strong>从第 0 层（嵌入层）就存在</strong>，且全层泛化满分—— 这正是「<strong>同一个 token 的方向</strong>」的特征，<strong>不是</strong>「越深越分明的语义方向」。</p>
 </section>
 <section id="诚实账" class="level2">
 <h2 class="anchored" data-anchor-id="诚实账">诚实账</h2>
 <ul>
-<li>语料是<strong>模板造</strong>的，证的是「<strong>可以</strong>换义」，不是现实里有多常见</li>
-<li>那个 0.000 里<strong>混了「读错位置」的成分</strong>——下一案直接从省名位读，预期翻回来</li>
-<li>GPT-2 太弱，满分与零分都有它的份；须换大模型复证</li>
-<li>换义 1.000 漂亮得可疑，<strong>须查干预后表示是否被推出流形</strong>（下一步诊）</li>
+<li>语料是<strong>模板造</strong>的，证的是「可/不可」，不是现实里有多常见</li>
+<li>省名位的 1.000 <strong>含 token 同一性的循环之嫌</strong>——照登，不当作语义证据</li>
+<li>两模型仍小（124M/490M）；更大规模复证仍候</li>
+<li>换义 1.000 的 OOD 疑已诊：干预后表示<strong>仍紧贴流形</strong>（余弦 0.98），非假象</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -301,7 +320,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>P5 按设计<strong>不上 Kaggle</strong>（本机秒级、零云端粮）——本册实为<strong>园里实验合集</strong>， 「舱」栏的「本机」「不上舱」正记此意。</p>
+<p>P5 系列按设计<strong>不上 Kaggle</strong>（本机秒级到几分钟、零云端粮）——本册实为<strong>园里实验合集</strong>。</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -314,23 +333,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>已终判</strong>。冻本 <code>PREREG_P5_domain_switch.md</code> sha <code>5c865c75</code>（先冻后用）； 正本 <code>report_p5.json</code> sha <code>a6b3ebd7</code>；<code>verify_p5.py</code> 实测退 0（判词逐籽可复现）。</p>
+<p><strong>已终判（三案）</strong>。冻本各先于运行： <code>PREREG_P5_domain_switch.md</code>(<code>5c865c75</code>) / <code>PREREG_P5b_domain_marker.md</code>(<code>79c71cf6</code>) / <code>PREREG_P5c_qwen_replication.md</code>(<code>71ce5440</code>)。 正本：<code>report_p5.json</code>(<code>a6b3ebd7</code>) / <code>report_p5b.json</code>(<code>7c9155d0</code>) / <code>report_p5c.json</code>(<code>c7fb3fe4</code>)。 三段 verify 皆<strong>实测退 0</strong>（判词逐籽可复现）。</p>
 </div>
 </div>
 
 
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">脚注</h2>
-
-<ol>
-<li id="fn1"><p>GPT-2 是 2019 年的小模型（1.2 亿参数），本机 CPU 几秒跑完。<strong>零 Kaggle 粮</strong>。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>模型分 12 层，本案取中间第 6 层（冻稿先定的规矩）。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>读「图书馆」这三个字所对应的 token 处（不是句末）——这是本案对比 ima 原设计<strong>修正的一处</strong>。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p><strong>探针</strong>：另训的一个小分类器，专门判断「这表示属于哪个域」。它必须与 v <strong>分开训</strong>，否则就是自证。<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
