@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>P5 · 上下文锚定（五部曲） – 园记 · Garden Notes</title>
+<title>P5 · 上下文锚定（七案） – 园记 · Garden Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -164,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">P5 · 上下文锚定（五部曲）</h1>
+<h1 class="title">P5 · 上下文锚定（七案）</h1>
 <p class="subtitle lead">「省图」在浙江和广东意思不同——能不能找到一根「换域」的杆子把它推过去？</p>
 </div>
 
@@ -192,146 +192,132 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>能否找到一根线性「方向杆」，加上就把「浙江的图书馆」推成「广东的图书馆」？ <strong>同词型内推得动（满分）；跨词型推不动——三档模型一致，不是模型太弱；而省名位那根杆子只是「同一个词」的方向，不是语义。</strong></p>
+<p>能否找到一根线性「方向杆」，把「浙江的图书馆」推成「广东的图书馆」？ <strong>同词型内推得动（满分）；跨词型推不动（三档规模一致，非模型太弱）；省名位那根只是「同一个词」的方向；而把域交给内容承载后，迁移</strong>部分<strong>出现——且依词型而异。</strong></p>
 </div>
 </div>
-<section id="为什么做这个" class="level2">
-<h2 class="anchored" data-anchor-id="为什么做这个">为什么做这个</h2>
-<p>「意义由上下文决定」是常识，但<strong>机制</strong>是什么？本案把「上下文锚定」逼成一个<strong>可动手的因果实验</strong>：能「加一根杆子就换义」，就说明锚定是<strong>线性编码</strong>的。</p>
-</section>
-<section id="五步" class="level2">
-<h2 class="anchored" data-anchor-id="五步">五步</h2>
+<section id="七案" class="level2">
+<h2 class="anchored" data-anchor-id="七案">七案</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>步</th>
-<th>做了什么</th>
+<th>案</th>
+<th>一事之改</th>
+<th>仪</th>
 <th>主结果</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>P5</strong></td>
-<td>GPT-2，读<strong>目标词</strong>处</td>
-<td>换义 1.000 / 跨词型泛化 <strong>0.000</strong></td>
+<td>读<strong>目标词</strong>处</td>
+<td>GPT-2 124M</td>
+<td>换义 1.000 / 泛化 <strong>0.000</strong></td>
 </tr>
 <tr class="even">
 <td><strong>P5b</strong></td>
-<td>只改读出位→<strong>省名</strong>处</td>
-<td>泛化 1.000——但疑似「同一 token」，非语义</td>
+<td>读出位→<strong>省名</strong>处</td>
+<td>GPT-2</td>
+<td>泛化 1.000〔疑 token 同一性〕</td>
 </tr>
 <tr class="odd">
 <td><strong>P5c</strong></td>
-<td>换中文模型 Qwen2.5-0.5B 复证</td>
-<td>目标词位泛化仍 <strong>0.095</strong>→非模型太弱</td>
+<td>换中文模型</td>
+<td>Qwen 490M</td>
+<td>泛化仍 <strong>0.095</strong></td>
 </tr>
 <tr class="even">
 <td><strong>P5d</strong></td>
-<td>施杆于<strong>没见过的省名</strong></td>
-<td>泛化 <strong>0.000</strong>（双模型）→省名位那根<strong>确是 token 身份</strong></td>
+<td>施杆于<strong>未见省名</strong></td>
+<td>GPT-2+Qwen</td>
+<td><strong>0.000</strong> → 坐实 token 身份</td>
 </tr>
 <tr class="odd">
 <td><strong>P5e</strong></td>
-<td>规模升 3 倍：Qwen2.5-1.5B</td>
-<td>目标词位泛化仍 <strong>0.000</strong>→规模非其因</td>
+<td>规模升 3 倍</td>
+<td>Qwen 1.54B</td>
+<td>泛化仍 <strong>0.000</strong></td>
+</tr>
+<tr class="even">
+<td><strong>P5f</strong></td>
+<td>去标记（<strong>读出句首</strong>）</td>
+<td>Qwen 490M</td>
+<td><strong>不可判</strong>——读出不见后文</td>
+</tr>
+<tr class="odd">
+<td><strong>P5g</strong></td>
+<td>去标记 + <strong>域词在前</strong></td>
+<td>Qwen 490M / 1.54B</td>
+<td>换义 0.952；泛化 <strong>档案馆 1.000 / 博物馆 0.67–0.71</strong></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="判词" class="level2">
 <h2 class="anchored" data-anchor-id="判词">判词</h2>
+<p><strong>主判词</strong>： &gt; <strong>「域切换方向」在同一词型内真实可干预（1.000，未出流形）；跨词型在「标记承载」之下无方向 &gt; （三档规模一致，非容量之限）；去标记、让读出能见域后，迁移</strong>部分<strong>出现，但</strong>依词型而异<strong>。</strong></p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>检验</th>
-<th>GPT-2 (124M)</th>
-<th>Qwen (490M)</th>
-<th>Qwen (1.54B)</th>
-<th>结论</th>
+<th>GPT-2</th>
+<th>Qwen 0.5B</th>
+<th>Qwen 1.5B</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>换义（同词型内）</td>
+<td>换义 <span class="citation" data-cites="目标词">@目标词</span></td>
 <td>1.000</td>
 <td>1.000</td>
 <td>1.000</td>
-<td><strong>恒立</strong>——方向真、可干预</td>
 </tr>
 <tr class="even">
-<td>泛化 <span class="citation" data-cites="目标词位">@目标词位</span></td>
+<td>泛化 <span class="citation" data-cites="目标词">@目标词</span>（标记承载）</td>
 <td>0.000</td>
 <td>0.095</td>
 <td>0.000</td>
-<td><strong>恒破</strong>——跨词型推不动</td>
 </tr>
 <tr class="odd">
-<td>泛化 <span class="citation" data-cites="省名位">@省名位</span></td>
+<td>泛化 <span class="citation" data-cites="*">@*</span>*未见标记**</td>
+<td>0.000</td>
+<td>0.000</td>
 <td>—</td>
-<td>1.000</td>
-<td>1.000</td>
-<td>立，但系 token 身份</td>
 </tr>
 <tr class="even">
-<td>泛化 <span class="citation" data-cites="*">@*</span>*未见省名**</td>
-<td>0.000</td>
-<td>0.000</td>
+<td>泛化 <span class="citation" data-cites="目标词">@目标词</span>（<strong>内容承载</strong>，P5g）</td>
 <td>—</td>
-<td><strong>破</strong>——坐实「非语义」</td>
-</tr>
-<tr class="odd">
-<td>器具自检（乱杆子）</td>
-<td>0.000</td>
-<td>0.083</td>
-<td>0.042</td>
-<td>器净</td>
-</tr>
-<tr class="even">
-<td>干预是否出流形</td>
-<td>未出（余弦 .979）</td>
-<td>—</td>
-<td>—</td>
-<td>非 OOD 假象</td>
+<td>档 1.000 / 博 0.667</td>
+<td>档 1.000 / 博 0.714</td>
 </tr>
 </tbody>
 </table>
-<p><strong>主判词</strong>： &gt; <strong>「域切换方向」在同一词型内真实可干预；跨词型不存在语义域方向。</strong> &gt; <strong>三档规模（124M→1.54B）一致 → 非容量之限；施于未见标记即失效 → 省名位那根系 token 身份。</strong></p>
 </section>
-<section id="一个诊断" class="level2">
-<h2 class="anchored" data-anchor-id="一个诊断">一个诊断</h2>
-<p>P5 那个 0.000 太可疑，量了两根杆子的夹角：</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>读哪里</th>
-<th>「图书馆」杆 vs 「美食」杆 的余弦</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>省名处</strong></td>
-<td><strong>+0.992</strong>（几乎重合）</td>
-</tr>
-<tr class="even">
-<td>目标词处</td>
-<td>+0.288（各说各话）</td>
-</tr>
-</tbody>
-</table>
-<p>层扫描：省名位那根<strong>从第 0 层（嵌入层）即存在</strong>，全层泛化满分——正是「<strong>同一个 token 的方向</strong>」的特征， <strong>不是</strong>「越深越分明的语义方向」。于是 P5d 直取未见省名一试，<strong>应声而破</strong>。</p>
+<section id="一条方法律p5f-之教训" class="level2">
+<h2 class="anchored" data-anchor-id="一条方法律p5f-之教训">一条方法律（P5f 之教训）</h2>
+<blockquote class="blockquote">
+<p><strong>因果语言模型的读出位，必须放在你所关心的上下文之后。</strong></p>
+</blockquote>
+<p>P5f 全部模板把目标词写在句首（token 0），于是读它时模型<strong>还没看到后文的域词</strong>—— 读出对域不可见，结果全噪（换义仅 0.52）。把域词挪到前面（P5g），换义立刻回到 0.95。 <strong>这不是假说被否，是仪器没对准。</strong></p>
 </section>
-<section id="诚实账" class="level2">
-<h2 class="anchored" data-anchor-id="诚实账">诚实账</h2>
+<section id="诊断与诚实账" class="level2">
+<h2 class="anchored" data-anchor-id="诊断与诚实账">诊断与诚实账</h2>
 <ul>
-<li>语料是<strong>模板造</strong>的，证的是「可/不可」，不是现实里有多常见</li>
-<li>省名位的 1.000 含 <strong>token 同一性</strong>——已由 P5d 拆穿，不当作语义证据</li>
-<li>三档模型仍小（124M/490M/1.54B）；更大规模复证仍候</li>
-<li>换义 1.000 的 OOD 疑已诊：干预后表示<strong>仍紧贴流形</strong>（余弦 0.98），非假象</li>
+<li>省名位的 1.000 含 <strong>token 同一性</strong>——已由 P5d（施于未见省名即失效）拆穿</li>
+<li>去标记后迁移<strong>依词型而异</strong>（档案馆满、博物馆~0.7），<strong>双仪复现</strong>，故非噪声，但原因未明</li>
+<li>语料系<strong>模板构造</strong>；证「可/不可」，非经验率</li>
+<li>三档模型仍小（≤1.54B）；更大规模复证仍候</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -356,7 +342,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>已终判（五案）</strong>。冻本各先于运行（<code>5c865c75</code> / <code>79c71cf6</code> / <code>71ce5440</code> / <code>6f07f759</code> / <code>6ddf33f1</code>）； 正本 <code>report_p5*.json</code>；<strong>五段 verify 皆实测退 0</strong>（判词逐籽可复现）。</p>
+<p><strong>七案俱终判</strong>。冻本各先于运行（<code>5c865c75</code>/<code>79c71cf6</code>/<code>71ce5440</code>/<code>6f07f759</code>/<code>6ddf33f1</code>/<code>763064b6</code>/<code>e4761936</code>）； 正本 <code>report_p5*.json</code>；<strong>verify 皆实测退 0</strong>（判词逐籽可复现）。</p>
 </div>
 </div>
 
