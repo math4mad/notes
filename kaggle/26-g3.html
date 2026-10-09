@@ -26,41 +26,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -200,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">G3 · 三年级模型</h1>
-<p class="subtitle lead">给不给课程，孩子学得一样吗？——四条臂的消融对照</p>
+<p class="subtitle lead">给不给「注意力」，模型学得一样吗？——四臂消融</p>
 </div>
 
 
@@ -227,12 +192,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>训练一个「三年级水平」的小模型，用四种不同的「视野规则」各训一遍， 看<strong>给课程 / 不给课程 / 给假课程 / 自己学</strong>哪种真有用。 这批实验第一次上 Kaggle 时崩了，本页记录<strong>怎么修好的</strong>。</p>
+<p>训练一个「三年级水平」的小模型，四种「视野规则」各训一遍，看<strong>给功课 / 不给 / 给假功课 / 自己学</strong>哪种真有用。 <strong>三阶段查下来，答案是：设计的「给他注意力」不承重——随便一个同稀疏度的乱掩码，效果一样好。</strong></p>
 </div>
 </div>
 <section id="为什么做这个" class="level2">
 <h2 class="anchored" data-anchor-id="为什么做这个">为什么做这个</h2>
-<p>园里主张：概念空间的成长像<strong>盖小区</strong>——不是加词汇，是<strong>加结构</strong>（维度/组织层级）。 要验证「课程」对加结构有没有用，就造一个模型当小白鼠，四臂对照：</p>
+<p>园里主张：概念空间的成长像<strong>盖小区</strong>——不是加词汇，是<strong>加结构</strong>。「给他注意力」（设计者预烧「该看哪」）能不能替规模分担这活？四臂<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>对照：</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -244,80 +209,96 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td><strong>given</strong></td>
-<td>给答案</td>
-<td>直接告诉它注意力该看哪</td>
+<td>给真功课</td>
+<td>设计者规定的舱间视野</td>
 </tr>
 <tr class="even">
-<td><strong>free</strong></td>
-<td>麻辣烫</td>
-<td>想怎么连就怎么连（全放开）</td>
+<td><strong>random</strong></td>
+<td>给假功课</td>
+<td>同稀疏度的<strong>乱划</strong>（安慰剂）</td>
 </tr>
 <tr class="odd">
-<td><strong>random</strong></td>
-<td>安慰剂</td>
-<td>给一套乱打的规矩（对照组）</td>
+<td>free</td>
+<td>麻辣烫</td>
+<td>随便看（无掩码）</td>
 </tr>
 <tr class="even">
-<td><strong>learned</strong></td>
+<td>learned</td>
 <td>自己学</td>
-<td>让它自己摸索出视野</td>
+<td>让它自己摸索视野</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="崩在哪故事" class="level2">
-<h2 class="anchored" data-anchor-id="崩在哪故事">崩在哪（故事）</h2>
-<p>第一次上 Kaggle，<strong>given 臂训练成功</strong>（loss 从 6.95 收敛到 0.122，耗时 449 秒）， 但跑到<strong>探针</strong>（落架判分）阶段就 ERROR：</p>
-<pre><code>RuntimeError: The size of tensor a (18) must match the size of tensor b (512)</code></pre>
+<section id="三阶段" class="level2">
+<h2 class="anchored" data-anchor-id="三阶段">三阶段</h2>
+<section id="金丝雀kaggle-舱修-bug" class="level3">
+<h3 class="anchored" data-anchor-id="金丝雀kaggle-舱修-bug">① 金丝雀（Kaggle 舱）——修 bug</h3>
+<p>首射 ERROR。根因两处：<code>CAUS[:n][:n]</code> 链式切片（应 <code>[:n, :n]</code>）、<code>rperm</code> 未置 device。 修毕重射 <strong>COMPLETE</strong>。但判分 given 8/9 ≈ random 8/9——后来才知道<strong>这卷有毛病</strong>。</p>
 </section>
-<section id="根因一行切片" class="level2">
-<h2 class="anchored" data-anchor-id="根因一行切片">根因：一行切片</h2>
-<p>罪魁是这行看起来没问题的代码：</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>CAUS[:<span class="bu">len</span>(ids)][:<span class="bu">len</span>(ids)]   <span class="co"># 错</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>CAUS[:<span class="bu">len</span>(ids), :<span class="bu">len</span>(ids)]   <span class="co"># 对</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="审计发现卷坏了" class="level3">
+<h3 class="anchored" data-anchor-id="审计发现卷坏了">② 审计——发现卷坏了</h3>
+<p>普查九道探针<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>的候选：「序敏」「验收」两轴候选<strong>全在同一舱</strong>→ <strong>落架<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>恒真，6/9 题没分辨力</strong>。 （runbook 早有预警，只是没修。）<strong>故金丝雀那个「8/9」主要是恒真 + 噪声，不是分离证据。</strong> 于是建 <strong>G3-Paper v1</strong>（掺跨舱干扰词），退化题 6/9 → <strong>0/9</strong>。</p>
+</section>
+<section id="中炮-自然复证" class="level3">
+<h3 class="anchored" data-anchor-id="中炮-自然复证">③ 中炮 + 自然复证</h3>
 <ul>
-<li><code>CAUS[:18]</code> 沿<strong>行</strong>切 → 得 18×512</li>
-<li>再 <code>[:18]</code> <strong>又沿行</strong>切（已经 18 行了）→ <strong>仍然</strong> 18×512</li>
-<li>作者以为在切列，其实在切行。正确写法要用<strong>逗号</strong>。</li>
+<li><strong>中炮</strong>（模板语料 3.36M 字符 / 26M 模型 / 1000 步）：<strong>五臂落架全 5/9——零分离</strong>。</li>
+<li><strong>自然语料复证</strong>（THUCNews 中文新闻，10 主题=10 舱 / 11M 模型 / held-out loss）：</li>
 </ul>
-<p><strong>为什么训练时没崩？</strong> 因为训练序列恰好满载 512，<code>18×512</code> 这种错形状<strong>碰巧</strong>对上了。 只有探针的短句（18 个 token）才让它露馅——典型的「撞大运式正确」。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>臂</th>
+<th>test_loss</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>given（真掩码）</strong></td>
+<td><strong>3.5519</strong></td>
+</tr>
+<tr class="even">
+<td><strong>random（乱掩码）</strong></td>
+<td><strong>3.5486</strong></td>
+</tr>
+<tr class="odd">
+<td>free（无掩码）</td>
+<td>3.8160</td>
+</tr>
+<tr class="even">
+<td>learned</td>
+<td>3.7964</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="怎么修的" class="level2">
-<h2 class="anchored" data-anchor-id="怎么修的">怎么修的</h2>
-<ol type="1">
-<li>三处 <code>CAUS[:n][:n]</code> 全改成 <code>CAUS[:n, :n]</code>（训练段两处 + 探针段一处）</li>
-<li>本地<strong>金丝雀</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>跑通：给定臂 20 步，探针能出分（不再崩）</li>
-<li>重新推上 Kaggle（修复版 <code>g3_kaggle.py</code> sha <code>dcaa301d</code>）</li>
-</ol>
 </section>
-<section id="修法留痕三样交付律" class="level2">
-<h2 class="anchored" data-anchor-id="修法留痕三样交付律">修法留痕（三样交付律）</h2>
+<section id="判词" class="level2">
+<h2 class="anchored" data-anchor-id="判词">判词</h2>
+<blockquote class="blockquote">
+<p><strong>主臂 given ≈ 安慰剂 random</strong>（差 0.003 可忽略）——真掩码与<strong>乱划同稀疏度掩码效果完全相同</strong>。 按冻本可证伪条款「<strong>对照臂同样过 → 结构非承重</strong>」：<strong>设计的「给定注意力」不承重。</strong> 但 free/learned 差 ~0.25 → <strong>某种掩码（无论对不对）有益</strong>，<strong>但具体结构无关</strong>。 <strong>两语料（模板+自然）同向 → 零分离不是语料伪影。</strong></p>
+</blockquote>
+</section>
+<section id="诚实账" class="level2">
+<h2 class="anchored" data-anchor-id="诚实账">诚实账</h2>
 <ul>
-<li><strong>正本</strong>：<code>chora/experiments/g3-grade3/g3_kaggle.py</code></li>
-<li><strong>可读投影</strong>：本页（上方代码对照）</li>
-<li><strong>verify</strong>：本地金丝雀 = 探针能出 9 判分即通</li>
+<li>规模仍小（26M / 11M；语料 3.4–4M 字符），<strong>远逊冻本之主炮</strong>（~90M / ~1B token）。</li>
+<li>自然复证用 THUCNews（新闻分词文本，10 主题），系<strong>另一实现</strong>，非 exp11「四舱快餐」。</li>
+<li>判词宜读作「<strong>在此规模、此掩码方式下</strong>，设计的舱结构不带来增益」——非绝对定谳。</li>
+<li>三次同型 device bug（新建索引张量未 <code>.to(device)</code>）——已立方法律。</li>
 </ul>
-</section>
-<section id="现在的状态" class="level2">
-<h2 class="anchored" data-anchor-id="现在的状态">现在的状态</h2>
-<ul>
-<li>✅ 双 bug 已修（<code>CAUS</code> 切片 + <code>rperm</code> 设备），本地五段金丝雀通</li>
-<li>✅ <strong>2026-10-09 舱 COMPLETE</strong>（kernel <code>math4amd/g3-grade-three-ablation-suite</code>）</li>
-<li>📊 <strong>canary 判分</strong>：given 字面5/9 落架8/9 · free 4/7 · random <strong>6/8</strong> · learned 4/7</li>
-</ul>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">警告</span>一个大警告：这是<strong>金丝雀</strong>规模
+<span class="screen-reader-only">提示</span>为什么这页进了「夜航」册
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>本舱模型仅 <strong>10M</strong>（d384/L6）、2500 步、语料 166 篇——<strong>不是</strong>冻本所指的主炮（~130M / ~1B token / 5090）。</p>
-<p>在此规模下，<strong>主臂 given（89%）与对照 random（89%）无差</strong>（差 0pt &lt; 冻条 20pt）——按冻本可证伪条款 「对照臂同样过 → 结构非承重」，<strong>苗头</strong>指向「给定的注意力非承重」。</p>
-<p>但小语料上各臂<strong>皆在记熟</strong>（落架 7–8/9 极可能系探针被记而非学会），故<strong>不足以下定谳</strong>。 <strong>判词暂缓，候主炮</strong>（那才是冻本所指之实验）。</p>
+<p>G3 的 Kaggle 舱按设计<strong>只跑金丝雀</strong>（主炮属 5090）；中炮/自然复证在<strong>本机</strong>跑（零云端粮）。 本册实为<strong>园里实验合集</strong>。</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -326,11 +307,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>及格线（冻本）
+<span class="screen-reader-only">注记</span>状态
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>主臂 ≥85% 且对照 ≤65%，差 ≥20pt。本舱读数：主臂 89% 过、对照 89% <strong>不达</strong>、差 0pt <strong>不达</strong>。</p>
+<p><strong>三阶段俱终判</strong>。冻本 <code>PREREG_G3_grade_three_model.md</code>；卷 <code>g3_paper_v1.py</code>（sha <code>de0c87e6</code>）； 正本 <code>report_g3_mid.json</code> · <code>RESULTS_G3_canary/mid/thuc.md</code> · 审计 <code>G3-PAPER-AUDIT.md</code>。</p>
 </div>
 </div>
 
@@ -341,7 +322,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">脚注</h2>
 
 <ol>
-<li id="fn1"><p><strong>金丝雀</strong>：正式开跑前的小规模试跑。源自矿工带金丝雀下井——鸟先倒，人就跑。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><strong>臂（arm）</strong>：实验的一个对照分支，如临床试验的对照组/实验组。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><strong>探针</strong>：训练完后拿出的小考题，量模型学到什么。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><strong>落架</strong>：答案选对了「对不对的<strong>舱</strong>」（概念空间），而非字面词。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

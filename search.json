@@ -228,56 +228,42 @@
     "href": "kaggle/26-g3.html",
     "title": "G3 · 三年级模型",
     "section": "",
-    "text": "注记一句话\n\n\n\n训练一个「三年级水平」的小模型，用四种不同的「视野规则」各训一遍， 看给课程 / 不给课程 / 给假课程 / 自己学哪种真有用。 这批实验第一次上 Kaggle 时崩了，本页记录怎么修好的。"
+    "text": "注记一句话\n\n\n\n训练一个「三年级水平」的小模型，四种「视野规则」各训一遍，看给功课 / 不给 / 给假功课 / 自己学哪种真有用。 三阶段查下来，答案是：设计的「给他注意力」不承重——随便一个同稀疏度的乱掩码，效果一样好。"
   },
   {
     "objectID": "kaggle/26-g3.html#为什么做这个",
     "href": "kaggle/26-g3.html#为什么做这个",
     "title": "G3 · 三年级模型",
     "section": "为什么做这个",
-    "text": "为什么做这个\n园里主张：概念空间的成长像盖小区——不是加词汇，是加结构（维度/组织层级）。 要验证「课程」对加结构有没有用，就造一个模型当小白鼠，四臂对照：\n\n\n\n臂\n白话\n给什么\n\n\n\n\ngiven\n给答案\n直接告诉它注意力该看哪\n\n\nfree\n麻辣烫\n想怎么连就怎么连（全放开）\n\n\nrandom\n安慰剂\n给一套乱打的规矩（对照组）\n\n\nlearned\n自己学\n让它自己摸索出视野"
+    "text": "为什么做这个\n园里主张：概念空间的成长像盖小区——不是加词汇，是加结构。「给他注意力」（设计者预烧「该看哪」）能不能替规模分担这活？四臂1对照：\n\n\n\n臂\n白话\n给什么\n\n\n\n\ngiven\n给真功课\n设计者规定的舱间视野\n\n\nrandom\n给假功课\n同稀疏度的乱划（安慰剂）\n\n\nfree\n麻辣烫\n随便看（无掩码）\n\n\nlearned\n自己学\n让它自己摸索视野"
   },
   {
-    "objectID": "kaggle/26-g3.html#崩在哪故事",
-    "href": "kaggle/26-g3.html#崩在哪故事",
+    "objectID": "kaggle/26-g3.html#三阶段",
+    "href": "kaggle/26-g3.html#三阶段",
     "title": "G3 · 三年级模型",
-    "section": "崩在哪（故事）",
-    "text": "崩在哪（故事）\n第一次上 Kaggle，given 臂训练成功（loss 从 6.95 收敛到 0.122，耗时 449 秒）， 但跑到探针（落架判分）阶段就 ERROR：\nRuntimeError: The size of tensor a (18) must match the size of tensor b (512)"
+    "section": "三阶段",
+    "text": "三阶段\n\n① 金丝雀（Kaggle 舱）——修 bug\n首射 ERROR。根因两处：CAUS[:n][:n] 链式切片（应 [:n, :n]）、rperm 未置 device。 修毕重射 COMPLETE。但判分 given 8/9 ≈ random 8/9——后来才知道这卷有毛病。\n\n\n② 审计——发现卷坏了\n普查九道探针2的候选：「序敏」「验收」两轴候选全在同一舱→ 落架3恒真，6/9 题没分辨力。 （runbook 早有预警，只是没修。）故金丝雀那个「8/9」主要是恒真 + 噪声，不是分离证据。 于是建 G3-Paper v1（掺跨舱干扰词），退化题 6/9 → 0/9。\n\n\n③ 中炮 + 自然复证\n\n中炮（模板语料 3.36M 字符 / 26M 模型 / 1000 步）：五臂落架全 5/9——零分离。\n自然语料复证（THUCNews 中文新闻，10 主题=10 舱 / 11M 模型 / held-out loss）：\n\n\n\n\n臂\ntest_loss\n\n\n\n\ngiven（真掩码）\n3.5519\n\n\nrandom（乱掩码）\n3.5486\n\n\nfree（无掩码）\n3.8160\n\n\nlearned\n3.7964"
   },
   {
-    "objectID": "kaggle/26-g3.html#根因一行切片",
-    "href": "kaggle/26-g3.html#根因一行切片",
+    "objectID": "kaggle/26-g3.html#判词",
+    "href": "kaggle/26-g3.html#判词",
     "title": "G3 · 三年级模型",
-    "section": "根因：一行切片",
-    "text": "根因：一行切片\n罪魁是这行看起来没问题的代码：\nCAUS[:len(ids)][:len(ids)]   # 错\nCAUS[:len(ids), :len(ids)]   # 对\n\nCAUS[:18] 沿行切 → 得 18×512\n再 [:18] 又沿行切（已经 18 行了）→ 仍然 18×512\n作者以为在切列，其实在切行。正确写法要用逗号。\n\n为什么训练时没崩？ 因为训练序列恰好满载 512，18×512 这种错形状碰巧对上了。 只有探针的短句（18 个 token）才让它露馅——典型的「撞大运式正确」。"
+    "section": "判词",
+    "text": "判词\n\n主臂 given ≈ 安慰剂 random（差 0.003 可忽略）——真掩码与乱划同稀疏度掩码效果完全相同。 按冻本可证伪条款「对照臂同样过 → 结构非承重」：设计的「给定注意力」不承重。 但 free/learned 差 ~0.25 → 某种掩码（无论对不对）有益，但具体结构无关。 两语料（模板+自然）同向 → 零分离不是语料伪影。"
   },
   {
-    "objectID": "kaggle/26-g3.html#怎么修的",
-    "href": "kaggle/26-g3.html#怎么修的",
+    "objectID": "kaggle/26-g3.html#诚实账",
+    "href": "kaggle/26-g3.html#诚实账",
     "title": "G3 · 三年级模型",
-    "section": "怎么修的",
-    "text": "怎么修的\n\n三处 CAUS[:n][:n] 全改成 CAUS[:n, :n]（训练段两处 + 探针段一处）\n本地金丝雀1跑通：给定臂 20 步，探针能出分（不再崩）\n重新推上 Kaggle（修复版 g3_kaggle.py sha dcaa301d）"
-  },
-  {
-    "objectID": "kaggle/26-g3.html#修法留痕三样交付律",
-    "href": "kaggle/26-g3.html#修法留痕三样交付律",
-    "title": "G3 · 三年级模型",
-    "section": "修法留痕（三样交付律）",
-    "text": "修法留痕（三样交付律）\n\n正本：chora/experiments/g3-grade3/g3_kaggle.py\n可读投影：本页（上方代码对照）\nverify：本地金丝雀 = 探针能出 9 判分即通"
-  },
-  {
-    "objectID": "kaggle/26-g3.html#现在的状态",
-    "href": "kaggle/26-g3.html#现在的状态",
-    "title": "G3 · 三年级模型",
-    "section": "现在的状态",
-    "text": "现在的状态\n\n✅ 双 bug 已修（CAUS 切片 + rperm 设备），本地五段金丝雀通\n✅ 2026-10-09 舱 COMPLETE（kernel math4amd/g3-grade-three-ablation-suite）\n📊 canary 判分：given 字面5/9 落架8/9 · free 4/7 · random 6/8 · learned 4/7\n\n\n\n\n\n\n\n警告一个大警告：这是金丝雀规模\n\n\n\n本舱模型仅 10M（d384/L6）、2500 步、语料 166 篇——不是冻本所指的主炮（~130M / ~1B token / 5090）。\n在此规模下，主臂 given（89%）与对照 random（89%）无差（差 0pt &lt; 冻条 20pt）——按冻本可证伪条款 「对照臂同样过 → 结构非承重」，苗头指向「给定的注意力非承重」。\n但小语料上各臂皆在记熟（落架 7–8/9 极可能系探针被记而非学会），故不足以下定谳。 判词暂缓，候主炮（那才是冻本所指之实验）。\n\n\n\n\n\n\n\n\n注记及格线（冻本）\n\n\n\n主臂 ≥85% 且对照 ≤65%，差 ≥20pt。本舱读数：主臂 89% 过、对照 89% 不达、差 0pt 不达。"
+    "section": "诚实账",
+    "text": "诚实账\n\n规模仍小（26M / 11M；语料 3.4–4M 字符），远逊冻本之主炮（~90M / ~1B token）。\n自然复证用 THUCNews（新闻分词文本，10 主题），系另一实现，非 exp11「四舱快餐」。\n判词宜读作「在此规模、此掩码方式下，设计的舱结构不带来增益」——非绝对定谳。\n三次同型 device bug（新建索引张量未 .to(device)）——已立方法律。\n\n\n\n\n\n\n\n提示为什么这页进了「夜航」册\n\n\n\nG3 的 Kaggle 舱按设计只跑金丝雀（主炮属 5090）；中炮/自然复证在本机跑（零云端粮）。 本册实为园里实验合集。\n\n\n\n\n\n\n\n\n注记状态\n\n\n\n三阶段俱终判。冻本 PREREG_G3_grade_three_model.md；卷 g3_paper_v1.py（sha de0c87e6）； 正本 report_g3_mid.json · RESULTS_G3_canary/mid/thuc.md · 审计 G3-PAPER-AUDIT.md。"
   },
   {
     "objectID": "kaggle/26-g3.html#footnotes",
     "href": "kaggle/26-g3.html#footnotes",
     "title": "G3 · 三年级模型",
     "section": "脚注",
-    "text": "脚注\n\n\n金丝雀：正式开跑前的小规模试跑。源自矿工带金丝雀下井——鸟先倒，人就跑。↩︎"
+    "text": "脚注\n\n\n臂（arm）：实验的一个对照分支，如临床试验的对照组/实验组。↩︎\n探针：训练完后拿出的小考题，量模型学到什么。↩︎\n落架：答案选对了「对不对的舱」（概念空间），而非字面词。↩︎"
   },
   {
     "objectID": "kaggle/24-pb16c.html",
@@ -389,14 +375,14 @@
     "href": "kaggle/index.html#逐案诊断表",
     "title": "Kaggle 夜航 · 实验合集",
     "section": "逐案诊断表",
-    "text": "逐案诊断表\n下表是2026-10-08 全面体检的结果。关键发现：多数标着「待射」的案子，舱其实早就跑完了—— 缺的不是「再跑一次」，而是「读报告出判词」。重跑会与已冻的封条2对不上账，也白费 Kaggle 粮。\n\n\n\n案\n冻稿\n弹\n舱\n产物\n判词\n真实缺口\n\n\n\n\nPB26\n✅\n✅\n本机\n✅\n✅\n无（首射已成）\n\n\nPB26b\n❌\n❌\n—\n—\n—\n需冻稿 + 真嵌入弹\n\n\nPB23c\n🟡\n✅\n✅\n✅\n🟡\n补冻稿 + 定判词（勿重跑）\n\n\nPB20\n✅\n✅\n✅\n✅\n✅\nb 版修器待射\n\n\nPB18\n✅\n✅\n✅\n✅\n❌\n读已有报告出判词\n\n\nPB16c\n✅\n✅\n✅\n✅\n✅\n无（已终判）\n\n\nE26\n✅\n❌\n不上舱\n—\n❌\n人工双端手测（非代码）\n\n\nPB22\n✅\n❌\n不上舱\n—\n❌\n写本机弹（零 Kaggle 粮）\n\n\nPB19\n✅\n✅\n✅\n✅\n❌\n读已有产物出判词\n\n\nG3 消融\n✅\n✅\n✅ COMPLETE\n✅\n🟡\ncanary 判分出，候主炮\n\n\nP5 锚定\n✅\n✅\n本机×4\n✅\n✅\n无（七案已成，三档规模+去标记）\n\n\nPB27\n🟡\n❌\n—\n—\n—\n候批；真语料需采买\n\n\n\n图例：✅ 齐 / 🟡 草案或进行中 / ❌ 缺 —— 「舱」栏的「本机」「不上舱」表示该案按设计就不该占 Kaggle 资源。"
+    "text": "逐案诊断表\n下表是2026-10-08 全面体检的结果。关键发现：多数标着「待射」的案子，舱其实早就跑完了—— 缺的不是「再跑一次」，而是「读报告出判词」。重跑会与已冻的封条2对不上账，也白费 Kaggle 粮。\n\n\n\n案\n冻稿\n弹\n舱\n产物\n判词\n真实缺口\n\n\n\n\nPB26\n✅\n✅\n本机\n✅\n✅\n无（首射已成）\n\n\nPB26b\n❌\n❌\n—\n—\n—\n需冻稿 + 真嵌入弹\n\n\nPB23c\n🟡\n✅\n✅\n✅\n🟡\n补冻稿 + 定判词（勿重跑）\n\n\nPB20\n✅\n✅\n✅\n✅\n✅\nb 版修器待射\n\n\nPB18\n✅\n✅\n✅\n✅\n❌\n读已有报告出判词\n\n\nPB16c\n✅\n✅\n✅\n✅\n✅\n无（已终判）\n\n\nE26\n✅\n❌\n不上舱\n—\n❌\n人工双端手测（非代码）\n\n\nPB22\n✅\n❌\n不上舱\n—\n❌\n写本机弹（零 Kaggle 粮）\n\n\nPB19\n✅\n✅\n✅\n✅\n❌\n读已有产物出判词\n\n\nG3 消融\n✅\n✅\n✅ COMPLETE\n✅\n✅\n结构非承重（三阶段判）\n\n\nP5 锚定\n✅\n✅\n本机×4\n✅\n✅\n无（七案已成，三档规模+去标记）\n\n\nPB27\n🟡\n❌\n—\n—\n—\n候批；真语料需采买\n\n\n\n图例：✅ 齐 / 🟡 草案或进行中 / ❌ 缺 —— 「舱」栏的「本机」「不上舱」表示该案按设计就不该占 Kaggle 资源。"
   },
   {
     "objectID": "kaggle/index.html#各案分页",
     "href": "kaggle/index.html#各案分页",
     "title": "Kaggle 夜航 · 实验合集",
     "section": "各案分页",
-    "text": "各案分页\n\nPB26 · 可达几何基准 —— 相似与可达可分离\nPB23c · 细十二带 —— 序生维膝检\nPB20 · DAG 消融 —— 算法序的边敏\nPB18 · 尾部分辨率 —— 长尾里还剩多少\nPB16c · 序即数据 —— 成人只剩波浪一只手\nPB19 · 多分辨率字典 —— 尺子该多细\nG3 · 三年级模型 —— 课程该不该给（canary：臂间无分离）\nP5 · 上下文锚定（七案） —— 同词型内立、跨词型破；去标记后部分现形"
+    "text": "各案分页\n\nPB26 · 可达几何基准 —— 相似与可达可分离\nPB23c · 细十二带 —— 序生维膝检\nPB20 · DAG 消融 —— 算法序的边敏\nPB18 · 尾部分辨率 —— 长尾里还剩多少\nPB16c · 序即数据 —— 成人只剩波浪一只手\nPB19 · 多分辨率字典 —— 尺子该多细\nG3 · 三年级模型 —— 给注意力不管用（结构非承重）\nP5 · 上下文锚定（七案） —— 同词型内立、跨词型破；去标记后部分现形"
   },
   {
     "objectID": "kaggle/index.html#一处特别的记录g3-的-bug",
